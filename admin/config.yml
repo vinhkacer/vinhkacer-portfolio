@@ -14,7 +14,8 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Thứ tự hiển thị (Số nhỏ xếp trước)", name: "order", widget: "number", default: 100, value_type: "int", min: 1, max: 999, required: false }
+      - { label: "Thứ tự can thiệp thủ công (Số nhỏ xếp trước - VD: 1, 2)", name: "order", widget: "number", value_type: "int", min: 1, max: 999, required: false }
+      - { label: "Lượt xem (Views - VD: 10M, 2.5M, 800K)", name: "views", widget: "string", required: false }
       - { label: "Ghim nổi bật (Featured)", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "Ngày đăng", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
       - { label: "Tiêu đề dự án", name: "title", widget: "string" }

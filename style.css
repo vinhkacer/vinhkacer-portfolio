@@ -212,6 +212,42 @@ h1, h2,
   border-radius: 9999px !important;
   box-shadow: none !important;
 }
+/* Views Pill Badges (TikTok 9:16 & Card overlays) */
+.views-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px !important;
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #F4F4F5;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.625rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1.25;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.views-pill.viral {
+  background: rgba(220, 38, 38, 0.25) !important;
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  color: #FEE2E2 !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.35);
+}
+
+.views-pill.standard {
+  background: rgba(10, 10, 12, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #E4E4E7 !important;
+}
 
 /* Minimalist Studio VFX Breakdown Button */
 .vfx-breakdown-btn {
