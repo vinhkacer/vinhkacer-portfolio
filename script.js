@@ -16,6 +16,42 @@ function getYouTubeId(url) {
   return match ? match[1] : null;
 }
 
+// Render YouTube Facade markup (Zero-latency initial load, lazy loads <iframe> only on user click)
+function createYouTubeFacadeHtml(ytId, title = 'Video') {
+  const safeTitle = (title || 'YouTube Video').replace(/"/g, '&quot;');
+  return `
+    <div class="youtube-facade group" onclick="event.stopPropagation(); playYouTubeFacade(this, '${ytId}')" title="Bấm để phát video YouTube ngay">
+      <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" 
+           alt="${safeTitle}" 
+           loading="lazy" 
+           onerror="this.src='https://img.youtube.com/vi/${ytId}/0.jpg'" />
+      <div class="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors"></div>
+      <button type="button" class="youtube-play-btn" aria-label="Phát YouTube">
+        <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+  `;
+}
+
+// Trigger YouTube Facade playback: stops all other media and replaces facade with high-performance iframe
+function playYouTubeFacade(element, ytId) {
+  playBeep(800, 0.05);
+  pauseAllVideos();
+
+  const container = element.closest('.video-16-9-container') || element.parentElement || element;
+  container.classList.add('active-youtube-container');
+  container.dataset.ytid = ytId;
+  const img = element.querySelector('img');
+  container.dataset.title = img ? img.alt : 'YouTube Video';
+
+  container.innerHTML = `
+    <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" 
+            class="w-full h-full border-0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+            allowfullscreen></iframe>
+  `;
+}
+
 // Play subtle synthesized audio tone via Web Audio API
 function playBeep(freq = 880, duration = 0.08) {
   try {
@@ -116,16 +152,41 @@ function updateTabUI(tabKey) {
 // Tab Switching
 function switchTab(tabKey) {
   playBeep(640, 0.05);
+  pauseAllVideos();
   currentTab = tabKey;
   updateTabUI(tabKey);
   renderProjects();
 }
 
-// Pause all playing videos on page
+// Pause all playing videos on page & clean up any active YouTube embeds
 function pauseAllVideos() {
   document.querySelectorAll('video').forEach(v => {
     try { v.pause(); } catch (e) {}
   });
+
+  // Reset any playing YouTube Facades in the grid back to facade
+  document.querySelectorAll('.active-youtube-container').forEach(container => {
+    const ytId = container.dataset.ytid;
+    const title = container.dataset.title || 'Video';
+    if (ytId) {
+      container.innerHTML = createYouTubeFacadeHtml(ytId, title);
+      container.classList.remove('active-youtube-container');
+    }
+  });
+
+  // Modal YouTube iframe cleanup
+  const modalIframe = document.getElementById('modalYouTubeIframe');
+  if (modalIframe) {
+    modalIframe.src = '';
+    modalIframe.classList.add('hidden');
+  }
+
+  // Breakdown YouTube iframe cleanup
+  const bdIframe = document.getElementById('breakdownYouTubeIframe');
+  if (bdIframe) {
+    bdIframe.src = '';
+    bdIframe.classList.add('hidden');
+  }
 }
 
 // State for VFX Breakdown Modal
@@ -284,18 +345,21 @@ function closeBreakdownModal() {
   currentBreakdownItem = null;
 }
 
-// Open Cinema Modal (for 9:16 vertical grid cards)
+// Open Cinema Modal (for 9:16 vertical grid cards or 16:9 cinematic)
 function openCinemaModal(item) {
   playBeep(750, 0.08);
   pauseAllVideos();
 
   const modal = document.getElementById('cinemaModal');
+  const modalDialog = document.getElementById('cinemaModalDialog');
   const modalTitle = document.getElementById('modalTitle');
   const modalBadge = document.getElementById('modalBadge');
   const modalRole = document.getElementById('modalRole');
   const modalVideo = document.getElementById('modalVideoPlayer');
   const modalSource = document.getElementById('modalVideoSource');
   const modalExternalLink = document.getElementById('modalExternalLink');
+  const modalYouTubeLink = document.getElementById('modalYouTubeLink');
+  const modalTikTokLink = document.getElementById('modalTikTokLink');
 
   if (!modal || !modalVideo || !modalSource) return;
 
@@ -313,8 +377,27 @@ function openCinemaModal(item) {
     }
   }
 
-  const modalYouTubeLink = document.getElementById('modalYouTubeLink');
-  const modalTikTokLink = document.getElementById('modalTikTokLink');
+  // Handle 9:16 vertical ratio adaptation for modal dialog
+  const isVertical = item.aspect === '9:16' || item.category === 'thunglong';
+  const modalVideoContainer = modalVideo.parentElement;
+
+  if (modalDialog) {
+    if (isVertical) {
+      modalDialog.classList.remove('max-w-5xl');
+      modalDialog.classList.add('max-w-sm', 'sm:max-w-md');
+    } else {
+      modalDialog.classList.remove('max-w-sm', 'sm:max-w-md');
+      modalDialog.classList.add('max-w-5xl');
+    }
+  }
+
+  if (modalVideoContainer) {
+    if (isVertical) {
+      modalVideoContainer.classList.add('tiktok-vertical-container');
+    } else {
+      modalVideoContainer.classList.remove('tiktok-vertical-container');
+    }
+  }
 
   if (modalYouTubeLink) {
     if (item.youtube_url) {
@@ -329,6 +412,8 @@ function openCinemaModal(item) {
     if (item.tiktok_url) {
       modalTikTokLink.href = item.tiktok_url;
       modalTikTokLink.classList.remove('hidden');
+      const span = modalTikTokLink.querySelector('span');
+      if (span) span.textContent = 'XEM BẢN FULL TRÊN TIKTOK ↗';
     } else {
       modalTikTokLink.classList.add('hidden');
     }
@@ -344,7 +429,6 @@ function openCinemaModal(item) {
     }
   }
 
-  const modalVideoContainer = modalVideo.parentElement;
   let modalIframe = document.getElementById('modalYouTubeIframe');
   const ytId = getYouTubeId(item.video_src) || (!item.video_src && item.youtube_url ? getYouTubeId(item.youtube_url) : null);
 
@@ -356,13 +440,18 @@ function openCinemaModal(item) {
     if (!modalIframe && modalVideoContainer) {
       modalIframe = document.createElement('iframe');
       modalIframe.id = 'modalYouTubeIframe';
-      modalIframe.className = 'w-full h-full min-h-[300px] sm:min-h-[460px] aspect-video border-0';
-      modalIframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      modalIframe.className = isVertical 
+        ? 'w-full h-full aspect-[9/16] border-0' 
+        : 'w-full h-full min-h-[300px] sm:min-h-[460px] aspect-video border-0';
+      modalIframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
       modalIframe.setAttribute('allowfullscreen', 'true');
       modalVideoContainer.appendChild(modalIframe);
     }
     if (modalIframe) {
-      modalIframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`;
+      modalIframe.className = isVertical 
+        ? 'w-full h-full aspect-[9/16] border-0' 
+        : 'w-full h-full min-h-[300px] sm:min-h-[460px] aspect-video border-0';
+      modalIframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1`;
       modalIframe.classList.remove('hidden');
     }
   } else {
@@ -390,10 +479,14 @@ function openCinemaModal(item) {
 
 // Close Cinema Modal
 function closeCinemaModal() {
+  pauseAllVideos();
+
   const modal = document.getElementById('cinemaModal');
+  const modalDialog = document.getElementById('cinemaModalDialog');
   const modalVideo = document.getElementById('modalVideoPlayer');
   const modalSource = document.getElementById('modalVideoSource');
   const modalIframe = document.getElementById('modalYouTubeIframe');
+  const modalVideoContainer = modalVideo ? modalVideo.parentElement : null;
 
   if (modalIframe) {
     modalIframe.src = '';
@@ -405,6 +498,16 @@ function closeCinemaModal() {
     if (modalSource) modalSource.src = '';
     modalVideo.classList.remove('hidden');
   }
+
+  if (modalDialog) {
+    modalDialog.classList.remove('max-w-sm', 'sm:max-w-md');
+    modalDialog.classList.add('max-w-5xl');
+  }
+
+  if (modalVideoContainer) {
+    modalVideoContainer.classList.remove('tiktok-vertical-container');
+  }
+
   if (modal) modal.classList.add('hidden');
   document.body.style.overflow = '';
 }
@@ -591,14 +694,7 @@ function create16x9Card(item) {
   const ytId = getYouTubeId(item.video_src) || (!item.video_src && item.youtube_url ? getYouTubeId(item.youtube_url) : null);
   let playerElementHtml = '';
   if (ytId) {
-    playerElementHtml = `
-      <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0&playsinline=1" 
-              title="${item.title ? item.title.replace(/"/g, '&quot;') : 'Video Player'}"
-              class="w-full h-full border-0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              allowfullscreen 
-              loading="lazy"></iframe>
-    `;
+    playerElementHtml = createYouTubeFacadeHtml(ytId, item.title);
   } else {
     playerElementHtml = `
       <!-- Video Player with controls, preload="metadata", playsinline and object-cover without black sidebars -->
@@ -682,12 +778,12 @@ function createVerticalCard(item) {
     verticalSocialHtml += `
       <a href="${item.tiktok_url}" target="_blank" rel="noopener noreferrer" 
          onclick="event.stopPropagation()"
-         class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-obsidian-950/90 hover:bg-white hover:text-black border border-white/15 hover:border-white text-zinc-300 text-[10px] font-mono font-medium transition-all duration-200 backdrop-blur-md shadow-sm"
-         title="Xem video trên TikTok (Mở tab mới)">
+         class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg tiktok-pill-badge text-[10px] font-mono font-bold transition-all duration-200 backdrop-blur-md shadow-sm"
+         title="Xem bản full trên TikTok (Mở tab mới)">
         <svg class="w-3 h-3 fill-current shrink-0" viewBox="0 0 24 24">
           <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
         </svg>
-        <span>TikTok</span>
+        <span>TikTok ↗</span>
       </a>
     `;
   }
