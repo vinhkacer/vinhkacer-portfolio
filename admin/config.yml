@@ -3,8 +3,6 @@ backend:
   repo: vinhkacer/vinhkacer-portfolio
   branch: main
 
-# Tùy chọn chạy backend nội bộ khi test trên máy qua: npx decap-server
-local_backend: true
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"

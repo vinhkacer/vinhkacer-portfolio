@@ -3,120 +3,455 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vinh Kacer Portfolio — Quản Trị Dự Án (Decap CMS)</title>
+  <title>Vinh Kacer Portfolio — Quản Trị CMS (GitHub)</title>
   <link rel="icon" type="image/jpeg" href="../avatar.jpg" />
   <style>
-    /* Styling for Direct Token Auth Banner & Footer */
-    #directAuthHelper {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #0d0e12;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      color: #d1d5db;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 13px;
-      padding: 10px 16px;
-      z-index: 999999;
+    :root {
+      --bg: #0a0a0c;
+      --card-bg: #121318;
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --cyan: #38bdf8;
+      --cyan-hover: #0284c7;
+      --error: #f87171;
+      --success: #4ade80;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+    }
+    /* Login Screen Container */
+    #loginScreen {
+      min-height: 100vh;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      padding: 1.5rem;
+      background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.08), transparent 60%), #0a0a0c;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+    }
+    .brand-header {
+      display: flex;
+      align-items: center;
       gap: 12px;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1.5rem;
     }
-    #directAuthHelper a, #directAuthHelper button {
-      color: #38bdf8;
-      background: transparent;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      font-size: 12px;
-      transition: all 0.2s;
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(56, 189, 248, 0.4);
     }
-    #directAuthHelper a:hover, #directAuthHelper button:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: #38bdf8;
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #fff;
     }
-    .auth-input-group {
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: var(--cyan);
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .form-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .form-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #e4e4e7;
+    }
+    .input-wrapper {
+      position: relative;
       display: flex;
       align-items: center;
+    }
+    .input-field {
+      width: 100%;
+      background: #181920;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 2.8rem 0.75rem 0.85rem;
+      color: #fff;
+      font-size: 0.9rem;
+      font-family: monospace;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-field:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+    .toggle-visibility {
+      position: absolute;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 0.85rem;
+    }
+    .toggle-visibility:hover {
+      color: #fff;
+    }
+    .btn-submit {
+      width: 100%;
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
     }
-    .auth-input-group input {
-      background: #181920;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      width: 250px;
-      outline: none;
+    .btn-submit:hover {
+      background: #0369a1;
     }
-    .auth-input-group input:focus {
-      border-color: #38bdf8;
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .status-msg {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      display: none;
+    }
+    .status-msg.error {
+      display: block;
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: var(--error);
+    }
+    .status-msg.success {
+      display: block;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: var(--success);
+    }
+    .guide-box {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .guide-box ol {
+      margin-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .guide-box li {
+      margin-bottom: 0.4rem;
+    }
+    .guide-box a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+    .guide-box a:hover {
+      text-decoration: underline;
+    }
+    /* Floating CMS Session Bar */
+    #sessionBar {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(18, 19, 24, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      z-index: 999999;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+    }
+    #sessionBar .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      font-weight: 500;
+    }
+    #sessionBar button {
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #fca5a5;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #sessionBar button:hover {
+      background: rgba(248, 113, 113, 0.3);
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <!-- Decap CMS Core Engine via CDN -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Login Screen (Displayed when no token found) -->
+  <div id="loginScreen" style="display: none;">
+    <div class="login-card">
+      <div class="brand-header">
+        <img src="../avatar.jpg" alt="Vinh Kacer" class="brand-avatar" onerror="this.style.display='none'">
+        <div>
+          <div class="brand-title">Vinh Kacer Portfolio</div>
+          <div class="brand-subtitle">Decap CMS • GitHub Backend</div>
+        </div>
+      </div>
 
-  <!-- GitHub Direct Token / PKCE Auth Helper -->
-  <div id="directAuthHelper">
-    <div id="authStatusText">
-      <span>🐙 <b>GitHub Backend:</b> Client ID: <code>Ov23liUzN2AfW07634hx</code> (repo: vinhkacer/vinhkacer-portfolio)</span>
+      <h1 class="form-title">Đăng Nhập Quản Trị</h1>
+      <p class="form-desc">
+        Hệ thống kết nối trực tiếp với GitHub Repository <code>vinhkacer/vinhkacer-portfolio</code> độc lập trên Cloudflare Pages.
+      </p>
+
+      <form id="patForm" onsubmit="handleTokenSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="tokenInput">GitHub Personal Access Token (PAT):</label>
+          <div class="input-wrapper">
+            <input type="password" id="tokenInput" class="input-field" placeholder="ghp_... hoặc github_pat_..." required autocomplete="off" />
+            <button type="button" class="toggle-visibility" onclick="toggleTokenVisibility()" title="Ẩn/Hiện token">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">
+          <span>Xác Thực & Vào Quản Trị</span>
+        </button>
+
+        <div id="statusMsg" class="status-msg"></div>
+      </form>
+
+      <div class="guide-box">
+        <b>Cách tạo GitHub Token (chỉ mất 1 phút):</b>
+        <ol>
+          <li>Truy cập <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener noreferrer">GitHub &gt; Personal Access Tokens (Classic) ↗</a></li>
+          <li>Đặt tên Note (ví dụ: <code>Portfolio CMS</code>).</li>
+          <li>Tích chọn quyền: <b><code>repo</code></b> (Full control of private repositories).</li>
+          <li>Cuộn xuống dưới chọn <b>Generate token</b> và dán chuỗi token vào ô trên.</li>
+        </ol>
+      </div>
     </div>
-    <div class="auth-input-group" id="authActions"></div>
+  </div>
+
+  <!-- Persistent Session Bar (Displayed when CMS is running) -->
+  <div id="sessionBar" style="display: none;">
+    <div class="user-badge" id="sessionUserBadge">
+      <span>🐙 GitHub: <code id="sessionUsername">Đã kết nối</code></span>
+    </div>
+    <button onclick="handleLogout()" title="Xóa token và đăng xuất khỏi CMS">Đăng xuất</button>
   </div>
 
   <script>
-    (function() {
-      const actionsContainer = document.getElementById('authActions');
-      const currentUser = localStorage.getItem('decap-cms-user');
+    const REPO_NAME = "vinhkacer/vinhkacer-portfolio";
+    const REPO_BRANCH = "main";
 
-      if (currentUser) {
-        try {
-          const userObj = JSON.parse(currentUser);
-          if (userObj.token) {
-            actionsContainer.innerHTML = `
-              <span style="color: #4ade80;">✓ Đã đăng nhập GitHub</span>
-              <button onclick="logoutCMS()">Đăng xuất / Đổi Token</button>
-            `;
+    function getStoredToken() {
+      // 1. Direct key
+      const direct = localStorage.getItem("github-pat");
+      if (direct && direct.trim()) return direct.trim();
+
+      // 2. decap-cms-user
+      try {
+        const dUser = localStorage.getItem("decap-cms-user");
+        if (dUser) {
+          const parsed = JSON.parse(dUser);
+          if (parsed && parsed.token && parsed.token.trim()) return parsed.token.trim();
+        }
+      } catch (e) {}
+
+      // 3. netlify-cms-user
+      try {
+        const nUser = localStorage.getItem("netlify-cms-user");
+        if (nUser) {
+          const parsed = JSON.parse(nUser);
+          if (parsed && parsed.token && parsed.token.trim()) return parsed.token.trim();
+        }
+      } catch (e) {}
+
+      return null;
+    }
+
+    function toggleTokenVisibility() {
+      const input = document.getElementById("tokenInput");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    async function handleTokenSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById("tokenInput");
+      const btn = document.getElementById("submitBtn");
+      const status = document.getElementById("statusMsg");
+      const token = input.value.trim();
+
+      if (!token) return;
+
+      btn.disabled = true;
+      btn.innerHTML = "<span>Đang kiểm tra token...</span>";
+      status.className = "status-msg";
+      status.style.display = "none";
+
+      try {
+        // Validate token with GitHub API
+        const res = await fetch("https://api.github.com/user", {
+          headers: {
+            "Authorization": `token ${token}`,
+            "Accept": "application/vnd.github.v3+json"
           }
-        } catch(e) {}
-      }
+        });
 
-      if (!actionsContainer.innerHTML.trim()) {
-        actionsContainer.innerHTML = `
-          <input type="password" id="patInput" placeholder="Dán GitHub Personal Access Token..." />
-          <button onclick="loginWithPAT()">Đăng nhập nhanh (PAT)</button>
-        `;
-      }
+        if (res.status === 200) {
+          const user = await res.json();
+          status.className = "status-msg success";
+          status.innerHTML = `✓ Xin chào <b>@${user.login}</b>! Đang tải hệ thống CMS...`;
 
-      window.loginWithPAT = function() {
-        const pat = document.getElementById('patInput').value.trim();
-        if (!pat) {
-          alert('Vui lòng dán GitHub Personal Access Token hợp lệ (có quyền repo).');
-          return;
+          const userPayload = {
+            token: token,
+            backendName: "github",
+            login: user.login,
+            name: user.name || user.login,
+            avatar_url: user.avatar_url
+          };
+
+          localStorage.setItem("github-pat", token);
+          localStorage.setItem("decap-cms-user", JSON.stringify(userPayload));
+          localStorage.setItem("netlify-cms-user", JSON.stringify(userPayload));
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 600);
+        } else if (res.status === 401) {
+          btn.disabled = false;
+          btn.innerHTML = "<span>Xác Thực & Vào Quản Trị</span>";
+          status.className = "status-msg error";
+          status.innerHTML = "⚠️ Token GitHub không chính xác hoặc đã hết hạn (Mã lỗi: 401 Unauthorized).";
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          btn.disabled = false;
+          btn.innerHTML = "<span>Xác Thực & Vào Quản Trị</span>";
+          status.className = "status-msg error";
+          status.innerHTML = `⚠️ GitHub báo lỗi: ${errData.message || res.statusText}.`;
         }
-        const user = {
-          token: pat,
-          backendName: 'github'
+      } catch (err) {
+        console.warn("Could not reach GitHub API directly, proceeding with local store:", err);
+        const userPayload = {
+          token: token,
+          backendName: "github"
         };
-        localStorage.setItem('decap-cms-user', JSON.stringify(user));
+        localStorage.setItem("github-pat", token);
+        localStorage.setItem("decap-cms-user", JSON.stringify(userPayload));
+        localStorage.setItem("netlify-cms-user", JSON.stringify(userPayload));
         window.location.reload();
-      };
+      }
+    }
 
-      window.logoutCMS = function() {
-        if (confirm('Bạn có chắc chắn muốn đăng xuất khỏi Decap CMS?')) {
-          localStorage.removeItem('decap-cms-user');
-          window.location.reload();
+    function handleLogout() {
+      if (confirm("Bạn có chắc chắn muốn đăng xuất khỏi Decap CMS?")) {
+        localStorage.removeItem("github-pat");
+        localStorage.removeItem("decap-cms-user");
+        localStorage.removeItem("netlify-cms-user");
+        window.location.reload();
+      }
+    }
+
+    // MAIN BOOTSTRAP LOGIC
+    (function bootstrap() {
+      const token = getStoredToken();
+
+      if (!token) {
+        // Show login form
+        document.getElementById("loginScreen").style.display = "flex";
+        return;
+      }
+
+      // Token exists: configure manual init and start Decap CMS
+      window.CMS_MANUAL_INIT = true;
+
+      // Ensure consistent storage
+      let username = "GitHub";
+      try {
+        const u = JSON.parse(localStorage.getItem("decap-cms-user") || "{}");
+        if (u.login) username = "@" + u.login;
+        if (!u.token || u.backendName !== "github") {
+          localStorage.setItem("decap-cms-user", JSON.stringify({ token: token, backendName: "github", login: u.login }));
+        }
+      } catch (e) {
+        localStorage.setItem("decap-cms-user", JSON.stringify({ token: token, backendName: "github" }));
+      }
+
+      // Show small session bar
+      const sessionBar = document.getElementById("sessionBar");
+      const sessionUsername = document.getElementById("sessionUsername");
+      if (sessionBar && sessionUsername) {
+        sessionUsername.textContent = username;
+        sessionBar.style.display = "flex";
+      }
+
+      // Dynamically load Decap CMS script
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js";
+      script.onload = function() {
+        if (window.CMS) {
+          window.CMS.init({
+            config: {
+              backend: {
+                name: "github",
+                repo: REPO_NAME,
+                branch: REPO_BRANCH,
+                token: token
+              }
+            }
+          });
         }
       };
+      document.head.appendChild(script);
     })();
   </script>
 </body>
