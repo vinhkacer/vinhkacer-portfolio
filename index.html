@@ -12,9 +12,12 @@
   <meta property="og:title" content="Vinh Kacer — Video Editor · VFX Artist · 3D Animation · Compositing">
   <meta property="og:description" content="Crafting Visual Rhythm, Viral Stories & Cinematic Motion.">
   <meta property="og:type" content="website">
-  
-  <!-- Netlify Identity Widget for Decap CMS -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta property="og:url" content="https://vinhkacer-portfolio.pages.dev">
+  <meta property="og:image" content="https://vinhkacer-portfolio.pages.dev/avatar.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vinh Kacer — Video Editor · VFX Artist · 3D Animation · Compositing">
+  <meta name="twitter:description" content="Crafting Visual Rhythm, Viral Stories & Cinematic Motion.">
+  <meta name="twitter:image" content="https://vinhkacer-portfolio.pages.dev/avatar.jpg">
   
   <!-- Google Fonts: Plus Jakarta Sans, Inter (Modern Sans-serif), JetBrains Mono (Tech/Metadata) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,7 +91,7 @@
       <!-- Logo & Profile with Nav Avatar -->
       <a href="#" class="group flex items-center gap-3 text-lg font-display font-bold tracking-tight text-white">
         <div class="relative shrink-0">
-          <img src="avatar.jpg" alt="Vinh Kacer" class="nav-avatar">
+          <img src="avatar.jpg" alt="Vinh Kacer" class="nav-avatar" width="40" height="40" decoding="async">
           <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-[#0A0A0C]"></span>
         </div>
         <span class="tracking-tight text-[#F4F4F5]">VINH KACER</span>
@@ -176,7 +179,7 @@
     <!-- Profile Avatar (Hero Cinematic Display) -->
     <div class="relative inline-block mb-8 group cursor-default">
       <div class="hero-avatar-wrapper w-24 h-24 sm:w-28 sm:h-28">
-        <img src="avatar.jpg" alt="Vinh Kacer — Video Editor & 3D / VFX Artist" class="hero-avatar-img">
+        <img src="avatar.jpg" alt="Vinh Kacer — Video Editor & 3D / VFX Artist" class="hero-avatar-img" width="112" height="112" decoding="async">
       </div>
       <!-- Studio Live Status Dot -->
       <div class="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-[#0A0A0C] border border-white/20 flex items-center justify-center" title="Available for Projects">
@@ -398,15 +401,26 @@
       </div>
     </div>
 
-    <!-- Active Tab Description Banner -->
-    <div id="tabBanner" class="p-3.5 mb-8 rounded-xl bg-white/[0.015] border border-white/5 flex items-center justify-between">
+    <!-- Active Tab Description Banner & Mobile 9:16 UX Controls -->
+    <div id="tabBanner" class="p-3.5 mb-8 rounded-xl bg-white/[0.015] border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="flex items-center gap-2.5">
         <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span>
         <span id="tabBannerText" class="text-xs font-mono text-zinc-400 tracking-wide uppercase">
           HIỂN THỊ TẤT CẢ DỰ ÁN • MUSIC VIDEOS 16:9, VIRAL SERIES 9:16 &amp; COMMERCIAL
         </span>
       </div>
-      <span class="text-[10px] font-mono text-zinc-500 hidden sm:inline-block">Controls • Preload Metadata • 1080p</span>
+      <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+        <!-- Mobile 9:16 Reel vs Compact Grid toggle -->
+        <div id="mobileLayoutToggle" class="sm:hidden flex items-center gap-1 bg-white/[0.04] p-1 rounded-lg border border-white/10 text-[11px] font-mono">
+          <button id="btnMobileReel" onclick="setMobileLayout('reel')" class="px-2.5 py-1 rounded bg-white/20 text-white font-bold transition-all flex items-center gap-1" title="Cuộn ngang kiểu Reel">
+            <span>⇄ Cuộn ngang</span>
+          </button>
+          <button id="btnMobileGrid" onclick="setMobileLayout('grid')" class="px-2.5 py-1 rounded text-zinc-400 hover:text-white transition-all flex items-center gap-1" title="Dạng lưới gọn">
+            <span>⊞ Lưới</span>
+          </button>
+        </div>
+        <span class="text-[10px] font-mono text-zinc-500 hidden sm:inline-block">Controls • Preload Metadata • 1080p</span>
+      </div>
     </div>
 
     <!-- Container for Rendered Projects -->

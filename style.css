@@ -444,3 +444,83 @@ button[id^="tabBtn"].bg-neon-cyan .tab-count {
   color: #ffffff !important;
 }
 
+/* ========================================================= */
+/* 8. MOBILE 9:16 VERTICAL REEL & COMPACT GRID UX            */
+/* ========================================================= */
+
+.vertical-scroll-reel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0.875rem;
+  padding: 0.25rem 0.25rem 1rem 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.vertical-scroll-reel::-webkit-scrollbar {
+  height: 5px;
+}
+
+.vertical-scroll-reel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 9999px;
+}
+
+.vertical-scroll-reel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+}
+
+.vertical-scroll-reel > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 58vw;
+  max-width: 220px;
+}
+
+@media (min-width: 640px) {
+  .vertical-scroll-reel {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    gap: 1.5rem !important;
+    padding: 0 !important;
+  }
+  .vertical-scroll-reel > * {
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vertical-scroll-reel {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Mobile Compact 2-Col Grid */
+.mobile-compact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-compact-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-compact-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+

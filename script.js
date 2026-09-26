@@ -7,6 +7,25 @@ let PORTFOLIO_DATA = {"cinematic": [{"id": "cam-bat-den.mp4", "title": "Cầm �
 
 let currentTab = 'all';
 let searchQuery = '';
+let mobileLayoutMode = 'reel'; // 'reel' (horizontal scroll snap) or 'grid' (compact 2-col)
+
+// Mobile 9:16 layout toggle (Horizontal Reel vs Compact 2-Col Grid)
+function setMobileLayout(mode) {
+  playBeep(720, 0.04);
+  mobileLayoutMode = mode;
+  const btnReel = document.getElementById('btnMobileReel');
+  const btnGrid = document.getElementById('btnMobileGrid');
+  if (btnReel && btnGrid) {
+    if (mode === 'reel') {
+      btnReel.className = 'px-2.5 py-1 rounded bg-white/20 text-white font-bold transition-all flex items-center gap-1';
+      btnGrid.className = 'px-2.5 py-1 rounded text-zinc-400 hover:text-white transition-all flex items-center gap-1';
+    } else {
+      btnReel.className = 'px-2.5 py-1 rounded text-zinc-400 hover:text-white transition-all flex items-center gap-1';
+      btnGrid.className = 'px-2.5 py-1 rounded bg-white/20 text-white font-bold transition-all flex items-center gap-1';
+    }
+  }
+  renderProjects();
+}
 
 // Helper to extract YouTube Video ID from any standard, embed, or shorts URL
 function getYouTubeId(url) {
@@ -24,6 +43,7 @@ function createYouTubeFacadeHtml(ytId, title = 'Video') {
       <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" 
            alt="${safeTitle}" 
            loading="lazy" 
+           decoding="async"
            onerror="this.src='https://img.youtube.com/vi/${ytId}/0.jpg'" />
       <div class="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors"></div>
       <button type="button" class="youtube-play-btn" aria-label="Phát YouTube">
@@ -575,10 +595,101 @@ function renderProjects() {
     return;
   }
 
-  // Mixed (All) or Vertical layouts (Thung Long, Freelance)
-  // Grid layout: 2 cols on mobile, 3 cols on tablet, 4 cols on desktop
-  // 16:9 video cards will use col-span-full to expand across ALL columns
-  grid.className = 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 items-start';
+  // Dedicated handling for TAB 2 (Thung Long) & TAB 3 (Freelance)
+  if (currentTab === 'thunglong' || currentTab === 'freelance') {
+    grid.className = mobileLayoutMode === 'reel' 
+      ? 'vertical-scroll-reel w-full' 
+      : 'mobile-compact-grid w-full';
+    list.forEach(item => {
+      grid.appendChild(createVerticalCard(item));
+    });
+    return;
+  }
+
+  // TAB 0: ALL (Tất cả dự án)
+  // When no search filter: display structured sections so 9:16 videos on mobile can scroll horizontally with snap!
+  if (searchQuery.trim() === '') {
+    grid.className = 'flex flex-col gap-10 w-full';
+
+    // Section 1: Music Videos (16:9)
+    const mvList = PORTFOLIO_DATA['cinematic'] || [];
+    if (mvList.length > 0) {
+      const mvSection = document.createElement('div');
+      mvSection.className = 'grid grid-cols-1 gap-8';
+      mvList.forEach(item => mvSection.appendChild(create16x9Card(item)));
+      grid.appendChild(mvSection);
+    }
+
+    // Section 2: Thủng Long Family (9:16)
+    const tlList = PORTFOLIO_DATA['thunglong'] || [];
+    if (tlList.length > 0) {
+      const tlWrapper = document.createElement('div');
+      tlWrapper.className = 'flex flex-col gap-4';
+
+      const tlHeader = document.createElement('div');
+      tlHeader.className = 'flex items-center justify-between border-b border-white/5 pb-2.5';
+      tlHeader.innerHTML = `
+        <div class="flex items-center gap-2.5">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+          <h3 class="text-xs sm:text-sm font-mono font-bold tracking-wider uppercase text-zinc-200">
+            THỦNG LONG FAMILY (VIRAL SHORT-FORM 9:16)
+          </h3>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400">${tlList.length}</span>
+        </div>
+        <span class="sm:hidden text-[10px] font-mono text-zinc-400 flex items-center gap-1">
+          <span>Vuốt ngang</span> <span>➔</span>
+        </span>
+      `;
+      tlWrapper.appendChild(tlHeader);
+
+      const tlContainer = document.createElement('div');
+      tlContainer.className = mobileLayoutMode === 'reel' 
+        ? 'vertical-scroll-reel w-full' 
+        : 'mobile-compact-grid w-full';
+      tlList.forEach(item => tlContainer.appendChild(createVerticalCard(item)));
+      tlWrapper.appendChild(tlContainer);
+
+      grid.appendChild(tlWrapper);
+    }
+
+    // Section 3: Commercial & Freelance (9:16)
+    const flList = PORTFOLIO_DATA['freelance'] || [];
+    if (flList.length > 0) {
+      const flWrapper = document.createElement('div');
+      flWrapper.className = 'flex flex-col gap-4';
+
+      const flHeader = document.createElement('div');
+      flHeader.className = 'flex items-center justify-between border-b border-white/5 pb-2.5';
+      flHeader.innerHTML = `
+        <div class="flex items-center gap-2.5">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+          <h3 class="text-xs sm:text-sm font-mono font-bold tracking-wider uppercase text-zinc-200">
+            COMMERCIAL &amp; BRAND CAMPAIGNS (9:16)
+          </h3>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400">${flList.length}</span>
+        </div>
+        <span class="sm:hidden text-[10px] font-mono text-zinc-400 flex items-center gap-1">
+          <span>Vuốt ngang</span> <span>➔</span>
+        </span>
+      `;
+      flWrapper.appendChild(flHeader);
+
+      const flContainer = document.createElement('div');
+      flContainer.className = mobileLayoutMode === 'reel' 
+        ? 'vertical-scroll-reel w-full' 
+        : 'mobile-compact-grid w-full';
+      flList.forEach(item => flContainer.appendChild(createVerticalCard(item)));
+      flWrapper.appendChild(flContainer);
+
+      grid.appendChild(flWrapper);
+    }
+    return;
+  }
+
+  // Fallback for search results
+  grid.className = mobileLayoutMode === 'reel' 
+    ? 'vertical-scroll-reel w-full' 
+    : 'mobile-compact-grid w-full';
 
   list.forEach(item => {
     const is16x9 = item.aspect === '16:9' || item.category === 'cinematic';
@@ -793,7 +904,7 @@ function createVerticalCard(item) {
   card.onclick = () => openCinemaModal(item);
   card.innerHTML = `
     <div class="relative w-full aspect-[9/16] bg-black overflow-hidden">
-      <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
+      <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" decoding="async">
       <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity"></div>
       
       <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
