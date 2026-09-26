@@ -327,6 +327,12 @@
         </button>
 
         <div id="statusMsg" class="status-msg"></div>
+
+        <div style="margin-top: 1.25rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1rem;">
+          <a href="sort.html" style="color: var(--cyan); font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <span>⇄ Mở công cụ Kéo-Thả Sắp Xếp Video (Sort Studio) ↗</span>
+          </a>
+        </div>
       </form>
 
       <div class="guide-box">
@@ -341,11 +347,20 @@
     </div>
   </div>
 
+  <!-- Quick Floating Shortcut to Sort Studio -->
+  <a href="sort.html" id="quickSortFloatingBtn" style="position:fixed;top:12px;right:14px;z-index:999999;background:rgba(18,19,25,0.92);border:1px solid rgba(56,189,248,0.4);color:#38bdf8;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:flex;align-items:center;gap:6px;transition:all 0.2s;" title="Mở công cụ Kéo-Thả Sắp Xếp Video">
+    <span>⇄</span>
+    <span>Sắp Xếp Kéo-Thả</span>
+  </a>
+
   <!-- Persistent Session Bar (Displayed when CMS is running) -->
   <div id="sessionBar" style="display: none;">
     <div class="user-badge" id="sessionUserBadge">
       <span>🐙 GitHub: <code id="sessionUsername">Đã kết nối</code></span>
     </div>
+    <a href="sort.html" style="color:var(--cyan);text-decoration:none;font-weight:600;font-size:11px;display:flex;align-items:center;gap:4px;padding:3px 9px;border-radius:12px;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.4);" title="Mở trang kéo thả sắp xếp video">
+      <span>⇄ Sắp xếp Kéo-Thả</span>
+    </a>
     <button onclick="handleLogout()" title="Xóa token và đăng xuất khỏi CMS">Đăng xuất</button>
   </div>
 

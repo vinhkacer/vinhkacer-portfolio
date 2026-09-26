@@ -1036,17 +1036,17 @@ function createVerticalCard(item) {
         </div>
       </div>
 
-      <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 z-10">
-        <h3 class="text-xs sm:text-sm font-display font-bold text-white group-hover:text-neon-cyan transition-colors line-clamp-2 leading-snug">
+      <div class="vertical-card-footer">
+        <h3 class="vertical-card-title group-hover:text-neon-cyan transition-colors" title="${item.title}">
           ${item.title}
         </h3>
-        <div class="mt-2.5 flex items-center justify-between gap-1.5">
-          <div class="flex items-center gap-1.5 shrink-0">
+        <div class="flex items-center justify-between gap-1.5 flex-wrap">
+          <div class="flex items-center gap-1.5 shrink-0 min-w-0">
             ${verticalSocialHtml}
           </div>
           ${item.role ? `
-          <span class="text-[9px] sm:text-[10px] font-mono text-neon-cyan/90 font-medium truncate px-2.5 py-1 rounded-lg bg-obsidian-950/85 border border-white/15 backdrop-blur-md shadow-sm max-w-[65%] text-right">
-            ${item.role}
+          <span class="role-capsule shrink-0" title="${item.role}">
+            ${item.role.split(' • ').slice(0, 2).join(' · ')}
           </span>` : ''}
         </div>
       </div>

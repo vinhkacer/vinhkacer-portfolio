@@ -1,0 +1,1364 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinh Kacer Portfolio — Sắp Xếp Dự Án Kéo-Thả (Sort Studio)</title>
+  <link rel="icon" type="image/jpeg" href="../avatar.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- SortableJS via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #09090d;
+      --card-bg: #121319;
+      --card-hover: #181a24;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.4);
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.25);
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --emerald: #34d399;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 90px;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+
+    /* Top Navigation Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(9, 9, 13, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: #e4e4e7;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-btn.primary {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: var(--cyan);
+    }
+
+    .nav-btn.primary:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--cyan);
+    }
+
+    /* Sub Toolbar */
+    .toolbar {
+      max-width: 1440px;
+      margin: 1.25rem auto 0;
+      padding: 0 1.5rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .view-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(18, 19, 25, 0.85);
+      border: 1px solid var(--border);
+      padding: 4px;
+      border-radius: 12px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--cyan);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .tab-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 240px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 12px 7px 32px;
+      color: #fff;
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--cyan);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Main Board */
+    main {
+      max-width: 1440px;
+      margin: 1.25rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .board-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Column Container */
+    .column-box {
+      background: rgba(14, 15, 20, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 480px;
+      transition: border-color 0.2s;
+    }
+
+    .column-box:hover {
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .column-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .column-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-mv { background: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); }
+    .dot-tl { background: #fb7185; box-shadow: 0 0 8px rgba(251, 113, 133, 0.6); }
+    .dot-cm { background: #fbbf24; box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+
+    .column-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .column-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    /* Sortable List */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-height: 100px;
+    }
+
+    /* Project Item Card */
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: grab;
+      user-select: none;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .project-card:active {
+      cursor: grabbing;
+    }
+
+    .project-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Sortable Dragging States */
+    .sortable-ghost {
+      opacity: 0.35;
+      background: rgba(56, 189, 248, 0.1) !important;
+      border: 1.5px dashed var(--cyan) !important;
+    }
+
+    .sortable-chosen {
+      background: #1c1e28 !important;
+      border-color: var(--cyan) !important;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2) !important;
+    }
+
+    .sortable-drag {
+      cursor: grabbing !important;
+      opacity: 0.95;
+    }
+
+    .drag-handle {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1;
+      padding: 4px;
+      cursor: grab;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover .drag-handle {
+      opacity: 1;
+      color: var(--cyan);
+    }
+
+    /* Order Number Pill */
+    .order-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 6px;
+      padding: 3px 8px;
+      min-width: 38px;
+      text-align: center;
+      shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .project-card.featured-card .order-pill {
+      color: var(--amber);
+      background: rgba(251, 191, 36, 0.15);
+      border-color: rgba(251, 191, 36, 0.4);
+    }
+
+    /* Thumbnail Box */
+    .thumb-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .thumb-box.mv-thumb {
+      width: 72px;
+      height: 42px;
+    }
+
+    .thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Info */
+    .card-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 5px;
+      border-radius: 4px;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .featured-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--amber);
+      background: rgba(251, 191, 36, 0.15);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Card Controls (Move Up/Down on Mobile) */
+    .card-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover .card-controls {
+      opacity: 1;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 22px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    /* Fixed Bottom Action Dock */
+    .action-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(14, 15, 21, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 1.5rem;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .dock-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .dock-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+
+    .status-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 3px 9px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-clean {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--emerald);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .status-dirty {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--amber);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .btn-save-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0284c7;
+      color: #fff;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--cyan-glow);
+      transition: all 0.25s ease;
+    }
+
+    .btn-save-all:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-save-all:active {
+      transform: scale(0.98);
+    }
+
+    .btn-save-all:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Modal for Token / Messages */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-active);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 480px;
+      padding: 1.75rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 85px;
+      right: 24px;
+      z-index: 9999;
+      background: #181922;
+      border: 1px solid var(--cyan);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
+    }
+
+    #toast.show {
+      display: flex;
+      transform: translateY(0);
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <img src="../avatar.jpg" alt="Vinh Kacer" class="brand-avatar" onerror="this.style.display='none'">
+        <div>
+          <div class="brand-title">
+            <span>Portfolio Order Studio</span>
+            <span class="brand-badge">SORTABLE JS</span>
+          </div>
+          <div class="brand-desc">Kéo & Thả để sắp xếp thứ tự ưu tiên video (Số nhỏ xếp trước: 1, 2, 3...)</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button onclick="openTokenModal()" id="btnAuthStatus" class="nav-btn">
+          <span>🔑 GitHub Token</span>
+        </button>
+        <a href="index.html" class="nav-btn">
+          <span>← Decap CMS</span>
+        </a>
+        <a href="../index.html" target="_blank" rel="noopener noreferrer" class="nav-btn primary">
+          <span>🌐 Xem Web ↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub Toolbar -->
+  <div class="toolbar">
+    <div class="view-tabs">
+      <button class="tab-btn active" onclick="switchFilter('all', this)">
+        <span>Tất Cả</span>
+        <span class="tab-count" id="countAll">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchFilter('mv', this)">
+        <span class="column-dot dot-mv"></span>
+        <span>Music Video</span>
+        <span class="tab-count" id="countMv">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchFilter('thunglong', this)">
+        <span class="column-dot dot-tl"></span>
+        <span>Thủng Long</span>
+        <span class="tab-count" id="countTl">0</span>
+      </button>
+      <button class="tab-btn" onclick="switchFilter('commercial', this)">
+        <span class="column-dot dot-cm"></span>
+        <span>Commercial</span>
+        <span class="tab-count" id="countCm">0</span>
+      </button>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+      <button class="nav-btn" onclick="reassignSequentialOrder()" title="Đánh số lại thứ tự từ 1 đến hết theo thứ tự hiển thị hiện tại">
+        <span>🔢 Đánh số 1..N tự động</span>
+      </button>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm theo tên video..." oninput="handleSearch(this.value)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Drag-and-Drop Board -->
+  <main>
+    <div class="board-grid" id="boardGrid">
+      
+      <!-- 1. Music Videos Column -->
+      <div class="column-box" id="col-mv">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-dot dot-mv"></span>
+            <span class="column-title">1. Music Videos (MV)</span>
+          </div>
+          <span class="column-counter" id="badge-mv">0 video</span>
+        </div>
+        <div class="project-list" id="list-mv" data-category="mv">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- 2. Thủng Long Family Column -->
+      <div class="column-box" id="col-thunglong">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-dot dot-tl"></span>
+            <span class="column-title">2. Thủng Long Family</span>
+          </div>
+          <span class="column-counter" id="badge-thunglong">0 video</span>
+        </div>
+        <div class="project-list" id="list-thunglong" data-category="thunglong">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- 3. Commercial & Freelance Column -->
+      <div class="column-box" id="col-commercial">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="column-dot dot-cm"></span>
+            <span class="column-title">3. Commercial & Freelance</span>
+          </div>
+          <span class="column-counter" id="badge-commercial">0 video</span>
+        </div>
+        <div class="project-list" id="list-commercial" data-category="commercial">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Fixed Bottom Action Dock -->
+  <div class="action-dock">
+    <div class="dock-inner">
+      <div class="dock-status">
+        <span class="status-pill status-clean" id="dirtyStatus">
+          <span>✓ Đã đồng bộ</span>
+        </span>
+        <span style="color: var(--muted); font-size: 0.8rem;" id="changeSummary">
+          Kéo thả thẻ để thay đổi thứ tự hiển thị
+        </span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="nav-btn" onclick="resetToInitialOrder()" id="btnReset" title="Hoàn tác về thứ tự lúc ban đầu tải trang">
+          <span>↺ Khôi phục</span>
+        </button>
+        <button class="btn-save-all" id="btnSaveAll" onclick="handleSaveAll()">
+          <span id="saveBtnIcon">💾</span>
+          <span id="saveBtnText">LƯU VỊ TRÍ HÀNG LOẠT</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAT Input Modal -->
+  <div class="modal-overlay" id="tokenModal">
+    <div class="modal-card">
+      <h3 class="modal-title">Cấu Hình GitHub Token</h3>
+      <p class="modal-desc">
+        Nhập GitHub Personal Access Token (PAT) có quyền <code>repo</code> để có thể lưu thứ tự hàng loạt trực tiếp lên nhánh <code>main</code> độc lập trên Cloudflare Pages.
+      </p>
+      <input type="password" id="modalTokenInput" class="search-input" style="padding: 10px; font-family: monospace; margin-bottom: 12px;" placeholder="ghp_... hoặc github_pat_..." autocomplete="off">
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="nav-btn" onclick="closeTokenModal()">Hủy</button>
+        <button class="nav-btn primary" onclick="saveModalToken()">Lưu & Xác Thực</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastText">Thao tác thành công!</span>
+  </div>
+
+  <script>
+    const REPO_NAME = "vinhkacer/vinhkacer-portfolio";
+    const REPO_BRANCH = "main";
+
+    let ALL_PROJECTS = [];
+    let INITIAL_SNAPSHOT = [];
+    let isDirty = false;
+    let sortableInstances = [];
+
+    // 1. Get stored token
+    function getStoredToken() {
+      const direct = localStorage.getItem("github-pat");
+      if (direct && direct.trim()) return direct.trim();
+      try {
+        const u = JSON.parse(localStorage.getItem("decap-cms-user") || "{}");
+        if (u.token && u.token.trim()) return u.token.trim();
+      } catch (e) {}
+      return null;
+    }
+
+    function updateAuthBadge() {
+      const token = getStoredToken();
+      const btn = document.getElementById("btnAuthStatus");
+      if (token) {
+        btn.innerHTML = `<span style="color:var(--emerald);">●</span> <span>GitHub Token ✓</span>`;
+        btn.style.borderColor = "rgba(52, 211, 153, 0.4)";
+      } else {
+        btn.innerHTML = `<span style="color:var(--amber);">●</span> <span>Nhập GitHub Token</span>`;
+        btn.style.borderColor = "rgba(251, 191, 36, 0.4)";
+      }
+    }
+
+    function openTokenModal() {
+      const input = document.getElementById("modalTokenInput");
+      input.value = getStoredToken() || "";
+      document.getElementById("tokenModal").style.display = "flex";
+      input.focus();
+    }
+
+    function closeTokenModal() {
+      document.getElementById("tokenModal").style.display = "none";
+    }
+
+    function saveModalToken() {
+      const val = document.getElementById("modalTokenInput").value.trim();
+      if (val) {
+        localStorage.setItem("github-pat", val);
+        showToast("✓ Đã lưu GitHub Token vào trình duyệt!", "success");
+      } else {
+        localStorage.removeItem("github-pat");
+        showToast("ℹ Đã xóa token", "info");
+      }
+      closeTokenModal();
+      updateAuthBadge();
+    }
+
+    // 2. Fetch Projects Data
+    async function loadProjects() {
+      updateAuthBadge();
+      showToast("Đang tải danh sách video...", "info");
+
+      try {
+        const res = await fetch("../content/projects/index.json");
+        if (!res.ok) throw new Error("Could not fetch index.json");
+        const data = await res.json();
+
+        let list = [];
+        if (Array.isArray(data.projects) && data.projects.length > 0) {
+          list = data.projects.map((p, idx) => {
+            let cat = (p.category || '').toLowerCase();
+            let mappedCat = 'commercial';
+            if (cat.includes('mv') || cat.includes('music') || cat.includes('cinematic')) mappedCat = 'mv';
+            else if (cat.includes('thung') || cat.includes('long')) mappedCat = 'thunglong';
+
+            let orderNum = 100;
+            if (p.order !== undefined && p.order !== null && !isNaN(Number(p.order))) {
+              orderNum = Number(p.order);
+            } else if (p.featured) {
+              orderNum = 1;
+            }
+
+            return {
+              id: p.id || `proj_${idx}`,
+              filename: p.filename || `${p.id || idx}.md`,
+              title: p.title || 'Video không tên',
+              category: mappedCat,
+              rawCategory: p.category || 'Commercial',
+              order: orderNum,
+              featured: Boolean(p.featured),
+              role: p.role || '',
+              thumbnail: p.thumbnail || p.thumb || '',
+              date: p.date || ''
+            };
+          });
+        }
+
+        // Sort initially by order ascending, then title
+        list.sort((a, b) => {
+          if (a.order !== b.order) return a.order - b.order;
+          return a.title.localeCompare(b.title);
+        });
+
+        ALL_PROJECTS = list;
+        INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(list));
+
+        renderBoard();
+        initSortables();
+        showToast(`✓ Đã nạp ${ALL_PROJECTS.length} dự án thành công!`);
+      } catch (err) {
+        console.error("Error loading projects:", err);
+        showToast("⚠️ Không thể đọc index.json, đang dùng dữ liệu dự phòng...", "error");
+      }
+    }
+
+    // 3. Render cards into 3 columns
+    function renderBoard() {
+      const listMv = document.getElementById("list-mv");
+      const listTl = document.getElementById("list-thunglong");
+      const listCm = document.getElementById("list-commercial");
+
+      listMv.innerHTML = "";
+      listTl.innerHTML = "";
+      listCm.innerHTML = "";
+
+      let countMv = 0;
+      let countTl = 0;
+      let countCm = 0;
+
+      ALL_PROJECTS.forEach((item, index) => {
+        const card = createCardElement(item);
+        if (item.category === 'mv') {
+          listMv.appendChild(card);
+          countMv++;
+        } else if (item.category === 'thunglong') {
+          listTl.appendChild(card);
+          countTl++;
+        } else {
+          listCm.appendChild(card);
+          countCm++;
+        }
+      });
+
+      document.getElementById("countAll").textContent = ALL_PROJECTS.length;
+      document.getElementById("countMv").textContent = countMv;
+      document.getElementById("countTl").textContent = countTl;
+      document.getElementById("countCm").textContent = countCm;
+
+      document.getElementById("badge-mv").textContent = `${countMv} video`;
+      document.getElementById("badge-thunglong").textContent = `${countTl} video`;
+      document.getElementById("badge-commercial").textContent = `${countCm} video`;
+    }
+
+    // Helper: Build individual card element
+    function createCardElement(item) {
+      const el = document.createElement("div");
+      el.className = `project-card ${item.featured ? 'featured-card' : ''}`;
+      el.dataset.id = item.id;
+      el.dataset.category = item.category;
+
+      // Fix relative thumbnail
+      let thumbSrc = item.thumbnail || '';
+      if (thumbSrc && !thumbSrc.startsWith('http') && !thumbSrc.startsWith('/')) {
+        thumbSrc = '../' + thumbSrc;
+      }
+
+      el.innerHTML = `
+        <div class="drag-handle" title="Nhấn giữ để kéo thả">⋮⋮</div>
+        
+        <div class="order-pill" title="Thứ tự hiển thị: ${item.order}">
+          #<span class="order-num">${item.order}</span>
+        </div>
+
+        <div class="thumb-box ${item.category === 'mv' ? 'mv-thumb' : ''}">
+          <img src="${thumbSrc}" alt="${item.title}" class="thumb-img" loading="lazy" onerror="this.src='../avatar.jpg'">
+        </div>
+
+        <div class="card-info">
+          <div class="card-title" title="${item.title}">${item.title}</div>
+          <div class="card-meta">
+            ${item.featured ? `<span class="featured-badge">★ HOT</span>` : ''}
+            <span class="card-tag">${item.role ? item.role.split(' • ')[0] : item.rawCategory}</span>
+          </div>
+        </div>
+
+        <div class="card-controls">
+          <button class="ctrl-btn" onclick="moveCardStep('${item.id}', -1)" title="Di chuyển lên">▲</button>
+          <button class="ctrl-btn" onclick="moveCardStep('${item.id}', 1)" title="Di chuyển xuống">▼</button>
+        </div>
+      `;
+      return el;
+    }
+
+    // 4. Initialize SortableJS on all 3 column lists
+    function initSortables() {
+      sortableInstances.forEach(inst => inst.destroy());
+      sortableInstances = [];
+
+      const listIds = ['list-mv', 'list-thunglong', 'list-commercial'];
+      listIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const sortable = new Sortable(el, {
+          group: 'portfolio-projects',
+          animation: 200,
+          handle: '.drag-handle, .project-card',
+          ghostClass: 'sortable-ghost',
+          chosenClass: 'sortable-chosen',
+          dragClass: 'sortable-drag',
+          onEnd: function (evt) {
+            handleOrderRecalculate();
+          }
+        });
+        sortableInstances.push(sortable);
+      });
+    }
+
+    // 5. Automatic recalculation of order from top to bottom
+    function handleOrderRecalculate() {
+      // Collect cards in actual current DOM order across the 3 lists
+      const listIds = ['list-mv', 'list-thunglong', 'list-commercial'];
+      let globalIndex = 1;
+
+      listIds.forEach(listId => {
+        const listEl = document.getElementById(listId);
+        if (!listEl) return;
+        const cards = Array.from(listEl.querySelectorAll('.project-card'));
+        cards.forEach(card => {
+          const id = card.dataset.id;
+          const proj = ALL_PROJECTS.find(p => p.id === id);
+          if (proj) {
+            proj.order = globalIndex;
+            // Update order pill in DOM
+            const numEl = card.querySelector('.order-num');
+            if (numEl) numEl.textContent = globalIndex;
+            globalIndex++;
+          }
+        });
+      });
+
+      markDirty(true);
+    }
+
+    // Step move button handler
+    function moveCardStep(id, direction) {
+      const card = document.querySelector(`.project-card[data-id="${id}"]`);
+      if (!card) return;
+      const parent = card.parentElement;
+      if (direction === -1) {
+        const prev = card.previousElementSibling;
+        if (prev) parent.insertBefore(card, prev);
+      } else {
+        const next = card.nextElementSibling;
+        if (next) parent.insertBefore(next, card);
+      }
+      handleOrderRecalculate();
+    }
+
+    // Sequential 1..N order renumbering
+    function reassignSequentialOrder() {
+      handleOrderRecalculate();
+      showToast("✓ Đã đánh số lại thứ tự từ 1 đến " + ALL_PROJECTS.length);
+    }
+
+    // Mark state as dirty (unsaved changes)
+    function markDirty(dirty) {
+      isDirty = dirty;
+      const pill = document.getElementById("dirtyStatus");
+      const summary = document.getElementById("changeSummary");
+      const saveBtn = document.getElementById("btnSaveAll");
+
+      if (dirty) {
+        pill.className = "status-pill status-dirty";
+        pill.innerHTML = "<span>● Có thay đổi chưa lưu</span>";
+        summary.textContent = "Bấm 'LƯU VỊ TRÍ HÀNG LOẠT' để đẩy lên GitHub";
+        saveBtn.style.boxShadow = "0 0 20px rgba(56, 189, 248, 0.6)";
+      } else {
+        pill.className = "status-pill status-clean";
+        pill.innerHTML = "<span>✓ Đã đồng bộ</span>";
+        summary.textContent = "Tất cả thay đổi đã được lưu an toàn";
+        saveBtn.style.boxShadow = "0 4px 20px var(--cyan-glow)";
+      }
+    }
+
+    // Reset to snapshot
+    function resetToInitialOrder() {
+      if (!confirm("Khôi phục lại toàn bộ thứ tự như lúc ban đầu?")) return;
+      ALL_PROJECTS = JSON.parse(JSON.stringify(INITIAL_SNAPSHOT));
+      renderBoard();
+      initSortables();
+      markDirty(false);
+      showToast("↺ Đã hoàn tác về thứ tự ban đầu!");
+    }
+
+    // 6. Batch Save to GitHub API
+    async function handleSaveAll() {
+      const token = getStoredToken();
+      if (!token) {
+        openTokenModal();
+        return;
+      }
+
+      const btn = document.getElementById("btnSaveAll");
+      const icon = document.getElementById("saveBtnIcon");
+      const text = document.getElementById("saveBtnText");
+
+      btn.disabled = true;
+      icon.innerHTML = `<div class="spinner"></div>`;
+      text.textContent = "Đang kết nối GitHub...";
+
+      try {
+        // Step A: Prepare tree items for updated files
+        text.textContent = "Đang đóng gói dữ liệu (Git Tree)...";
+
+        // Read or construct updated content for projects
+        const updatedProjects = ALL_PROJECTS.map(p => ({
+          ...p,
+          order: p.order
+        }));
+
+        // Build updated index.json content
+        const indexRes = await fetch("../content/projects/index.json");
+        const indexData = await indexRes.json();
+        indexData.projects = updatedProjects;
+        const newIndexJsonContent = JSON.stringify(indexData, null, 2);
+
+        // Fetch latest commit SHA of main
+        const refRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/ref/heads/${REPO_BRANCH}`, {
+          headers: {
+            "Authorization": `token ${token}`,
+            "Accept": "application/vnd.github.v3+json"
+          }
+        });
+
+        if (!refRes.ok) {
+          throw new Error(`Lỗi kết nối GitHub (${refRes.status}): Kiểm tra lại Token PAT.`);
+        }
+
+        const refData = await refRes.json();
+        const baseCommitSha = refData.object.sha;
+
+        // Step B: Build Git tree entries
+        const treeEntries = [];
+
+        // 1. Add content/projects/index.json
+        treeEntries.push({
+          path: "content/projects/index.json",
+          mode: "100644",
+          type: "blob",
+          content: newIndexJsonContent
+        });
+
+        // 2. Add individual markdown files with updated order: X frontmatter
+        for (const proj of ALL_PROJECTS) {
+          // Identify filename
+          const filename = proj.filename.endsWith('.md') ? proj.filename : `${proj.id}.md`;
+          try {
+            const mdRes = await fetch(`../content/projects/${filename}`);
+            if (mdRes.ok) {
+              let mdText = await mdRes.text();
+              // Replace or insert order: ...
+              if (/^order:\s*\d+/m.test(mdText)) {
+                mdText = mdText.replace(/^order:\s*\d+/m, `order: ${proj.order}`);
+              } else {
+                // Insert order right after ---
+                mdText = mdText.replace(/^---\r?\n/, `---\norder: ${proj.order}\n`);
+              }
+              treeEntries.push({
+                path: `content/projects/${filename}`,
+                mode: "100644",
+                type: "blob",
+                content: mdText
+              });
+            }
+          } catch (e) {
+            console.warn(`Could not read markdown for ${filename}:`, e);
+          }
+        }
+
+        // Step C: Create Git Tree
+        text.textContent = `Đang tải ${treeEntries.length} file lên Git Tree...`;
+        const treeRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/trees`, {
+          method: "POST",
+          headers: {
+            "Authorization": `token ${token}`,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            base_tree: baseCommitSha,
+            tree: treeEntries
+          })
+        });
+
+        if (!treeRes.ok) throw new Error("Không thể tạo Git Tree trên GitHub.");
+        const treeData = await treeRes.json();
+
+        // Step D: Create Atomic Commit
+        text.textContent = "Đang tạo Commit...";
+        const commitRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/commits`, {
+          method: "POST",
+          headers: {
+            "Authorization": `token ${token}`,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: `chore: Cập nhật thứ tự hiển thị ${ALL_PROJECTS.length} dự án (Sort Studio)`,
+            tree: treeData.sha,
+            parents: [baseCommitSha]
+          })
+        });
+
+        if (!commitRes.ok) throw new Error("Không thể tạo Commit trên GitHub.");
+        const commitData = await commitRes.json();
+
+        // Step E: Update branch ref
+        text.textContent = "Đang đẩy lên nhánh main...";
+        const pushRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/refs/heads/${REPO_BRANCH}`, {
+          method: "PATCH",
+          headers: {
+            "Authorization": `token ${token}`,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            sha: commitData.sha,
+            force: false
+          })
+        });
+
+        if (!pushRes.ok) throw new Error("Không thể cập nhật nhánh main trên GitHub.");
+
+        // Success!
+        INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(ALL_PROJECTS));
+        markDirty(false);
+        showToast("🚀 Đã lưu thành công lên GitHub! Cloudflare Pages đang tự động deploy.", "success");
+      } catch (err) {
+        console.error("Save error:", err);
+        showToast(`❌ Lỗi: ${err.message}`, "error");
+      } finally {
+        btn.disabled = false;
+        icon.innerHTML = "💾";
+        text.textContent = "LƯU VỊ TRÍ HÀNG LOẠT";
+      }
+    }
+
+    // 7. Filter & Search
+    function switchFilter(cat, btnEl) {
+      document.querySelectorAll('.view-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      const colMv = document.getElementById("col-mv");
+      const colTl = document.getElementById("col-thunglong");
+      const colCm = document.getElementById("col-commercial");
+      const grid = document.getElementById("boardGrid");
+
+      if (cat === 'all') {
+        colMv.style.display = 'flex';
+        colTl.style.display = 'flex';
+        colCm.style.display = 'flex';
+        grid.style.gridTemplateColumns = 'repeat(3, minmax(0, 1fr))';
+      } else {
+        colMv.style.display = cat === 'mv' ? 'flex' : 'none';
+        colTl.style.display = cat === 'thunglong' ? 'flex' : 'none';
+        colCm.style.display = cat === 'commercial' ? 'flex' : 'none';
+        grid.style.gridTemplateColumns = '1fr';
+      }
+    }
+
+    function handleSearch(query) {
+      const q = (query || '').toLowerCase().trim();
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+        if (!q || title.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Toast helper
+    let toastTimer = null;
+    function showToast(msg, type = "success") {
+      const t = document.getElementById("toast");
+      const icon = document.getElementById("toastIcon");
+      const text = document.getElementById("toastText");
+
+      icon.textContent = type === "error" ? "❌" : (type === "info" ? "ℹ" : "✓");
+      text.textContent = msg;
+      t.className = "show";
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        t.className = "";
+      }, 4000);
+    }
+
+    // Init on page load
+    window.addEventListener("DOMContentLoaded", () => {
+      loadProjects();
+    });
+  </script>
+</body>
+</html>
