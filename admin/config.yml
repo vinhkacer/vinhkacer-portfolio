@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: vinhkacer/vinhkacer-portfolio
   branch: main
 
 # Tùy chọn chạy backend nội bộ khi test trên máy qua: npx decap-server

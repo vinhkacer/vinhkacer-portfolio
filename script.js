@@ -8,6 +8,14 @@ let PORTFOLIO_DATA = {"cinematic": [{"id": "cam-bat-den.mp4", "title": "Cầm �
 let currentTab = 'all';
 let searchQuery = '';
 
+// Helper to extract YouTube Video ID from any standard, embed, or shorts URL
+function getYouTubeId(url) {
+  if (!url || typeof url !== 'string') return null;
+  const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+  const match = url.match(regExp);
+  return match ? match[1] : null;
+}
+
 // Play subtle synthesized audio tone via Web Audio API
 function playBeep(freq = 880, duration = 0.08) {
   try {
@@ -189,19 +197,51 @@ function loadBreakdownPart(index) {
   }
 
   // Update Video Player
-  if (videoPlayer && videoSource) {
-    videoPlayer.pause();
-    if (part.thumb) {
-      videoPlayer.poster = part.thumb;
-    } else {
-      videoPlayer.removeAttribute('poster');
+  const bdVideoContainer = videoPlayer ? videoPlayer.parentElement : null;
+  let bdIframe = document.getElementById('breakdownYouTubeIframe');
+  const ytId = getYouTubeId(part.src);
+
+  if (ytId) {
+    if (videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.classList.add('hidden');
     }
-    videoSource.src = part.src;
-    videoPlayer.load();
-    videoPlayer.play().catch(() => {
-      videoPlayer.muted = true;
-      videoPlayer.play().catch(() => {});
-    });
+    if (videoSource) videoSource.src = '';
+
+    if (!bdIframe && bdVideoContainer) {
+      bdIframe = document.createElement('iframe');
+      bdIframe.id = 'breakdownYouTubeIframe';
+      bdIframe.className = 'w-full h-full aspect-[9/16] border-0';
+      bdIframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      bdIframe.setAttribute('allowfullscreen', 'true');
+      bdVideoContainer.appendChild(bdIframe);
+    }
+    if (bdIframe) {
+      bdIframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`;
+      bdIframe.classList.remove('hidden');
+    }
+  } else {
+    if (bdIframe) {
+      bdIframe.src = '';
+      bdIframe.classList.add('hidden');
+    }
+    if (videoPlayer && videoSource) {
+      videoPlayer.classList.remove('hidden');
+      videoPlayer.setAttribute('preload', 'metadata');
+      videoPlayer.setAttribute('playsinline', '');
+      videoPlayer.pause();
+      if (part.thumb) {
+        videoPlayer.poster = part.thumb;
+      } else {
+        videoPlayer.removeAttribute('poster');
+      }
+      videoSource.src = part.src;
+      videoPlayer.load();
+      videoPlayer.play().catch(() => {
+        videoPlayer.muted = true;
+        videoPlayer.play().catch(() => {});
+      });
+    }
   }
 }
 
@@ -227,10 +267,17 @@ function closeBreakdownModal() {
   const modal = document.getElementById('vfxBreakdownModal');
   const videoPlayer = document.getElementById('breakdownVideoPlayer');
   const videoSource = document.getElementById('breakdownVideoSource');
+  const bdIframe = document.getElementById('breakdownYouTubeIframe');
+
+  if (bdIframe) {
+    bdIframe.src = '';
+    bdIframe.classList.add('hidden');
+  }
 
   if (videoPlayer) {
     videoPlayer.pause();
     if (videoSource) videoSource.src = '';
+    videoPlayer.classList.remove('hidden');
   }
   if (modal) modal.classList.add('hidden');
   document.body.style.overflow = '';
@@ -297,13 +344,44 @@ function openCinemaModal(item) {
     }
   }
 
-  if (item.video_src) {
-    modalSource.src = item.video_src;
-    modalVideo.load();
-    modalVideo.play().catch(() => {
-      modalVideo.muted = true;
-      modalVideo.play().catch(() => {});
-    });
+  const modalVideoContainer = modalVideo.parentElement;
+  let modalIframe = document.getElementById('modalYouTubeIframe');
+  const ytId = getYouTubeId(item.video_src) || (!item.video_src && item.youtube_url ? getYouTubeId(item.youtube_url) : null);
+
+  if (ytId) {
+    modalVideo.pause();
+    modalVideo.classList.add('hidden');
+    if (modalSource) modalSource.src = '';
+
+    if (!modalIframe && modalVideoContainer) {
+      modalIframe = document.createElement('iframe');
+      modalIframe.id = 'modalYouTubeIframe';
+      modalIframe.className = 'w-full h-full min-h-[300px] sm:min-h-[460px] aspect-video border-0';
+      modalIframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      modalIframe.setAttribute('allowfullscreen', 'true');
+      modalVideoContainer.appendChild(modalIframe);
+    }
+    if (modalIframe) {
+      modalIframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`;
+      modalIframe.classList.remove('hidden');
+    }
+  } else {
+    if (modalIframe) {
+      modalIframe.src = '';
+      modalIframe.classList.add('hidden');
+    }
+    modalVideo.classList.remove('hidden');
+    modalVideo.setAttribute('preload', 'metadata');
+    modalVideo.setAttribute('playsinline', '');
+
+    if (item.video_src) {
+      modalSource.src = item.video_src;
+      modalVideo.load();
+      modalVideo.play().catch(() => {
+        modalVideo.muted = true;
+        modalVideo.play().catch(() => {});
+      });
+    }
   }
 
   modal.classList.remove('hidden');
@@ -315,10 +393,17 @@ function closeCinemaModal() {
   const modal = document.getElementById('cinemaModal');
   const modalVideo = document.getElementById('modalVideoPlayer');
   const modalSource = document.getElementById('modalVideoSource');
+  const modalIframe = document.getElementById('modalYouTubeIframe');
+
+  if (modalIframe) {
+    modalIframe.src = '';
+    modalIframe.classList.add('hidden');
+  }
 
   if (modalVideo) {
     modalVideo.pause();
     if (modalSource) modalSource.src = '';
+    modalVideo.classList.remove('hidden');
   }
   if (modal) modal.classList.add('hidden');
   document.body.style.overflow = '';
@@ -503,13 +588,30 @@ function create16x9Card(item) {
     `;
   }
 
-  card.innerHTML = `
-    <div class="video-16-9-container relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
+  const ytId = getYouTubeId(item.video_src) || (!item.video_src && item.youtube_url ? getYouTubeId(item.youtube_url) : null);
+  let playerElementHtml = '';
+  if (ytId) {
+    playerElementHtml = `
+      <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0&playsinline=1" 
+              title="${item.title ? item.title.replace(/"/g, '&quot;') : 'Video Player'}"
+              class="w-full h-full border-0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen 
+              loading="lazy"></iframe>
+    `;
+  } else {
+    playerElementHtml = `
       <!-- Video Player with controls, preload="metadata", playsinline and object-cover without black sidebars -->
       <video controls preload="metadata" playsinline poster="${item.thumbnail}" class="w-full h-full object-cover">
         <source src="${item.video_src}" type="video/mp4">
         Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
       </video>
+    `;
+  }
+
+  card.innerHTML = `
+    <div class="video-16-9-container relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
+      ${playerElementHtml}
     </div>
 
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
@@ -823,10 +925,19 @@ function parseCMSFrontmatter(text) {
 // Convert CMS item into normalized portfolio project format
 function normalizeCMSItem(item, defaultId = null) {
   let videoSrc = item.video || item.video_src || '';
-  if (videoSrc.startsWith('/')) videoSrc = videoSrc.slice(1);
+  if (videoSrc.startsWith('/') && !videoSrc.startsWith('//')) videoSrc = videoSrc.slice(1);
+  if (!videoSrc && item.youtube_url) {
+    videoSrc = item.youtube_url;
+  }
 
   let thumb = item.thumbnail || '';
-  if (thumb.startsWith('/')) thumb = thumb.slice(1);
+  if (thumb.startsWith('/') && !thumb.startsWith('//')) thumb = thumb.slice(1);
+  if (!thumb) {
+    const ytId = getYouTubeId(videoSrc) || getYouTubeId(item.youtube_url);
+    if (ytId) {
+      thumb = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+    }
+  }
 
   const rawCat = (item.category || '').trim();
   let category = 'cinematic';

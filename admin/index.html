@@ -5,22 +5,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vinh Kacer Portfolio — Quản Trị Dự Án (Decap CMS)</title>
   <link rel="icon" type="image/jpeg" href="../avatar.jpg" />
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    /* Styling for Direct Token Auth Banner & Footer */
+    #directAuthHelper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0d0e12;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: #d1d5db;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      padding: 10px 16px;
+      z-index: 999999;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    }
+    #directAuthHelper a, #directAuthHelper button {
+      color: #38bdf8;
+      background: transparent;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    #directAuthHelper a:hover, #directAuthHelper button:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
+    }
+    .auth-input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .auth-input-group input {
+      background: #181920;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      width: 250px;
+      outline: none;
+    }
+    .auth-input-group input:focus {
+      border-color: #38bdf8;
+    }
+  </style>
 </head>
 <body>
   <!-- Decap CMS Core Engine via CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- GitHub Direct Token / PKCE Auth Helper -->
+  <div id="directAuthHelper">
+    <div id="authStatusText">
+      <span>🐙 <b>GitHub Backend:</b> Client ID: <code>Ov23liUzN2AfW07634hx</code> (repo: vinhkacer/vinhkacer-portfolio)</span>
+    </div>
+    <div class="auth-input-group" id="authActions"></div>
+  </div>
+
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", function(user) {
-        if (!user) {
-          window.netlifyIdentity.on("login", function() {
-            document.location.reload();
-          });
+    (function() {
+      const actionsContainer = document.getElementById('authActions');
+      const currentUser = localStorage.getItem('decap-cms-user');
+
+      if (currentUser) {
+        try {
+          const userObj = JSON.parse(currentUser);
+          if (userObj.token) {
+            actionsContainer.innerHTML = `
+              <span style="color: #4ade80;">✓ Đã đăng nhập GitHub</span>
+              <button onclick="logoutCMS()">Đăng xuất / Đổi Token</button>
+            `;
+          }
+        } catch(e) {}
+      }
+
+      if (!actionsContainer.innerHTML.trim()) {
+        actionsContainer.innerHTML = `
+          <input type="password" id="patInput" placeholder="Dán GitHub Personal Access Token..." />
+          <button onclick="loginWithPAT()">Đăng nhập nhanh (PAT)</button>
+        `;
+      }
+
+      window.loginWithPAT = function() {
+        const pat = document.getElementById('patInput').value.trim();
+        if (!pat) {
+          alert('Vui lòng dán GitHub Personal Access Token hợp lệ (có quyền repo).');
+          return;
         }
-      });
-    }
+        const user = {
+          token: pat,
+          backendName: 'github'
+        };
+        localStorage.setItem('decap-cms-user', JSON.stringify(user));
+        window.location.reload();
+      };
+
+      window.logoutCMS = function() {
+        if (confirm('Bạn có chắc chắn muốn đăng xuất khỏi Decap CMS?')) {
+          localStorage.removeItem('decap-cms-user');
+          window.location.reload();
+        }
+      };
+    })();
   </script>
 </body>
 </html>
