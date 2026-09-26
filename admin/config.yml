@@ -13,9 +13,9 @@ collections:
     folder: "content/projects"
     create: true
     slug: "{{slug}}"
+    summary: "{{order}} — {{title}} ({{category}})"
     fields:
-      - { label: "Thứ tự can thiệp thủ công (Số nhỏ xếp trước - VD: 1, 2)", name: "order", widget: "number", value_type: "int", min: 1, max: 999, required: false }
-      - { label: "Lượt xem (Views - VD: 10M, 2.5M, 800K)", name: "views", widget: "string", required: false }
+      - { label: "Thứ tự hiển thị (Số nhỏ xếp trước: 1, 2, 3...)", name: "order", widget: "number", value_type: "int", default: 100, min: 1, max: 999, required: false }
       - { label: "Ghim nổi bật (Featured)", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "Ngày đăng", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
       - { label: "Tiêu đề dự án", name: "title", widget: "string" }

@@ -234,6 +234,66 @@
       background: rgba(248, 113, 113, 0.3);
       color: #fff;
     }
+    /* =========================================================
+       Decap CMS — Custom Admin UI Overrides (Obsidian Dark)
+       ========================================================= */
+
+    /* Global CMS dark background */
+    #nc-root, .nc-app-root {
+      background: #0a0a0c !important;
+      color: #f4f4f5 !important;
+    }
+
+    /* Collection list item summary (shows order — title (category)) */
+    [class*="ListItem"] span, [class*="EntryCard"] span {
+      font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+      font-size: 0.8rem !important;
+      color: #a1a1aa !important;
+    }
+
+    /* === HIGHLIGHT: Thứ tự hiển thị (order) field === */
+    /* Target the number input widget for 'order' */
+    [class*="ControlContainer"]:has(label[for*="order"]),
+    [data-testid*="field-order"],
+    [class*="WidgetContainer"]:has(input[id*="order"]) {
+      background: rgba(56, 189, 248, 0.06) !important;
+      border: 1px solid rgba(56, 189, 248, 0.35) !important;
+      border-radius: 10px !important;
+      padding: 0.75rem 1rem !important;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.12) !important;
+    }
+
+    /* Make the order label stand out */
+    [class*="ControlContainer"]:has(label[for*="order"]) label,
+    [class*="WidgetContainer"]:has(input[id*="order"]) label {
+      color: #38bdf8 !important;
+      font-weight: 700 !important;
+      font-size: 0.8rem !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+    }
+
+    /* Highlight the order number input itself */
+    input[id*="order"], input[name*="order"] {
+      background: #0f172a !important;
+      border: 1.5px solid rgba(56, 189, 248, 0.5) !important;
+      color: #38bdf8 !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 1.15rem !important;
+      font-weight: 700 !important;
+      border-radius: 8px !important;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
+      letter-spacing: 0.05em !important;
+    }
+
+    /* Subtle separators and card backgrounds */
+    [class*="EditorContainer"], [class*="EntryEditor"] {
+      background: #0d0d10 !important;
+    }
+    [class*="CollectionHeader"], [class*="AppHeader"] {
+      background: #0a0a0c !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    }
   </style>
 </head>
 <body>
