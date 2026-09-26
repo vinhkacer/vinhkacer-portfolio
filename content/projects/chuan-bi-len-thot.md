@@ -1,5 +1,5 @@
 ---
-order: 24
+order: 23
 title: "Chuẩn Bị Lên Thớt 😌 (Dance Trend)"
 category: "Thủng Long"
 roles:

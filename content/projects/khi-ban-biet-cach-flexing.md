@@ -1,5 +1,5 @@
 ---
-order: 8
+order: 7
 title: "Khi Bạn Biết Cách Flexing Về Nghề 🤭"
 category: "Thủng Long"
 roles:
