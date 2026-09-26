@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Tùy chọn chạy backend nội bộ khi test trên máy qua: npx decap-server
+local_backend: true
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "projects"
+    label: "Dự án Portfolio"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Tiêu đề dự án", name: "title", widget: "string" }
+      - { label: "Thể loại", name: "category", widget: "select", options: ["MV", "Thủng Long", "VFX Breakdown", "Commercial"] }
+      - { label: "Video chính (.mp4)", name: "video", widget: "file" }
+      - { label: "Ảnh bìa Thumbnail", name: "thumbnail", widget: "image" }
+      - { label: "Mô tả ngắn", name: "description", widget: "text", required: false }

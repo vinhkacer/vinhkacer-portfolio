@@ -1,0 +1,10 @@
+# OS junk
+.DS_Store
+*.pyc
+__pycache__/
+*.mp3
+
+# Original redundant backup folders (active videos are clean in videos/)
+*Long Family/
+*Music Videos*/
+Freelance*/

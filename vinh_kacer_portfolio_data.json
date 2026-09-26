@@ -1,0 +1,104 @@
+{
+  "profile": {
+    "name": "Vinh Kacer",
+    "title": "Video Editor / Visual Effects & 3D Artist",
+    "tagline": "I'm a passionate Video Editor from Viet Nam",
+    "bio": "I am an experienced editor skilled in refining content for various genres. I manage projects efficiently from start to finish, ensuring quality results. I'm seeking opportunities to apply my editing expertise in new and challenging environments.",
+    "birthday": "23 August 2001",
+    "phone": "+84 876 823 081",
+    "email": "bkchoc230801@gmail.com",
+    "origin": "Hai Phong, Viet Nam",
+    "location": "Ho Chi Minh City, Viet Nam",
+    "freelance_status": "Available"
+  },
+  "skills": [
+    {"name": "Adobe Premiere Pro", "level": 100, "category": "Video Editing"},
+    {"name": "Adobe After Effects", "level": 100, "category": "VFX & Motion Graphics"},
+    {"name": "Blender", "level": 99, "category": "3D Animation & Modeling"},
+    {"name": "Adobe Photoshop", "level": 99, "category": "Graphic Design & Concept Art"},
+    {"name": "Unreal Engine 5", "level": 99, "category": "Real-time 3D & Virtual Production"}
+  ],
+  "work_experience": [
+    {
+      "role": "Video Editor",
+      "company": "Thủng Long Family",
+      "period": "2023 - Present",
+      "responsibilities": [
+        "Thực hiện quay và dựng các sản phẩm video ngắn / viral content.",
+        "Tham gia đóng góp tiền kì, phát triển ý tưởng kịch bản và hậu kì hoàn thiện kỹ xảo VFX.",
+        "Đóng góp một số vai diễn nhỏ và tình huống xuất hiện trên kênh."
+      ]
+    },
+    {
+      "role": "3D Animation Artist",
+      "company": "I MMG Global",
+      "period": "2021 - 2022",
+      "responsibilities": [
+        "Tạo chuyển động nhân vật, đạo cụ, vật phẩm 3D theo storyboard và kịch bản có sẵn.",
+        "Hoàn thiện diễn hoạt và render phục vụ chuỗi video sản phẩm hoàn chỉnh."
+      ]
+    },
+    {
+      "role": "Graphic Designer",
+      "company": "I Top Media",
+      "period": "2020",
+      "responsibilities": [
+        "Thiết kế bộ nhận diện thương hiệu và ấn phẩm ngành F&B: Logo, Menu, Standee, Panel quảng cáo."
+      ]
+    }
+  ],
+  "portfolio_projects": {
+    "freelance_and_commercial": [
+      {"id": "7469760253500853509", "title": "Haidilao Hotpot Campaign", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7469760253500853509"},
+      {"id": "7448873288429767941", "title": "Đu trend trong ngày mưa / Message copied", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7448873288429767941"},
+      {"id": "7447014404505259270", "title": "Have great food, great memories", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7447014404505259270"},
+      {"id": "7439180307032476984", "title": "Cuộc thi Hoa Hậu Người M... / Show you some magic", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7439180307032476984"},
+      {"id": "7435672378299944247", "title": "#apt Challenge! Dance", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7435672378299944247"},
+      {"id": "7428822702070304005", "title": "Chị em chỉ cần mỗi vậy / Me on work version", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7428822702070304005"},
+      {"id": "7425802752959253765", "title": "When you have great work", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7425802752959253765"},
+      {"id": "7428082811434716421", "title": "Chăm người lớn phức tạp", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7428082811434716421"},
+      {"id": "7441776844061281591", "title": "Bảo sao phụ huynh lo lắng (Photo slide / Audio)", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7441776844061281591"},
+      {"id": "7444768523089399096", "title": "We have HANFU Chinese style", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7444768523089399096"},
+      {"id": "7466795322665094406", "title": "GOTCHA!!! Are you choosing", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7466795322665094406"},
+      {"id": "gdrive_tlc1", "title": "Highlight / Reel Showcase Project", "platform": "Google Drive", "url": "https://drive.google.com/file/d/1Tm2p7Y41OUHWbwmFIWtHbmM-k4IGUA5P/view"}
+    ],
+    "thung_long_family": [
+      {"id": "7325298596356689153", "title": "Đu trend hơi muộn tí", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7325298596356689153"},
+      {"id": "7339135630951304449", "title": "Cô ơi cô đừng về join", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7339135630951304449"},
+      {"id": "7302069166826179842", "title": "Hiệp hội phao cứu sinh sẵn sàng", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7302069166826179842"},
+      {"id": "7332087700129877249", "title": "Bộ câu hỏi cà khịa dành cho", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7332087700129877249"},
+      {"id": "7330969014832860418", "title": "Hiệp hội phao cứu sinh sẵn sàng (P2)", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7330969014832860418"},
+      {"id": "7276797810253614337", "title": "Khi bạn biết cách flexing vui", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7276797810253614337"},
+      {"id": "7281247914771483905", "title": "Với mỗi 1 món skincare", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7281247914771483905"},
+      {"id": "7263072598836202760", "title": "Food tour tại Lệ Giang", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7263072598836202760"},
+      {"id": "7284955655289588994", "title": "1 ngày hoa mắt với clip", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7284955655289588994"},
+      {"id": "7236720841944206598", "title": "Ai chẳng muốn mình xê dịch", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7236720841944206598"},
+      {"id": "227428225142557958", "title": "Short Funny Sketch", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/227428225142557958"},
+      {"id": "7317614770717297921", "title": "Giveaway for my fans!", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7317614770717297921"},
+      {"id": "7305745167993031937", "title": "Rồi ai là sếp ai là nhân viên", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7305745167993031937"},
+      {"id": "7297587094958902529", "title": "Trend gia đình vui nhộn", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7297587094958902529"},
+      {"id": "7291641220160326913", "title": "Quan trọng là cái tấm lòng", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7291641220160326913"},
+      {"id": "7279397866169289986", "title": "Bộ câu hỏi cà khịa dành cho khách", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7279397866169289986"},
+      {"id": "7245623121108159749", "title": "May cho anh đấy nhé", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7245623121108159749"},
+      {"id": "7226334534378310918", "title": "Thích ngắm gái không hả", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7226334534378310918"},
+      {"id": "7290173297638018311", "title": "Tiểu phẩm văn phòng / gia đình", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7290173297638018311"},
+      {"id": "7303888492621237506", "title": "Sau khi xem Massage", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7303888492621237506"},
+      {"id": "7342870241090768130", "title": "Chuẩn bị lên thớt DC", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7342870241090768130"},
+      {"id": "7315758991269694721", "title": "Khi bạn xem massage", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7315758991269694721"},
+      {"id": "7315392879562591490", "title": "1 ngày foodtour bất quy tắc", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7315392879562591490"},
+      {"id": "7307238023320603911", "title": "Các bố mẹ mà đập hộp", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7307238023320603911"},
+      {"id": "7291276702813064449", "title": "Hài hước cùng gia đình Thủng Long", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7291276702813064449"},
+      {"id": "7287550952079396098", "title": "Em chỉ ăn mỗi thế thôi mà", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7287550952079396098"},
+      {"id": "7259733140934102280", "title": "Làm gì có chuyện nổi tiếng dễ dàng", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7259733140934102280"},
+      {"id": "7223728609372998918", "title": "Cứ thích thể hiện cho lắm", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7223728609372998918"},
+      {"id": "7213383919234731291", "title": "Hey! Buy you a drink", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7213383919234731291"},
+      {"id": "7212612550922407194", "title": "Khoảnh khắc hài hước", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7212612550922407194"},
+      {"id": "7208891929671650587", "title": "Cưng tưởng thế là hạ được chị", "platform": "TikTok", "url": "https://www.tiktok.com/@/video/7208891929671650587"},
+      {"id": "7544395711182392593", "title": "Thủng Long Video Mới #1", "platform": "TikTok", "url": "https://www.tiktok.com/@thunglongfamily/video/7544395711182392593"},
+      {"id": "7539895638197112080", "title": "Thủng Long Video Mới #2", "platform": "TikTok", "url": "https://www.tiktok.com/@thunglongfamily/video/7539895638197112080"},
+      {"id": "7521720993946160385", "title": "Thủng Long Video Mới #3", "platform": "TikTok", "url": "https://www.tiktok.com/@thunglongfamily/video/7521720993946160385"},
+      {"id": "7520226940834352385", "title": "Thủng Long Video Mới #4", "platform": "TikTok", "url": "https://www.tiktok.com/@thunglongfamily/video/7520226940834352385"},
+      {"id": "7369216070894374162", "title": "Thủng Long Video Mới #5", "platform": "TikTok", "url": "https://www.tiktok.com/@thunglongfamily/video/7369216070894374162"}
+    ]
+  }
+}
