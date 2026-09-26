@@ -1,6 +1,10 @@
 ---
 title: "@wheelie0nther0ad — Món Quà Quê ft. @ICYFAMOUSS [Official MV]"
 category: "MV"
+roles:
+  - "Edit"
+  - "Sound Design"
+  - "VFX"
 video: "videos/mv/wheelie-mon-qua-que-nen.mp4"
 thumbnail: "thumbnails/mv/mon_qua_que.jpg"
 breakdown_video: "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4"

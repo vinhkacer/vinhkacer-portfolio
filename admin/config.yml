@@ -17,6 +17,21 @@ collections:
     fields:
       - { label: "Tiêu đề dự án", name: "title", widget: "string" }
       - { label: "Thể loại", name: "category", widget: "select", options: ["MV", "Thủng Long", "VFX Breakdown", "Commercial"] }
+      - label: "Vai trò đảm nhiệm (Roles)"
+        name: "roles"
+        widget: "select"
+        multiple: true
+        required: false
+        options:
+          - "VFX"
+          - "Edit"
+          - "3D Animation"
+          - "3D Model"
+          - "Sound Design"
+          - "Audio Mixing"
+          - "Color Grading"
+          - "Motion Graphics"
+          - "Compositing"
       - { label: "Video chính (.mp4)", name: "video", widget: "file" }
       - { label: "Ảnh bìa Thumbnail", name: "thumbnail", widget: "image" }
       - { label: "Video VFX Breakdown (.mp4)", name: "breakdown_video", widget: "file", required: false }

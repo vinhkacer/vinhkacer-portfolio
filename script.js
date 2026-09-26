@@ -254,7 +254,17 @@ function openCinemaModal(item) {
 
   modalTitle.textContent = item.title;
   modalBadge.textContent = item.badge || 'VIDEO';
-  modalRole.textContent = item.role || 'Video Editor & VFX';
+
+  const modalRoleContainer = document.getElementById('modalRoleContainer') || (modalRole ? modalRole.parentElement : null);
+  if (modalRole) {
+    if (item.role) {
+      modalRole.textContent = item.role;
+      if (modalRoleContainer) modalRoleContainer.classList.remove('hidden');
+    } else {
+      modalRole.textContent = '';
+      if (modalRoleContainer) modalRoleContainer.classList.add('hidden');
+    }
+  }
 
   if (item.url && item.url !== '#' && item.url !== '') {
     modalExternalLink.href = item.url;
@@ -528,9 +538,12 @@ function createVerticalCard(item) {
         <h3 class="text-xs sm:text-sm font-display font-bold text-white group-hover:text-neon-cyan transition-colors line-clamp-2 leading-snug">
           ${item.title}
         </h3>
-        <div class="mt-2 text-[10px] font-mono text-neon-cyan/90 truncate">
-          ${item.role}
-        </div>
+        ${item.role ? `
+        <div class="mt-2.5 flex items-center justify-end">
+          <span class="text-[9px] sm:text-[10px] font-mono text-neon-cyan/90 font-medium truncate px-2.5 py-1 rounded-lg bg-obsidian-950/85 border border-white/15 backdrop-blur-md shadow-sm max-w-full">
+            ${item.role}
+          </span>
+        </div>` : ''}
       </div>
     </div>
   `;
@@ -647,17 +660,74 @@ function parseCMSFrontmatter(text) {
   const yaml = match[1];
   const body = (match[2] || '').trim();
   const data = {};
-  yaml.split(/\r?\n/).forEach(line => {
-    const colonIdx = line.indexOf(':');
-    if (colonIdx > -1) {
-      const key = line.slice(0, colonIdx).trim();
-      let val = line.slice(colonIdx + 1).trim();
-      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-        val = val.slice(1, -1);
+  
+  const lines = yaml.split(/\r?\n/);
+  let currentKey = null;
+  let inBlockScalar = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
+    const trimmed = rawLine.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+
+    // Check if list item under currentKey
+    if (trimmed.startsWith('-') && currentKey && !inBlockScalar) {
+      let itemVal = trimmed.replace(/^-\s*/, '').trim();
+      if ((itemVal.startsWith('"') && itemVal.endsWith('"')) || (itemVal.startsWith("'") && itemVal.endsWith("'"))) {
+        itemVal = itemVal.slice(1, -1).trim();
       }
-      data[key] = val;
+      if (!Array.isArray(data[currentKey])) {
+        data[currentKey] = [];
+      }
+      data[currentKey].push(itemVal);
+      continue;
+    }
+
+    // Check if multi-line block scalar continuation (indented line)
+    if (inBlockScalar && currentKey && (rawLine.startsWith('  ') || rawLine.startsWith('\t'))) {
+      if (typeof data[currentKey] === 'string') {
+        data[currentKey] = (data[currentKey] ? data[currentKey] + ' ' : '') + trimmed;
+      } else {
+        data[currentKey] = trimmed;
+      }
+      continue;
+    } else {
+      inBlockScalar = false;
+    }
+
+    const colonIdx = rawLine.indexOf(':');
+    if (colonIdx > -1) {
+      const key = rawLine.slice(0, colonIdx).trim();
+      let val = rawLine.slice(colonIdx + 1).trim();
+      currentKey = key;
+
+      if (val === '|' || val === '>') {
+        data[key] = '';
+        inBlockScalar = true;
+      } else if (val === '') {
+        data[key] = [];
+      } else if (val.startsWith('[') && val.endsWith(']')) {
+        try {
+          data[key] = JSON.parse(val.replace(/'/g, '"'));
+        } catch (e) {
+          data[key] = val.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+        }
+      } else {
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+        data[key] = val;
+      }
+    }
+  }
+
+  // Cleanup keys that remained empty arrays without any list items (except roles)
+  Object.keys(data).forEach(k => {
+    if (Array.isArray(data[k]) && data[k].length === 0 && k !== 'roles') {
+      data[k] = '';
     }
   });
+
   if (body && !data.description) {
     data.description = body;
   }
@@ -676,32 +746,62 @@ function normalizeCMSItem(item, defaultId = null) {
   let category = 'cinematic';
   let aspect = '16:9';
   let badge = '1080P CINEMATIC';
-  let role = item.role || 'Video Editor • VFX Artist';
 
   if (rawCat === 'MV') {
     category = 'cinematic';
     aspect = '16:9';
     badge = item.badge || 'Official MV / 1080p Cinematic';
-    role = item.role || 'Lead Video Editor • VFX Artist';
   } else if (rawCat === 'Thủng Long') {
     category = 'thunglong';
     aspect = '9:16';
     badge = item.badge || '🔥 Viral Content / Triệu Views';
-    role = item.role || 'Tiền kì • Dựng chính • VFX';
   } else if (rawCat === 'Commercial') {
     category = 'freelance';
     aspect = item.aspect || '9:16';
     badge = item.badge || 'Commercial / Brand Campaign';
-    role = item.role || 'Video Editor • VFX • Motion Graphics';
   } else if (rawCat === 'VFX Breakdown') {
     category = 'cinematic';
     aspect = '9:16';
     badge = item.badge || '✨ VFX Breakdown (9:16)';
-    role = item.role || 'VFX Artist • Compositing';
   } else if (rawCat === 'cinematic' || rawCat === 'thunglong' || rawCat === 'freelance') {
     category = rawCat;
     aspect = item.aspect || (category === 'cinematic' ? '16:9' : '9:16');
     badge = item.badge || 'PROJECT';
+  }
+
+  const projId = defaultId || item.id || (item.title ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'cms-' + Math.random().toString(36).slice(2, 8));
+
+  // Find if matching existing item in PORTFOLIO_DATA
+  const existing = [
+    ...(PORTFOLIO_DATA.cinematic || []),
+    ...(PORTFOLIO_DATA.thunglong || []),
+    ...(PORTFOLIO_DATA.freelance || [])
+  ].find(x => x.id === projId || (x.filename && x.filename.includes(projId)) || (x.title && x.title === item.title));
+
+  // Determine roles:
+  // - Join multiple roles with ' • ' (e.g., "Edit • VFX • Sound Design")
+  // - Fallback to item.role or existing.role if available
+  // - If none or empty, hide badge (role = '')
+  let role = '';
+  if (Array.isArray(item.roles)) {
+    const validRoles = item.roles.map(r => String(r).trim()).filter(Boolean);
+    if (validRoles.length > 0) {
+      role = validRoles.join(' • ');
+    } else if (existing && existing.role) {
+      role = existing.role;
+    }
+  } else if (typeof item.roles === 'string' && item.roles.trim()) {
+    role = item.roles.split(',').map(s => s.trim()).filter(Boolean).join(' • ');
+  } else if (item.role && typeof item.role === 'string' && item.role.trim()) {
+    role = item.role.trim();
+  } else if (existing && existing.role) {
+    role = existing.role;
+  } else {
+    if (rawCat === 'MV') role = 'Lead Video Editor • VFX Artist';
+    else if (rawCat === 'Thủng Long') role = 'Tiền kì • Dựng chính • VFX';
+    else if (rawCat === 'Commercial') role = 'Video Editor • VFX • Motion Graphics';
+    else if (rawCat === 'VFX Breakdown') role = 'VFX Artist • Compositing';
+    else role = '';
   }
 
   // Parse breakdown videos from CMS fields
@@ -757,15 +857,8 @@ function normalizeCMSItem(item, defaultId = null) {
     }
   }
 
-  const projId = defaultId || item.id || (item.title ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'cms-' + Math.random().toString(36).slice(2, 8));
-
   // Fallback: If CMS item doesn't have breakdown, check if existing embedded data had it
   if (breakdowns.length === 0) {
-    const existing = [
-      ...(PORTFOLIO_DATA.cinematic || []),
-      ...(PORTFOLIO_DATA.thunglong || []),
-      ...(PORTFOLIO_DATA.freelance || [])
-    ].find(x => x.id === projId || (x.filename && x.filename.includes(projId)) || (x.title && x.title === item.title));
     if (existing && existing.breakdowns && existing.breakdowns.length > 0) {
       breakdowns = existing.breakdowns;
     } else if (existing && existing.breakdown_src) {
@@ -784,6 +877,7 @@ function normalizeCMSItem(item, defaultId = null) {
     title: item.title || 'Dự án mới',
     category: category,
     aspect: aspect,
+    roles: Array.isArray(item.roles) ? item.roles : (role ? role.split(' • ') : []),
     role: role,
     badge: badge,
     thumbnail: thumb,

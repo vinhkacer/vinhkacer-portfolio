@@ -56,8 +56,8 @@
       "category": "MV",
       "video": "videos/mv/cam-bat-den-nen.mp4",
       "thumbnail": "thumbnails/mv/cam_bat_den.jpg",
-      "description": "MV âm nhạc chính thức của nghệ sĩ Cầm. Cắt dựng nhịp điệu bài hát tinh tế, xử lý ánh sáng và chuyển cảnh điện ảnh.",
-      "role": "Lead Video Editor • VFX Artist",
+      "description": "MV âm nhạc chính thức của nghệ sĩ Cầm. Thực hiện 3d Animation",
+      "role": "Edit • VFX • Color Grading",
       "badge": "Official MV / 1080p Cinematic",
       "aspect": "16:9",
       "url": "",
@@ -73,7 +73,12 @@
       "breakdown_video": "videos/breakdown/cam-bat-den-breakdown.mp4",
       "breakdown_thumb": "thumbnails/breakdown/cam_breakdown.jpg",
       "has_breakdown": true,
-      "breakdown_src": "videos/breakdown/cam-bat-den-breakdown.mp4"
+      "breakdown_src": "videos/breakdown/cam-bat-den-breakdown.mp4",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Color Grading"
+      ]
     },
     {
       "id": "danmy-vi-da-la-con-gai.mp4",
@@ -81,8 +86,8 @@
       "category": "MV",
       "video": "videos/mv/danmy-vi-da-la-con-gai-nen.mp4",
       "thumbnail": "thumbnails/mv/vi_da_la_con_gai.jpg",
-      "description": "MV âm nhạc phong cách trẻ trung năng động, nhịp điệu bắt tai, kinetic typography và chuyển cảnh visual motion hiện đại.",
-      "role": "Lead Video Editor • Motion Graphics",
+      "description": "MV âm nhạc phong cách trẻ trung năng động, nhịp điệu bắt tai, Xử Lí VFX 3D",
+      "role": "Edit • Motion Graphics • VFX",
       "badge": "Official MV / 1080p Cinematic",
       "aspect": "16:9",
       "url": "",
@@ -107,7 +112,12 @@
       "breakdown_video_2": "videos/breakdown/danmy-breakdown-02.mp4",
       "breakdown_thumb_2": "thumbnails/breakdown/danmy_breakdown_2.jpg",
       "has_breakdown": true,
-      "breakdown_src": "videos/breakdown/danmy-breakdown-01.mp4"
+      "breakdown_src": "videos/breakdown/danmy-breakdown-01.mp4",
+      "roles": [
+        "Edit",
+        "Motion Graphics",
+        "VFX"
+      ]
     },
     {
       "id": "wheelie-mon-qua-que.mp4",
@@ -116,7 +126,7 @@
       "video": "videos/mv/wheelie-mon-qua-que-nen.mp4",
       "thumbnail": "thumbnails/mv/mon_qua_que.jpg",
       "description": "MV Rap/Hip-hop đường phố chân thực, khớp từng beat bass uy lực và hiệu ứng chuyển cảnh kỹ xảo độc đáo.",
-      "role": "Lead Video Editor • Sound Sync • VFX",
+      "role": "Edit • Sound Design • VFX",
       "badge": "Official MV / Directed by Xe Nguyen",
       "aspect": "16:9",
       "url": "",
@@ -132,7 +142,12 @@
       "breakdown_video": "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4",
       "breakdown_thumb": "thumbnails/breakdown/wheelie_breakdown_2.jpg",
       "has_breakdown": true,
-      "breakdown_src": "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4"
+      "breakdown_src": "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4",
+      "roles": [
+        "Edit",
+        "Sound Design",
+        "VFX"
+      ]
     },
     {
       "id": "7315392879562591490",
@@ -141,11 +156,16 @@
       "video": "videos/thunglong/1-ngay-foodtour.mp4",
       "thumbnail": "thumbnails/7315392879562591490.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7315392879562591490",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7212612550922407194",
@@ -154,11 +174,16 @@
       "video": "videos/thunglong/1-ngay-hoa-mat-con-gai.mp4",
       "thumbnail": "thumbnails/7212612550922407194.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7212612550922407194",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7287550952079396098",
@@ -167,11 +192,16 @@
       "video": "videos/thunglong/ai-chang-muon-minh-xenh.mp4",
       "thumbnail": "thumbnails/7287550952079396098.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7287550952079396098",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7245623121108159749",
@@ -180,11 +210,16 @@
       "video": "videos/thunglong/bo-cau-hoi-ca-khia-phan-1.mp4",
       "thumbnail": "thumbnails/7245623121108159749.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7245623121108159749",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7279397866169289986",
@@ -193,11 +228,16 @@
       "video": "videos/thunglong/bo-cau-hoi-ca-khia-phan-2.mp4",
       "thumbnail": "thumbnails/7279397866169289986.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7279397866169289986",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7342870241090768130",
@@ -206,11 +246,16 @@
       "video": "videos/thunglong/chuan-bi-len-thot.mp4",
       "thumbnail": "thumbnails/7342870241090768130.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7342870241090768130",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7317614770717297921",
@@ -219,11 +264,16 @@
       "video": "videos/thunglong/cham-nguoi-lon-phuc-tap.mp4",
       "thumbnail": "thumbnails/7317614770717297921.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7317614770717297921",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7307238023320603911",
@@ -232,11 +282,16 @@
       "video": "videos/thunglong/chay-theo-xa-hoa-phu-du.mp4",
       "thumbnail": "thumbnails/7307238023320603911.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7307238023320603911",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7281247914771483905",
@@ -245,11 +300,16 @@
       "video": "videos/thunglong/chi-em-chi-can-moi-vay-thoi.mp4",
       "thumbnail": "thumbnails/7281247914771483905.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7281247914771483905",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7291276702813064449",
@@ -258,11 +318,16 @@
       "video": "videos/thunglong/cuoc-thi-hoa-hau-nguoi-me.mp4",
       "thumbnail": "thumbnails/7291276702813064449.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7291276702813064449",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7290173297638018311",
@@ -271,11 +336,16 @@
       "video": "videos/thunglong/dap-hop-thu-lai-dong-qua.mp4",
       "thumbnail": "thumbnails/7290173297638018311.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7290173297638018311",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7332087700129877249",
@@ -284,11 +354,16 @@
       "video": "videos/thunglong/co-oi-co-dung-ve.mp4",
       "thumbnail": "thumbnails/7332087700129877249.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7332087700129877249",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7208891929671650587",
@@ -297,11 +372,16 @@
       "video": "videos/thunglong/cung-tuong-the-la-ha-duoc-chi.mp4",
       "thumbnail": "thumbnails/7208891929671650587.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7208891929671650587",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7236720841944206598",
@@ -310,11 +390,16 @@
       "video": "videos/thunglong/cu-thich-the-hien-cho-lam-nen.mp4",
       "thumbnail": "thumbnails/7236720841944206598.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7236720841944206598",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7284955655289588994",
@@ -323,11 +408,16 @@
       "video": "videos/thunglong/em-chi-an-moi-the-thoi.mp4",
       "thumbnail": "thumbnails/7284955655289588994.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7284955655289588994",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7263072598836202760",
@@ -336,11 +426,16 @@
       "video": "videos/thunglong/food-tour-tai-le-giang.mp4",
       "thumbnail": "thumbnails/7263072598836202760.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7263072598836202760",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7428082811434716421",
@@ -349,11 +444,16 @@
       "video": "videos/thunglong/giveaway-for-my-fans.mp4",
       "thumbnail": "thumbnails/7428082811434716421.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7428082811434716421",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7330969014832860418",
@@ -362,11 +462,16 @@
       "video": "videos/thunglong/hiep-hoi-phao-cuu-sinh-phan-2.mp4",
       "thumbnail": "thumbnails/7330969014832860418.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7330969014832860418",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7302069166826179842",
@@ -375,11 +480,16 @@
       "video": "videos/thunglong/hiep-hoi-phao-cuu-sinh-phan-1.mp4",
       "thumbnail": "thumbnails/7302069166826179842.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7302069166826179842",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7276797810253614337",
@@ -388,11 +498,16 @@
       "video": "videos/thunglong/khi-ban-biet-cach-flexing.mp4",
       "thumbnail": "thumbnails/7276797810253614337.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7276797810253614337",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7315758991269694721",
@@ -401,11 +516,16 @@
       "video": "videos/thunglong/khi-ban-xem-massage-an-do.mp4",
       "thumbnail": "thumbnails/7315758991269694721.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7315758991269694721",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7339135630951304449",
@@ -414,11 +534,16 @@
       "video": "videos/thunglong/may-cho-anh-day-nhe.mp4",
       "thumbnail": "thumbnails/7339135630951304449.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7339135630951304449",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7369216070894374162",
@@ -427,11 +552,16 @@
       "video": "videos/thunglong/may-ma-than-thu-phi-pham.mp4",
       "thumbnail": "thumbnails/7369216070894374162.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7369216070894374162",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7428822702070304005",
@@ -440,11 +570,16 @@
       "video": "videos/thunglong/me-on-work-vs-halloween.mp4",
       "thumbnail": "thumbnails/7428822702070304005.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7428822702070304005",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7448873288429767941",
@@ -453,11 +588,16 @@
       "video": "videos/thunglong/haidilao-late-night-snacks.mp4",
       "thumbnail": "thumbnails/7448873288429767941.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7448873288429767941",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7291641220160326913",
@@ -466,11 +606,16 @@
       "video": "videos/thunglong/quan-trong-la-cai-tam-long.mp4",
       "thumbnail": "thumbnails/7291641220160326913.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7291641220160326913",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7305745167993031937",
@@ -479,11 +624,16 @@
       "video": "videos/thunglong/roi-ai-la-sep-ai-la-nhan-vien.mp4",
       "thumbnail": "thumbnails/7305745167993031937.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7305745167993031937",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7303888492621237506",
@@ -492,11 +642,16 @@
       "video": "videos/thunglong/sau-khi-xem-massage-an-do.mp4",
       "thumbnail": "thumbnails/7303888492621237506.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7303888492621237506",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7223728609372998918",
@@ -505,11 +660,16 @@
       "video": "videos/thunglong/thich-ngam-gai-khong-ha.mp4",
       "thumbnail": "thumbnails/7223728609372998918.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7223728609372998918",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7539895638197112080",
@@ -518,11 +678,16 @@
       "video": "videos/thunglong/thom-den-muc-chi-em-muon-dong-khau.mp4",
       "thumbnail": "thumbnails/7539895638197112080.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7539895638197112080",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7226334534378310918",
@@ -531,11 +696,16 @@
       "video": "videos/thunglong/voi-moi-mon-skincare.mp4",
       "thumbnail": "thumbnails/7226334534378310918.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7226334534378310918",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7444768523089399096",
@@ -544,11 +714,16 @@
       "video": "videos/thunglong/hanfu-chinese-traditional-clothes.mp4",
       "thumbnail": "thumbnails/7444768523089399096.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7444768523089399096",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7259733140934102280",
@@ -557,11 +732,16 @@
       "video": "videos/thunglong/lam-gi-co-chuyen-noi-den-sang-mai.mp4",
       "thumbnail": "thumbnails/7259733140934102280.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7259733140934102280",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7325298596356689153",
@@ -570,11 +750,16 @@
       "video": "videos/thunglong/du-trend-hoi-muon-ti.mp4",
       "thumbnail": "thumbnails/7325298596356689153.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7325298596356689153",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7297587094958902529",
@@ -583,11 +768,16 @@
       "video": "videos/thunglong/du-trend-trong-1-ngay-mua-gio.mp4",
       "thumbnail": "thumbnails/7297587094958902529.jpg",
       "description": "",
-      "role": "Tiền kì • Dựng chính • VFX",
+      "role": "Edit • VFX • Sound Design",
       "badge": "🔥 Viral Content / Triệu Views",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@thunglongfamily/video/7297587094958902529",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7435672378299944247",
@@ -596,11 +786,16 @@
       "video": "videos/freelance/haidilao-apt-dance-challenge.mp4",
       "thumbnail": "thumbnails/7435672378299944247.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7435672378299944247",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7466795322665094406",
@@ -609,11 +804,16 @@
       "video": "videos/freelance/haidilao-tomato-or-potato.mp4",
       "thumbnail": "thumbnails/7466795322665094406.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7466795322665094406",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7469760253500853509",
@@ -622,11 +822,16 @@
       "video": "videos/freelance/haidilao-hotpot-for-happiness.mp4",
       "thumbnail": "thumbnails/7469760253500853509.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7469760253500853509",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7447014404505259270",
@@ -635,11 +840,16 @@
       "video": "videos/freelance/haidilao-great-food-great-mood.mp4",
       "thumbnail": "thumbnails/7447014404505259270.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7447014404505259270",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7441776844061281591",
@@ -648,11 +858,16 @@
       "video": "videos/freelance/haidilao-wednesday-drink.mp4",
       "thumbnail": "thumbnails/7441776844061281591.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7441776844061281591",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7521720993946160385",
@@ -661,11 +876,16 @@
       "video": "videos/freelance/salitos-x-mosvici-tinh-than.mp4",
       "thumbnail": "thumbnails/7521720993946160385.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7521720993946160385",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7439180307032476984",
@@ -674,11 +894,16 @@
       "video": "videos/freelance/haidilao-table-magic-tricks.mp4",
       "thumbnail": "thumbnails/7439180307032476984.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7439180307032476984",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7544395711182392593",
@@ -687,11 +912,16 @@
       "video": "videos/freelance/tu-hao-2-tieng-viet-nam.mp4",
       "thumbnail": "thumbnails/7544395711182392593.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7544395711182392593",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7425802752959253765",
@@ -700,11 +930,16 @@
       "video": "videos/freelance/haidilao-friendship-magic.mp4",
       "thumbnail": "thumbnails/7425802752959253765.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7425802752959253765",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7520226940834352385",
@@ -713,11 +948,16 @@
       "video": "videos/freelance/clear-men-fake-situation.mp4",
       "thumbnail": "thumbnails/7520226940834352385.jpg",
       "description": "",
-      "role": "Video Editor • VFX • Motion Graphics",
+      "role": "Edit • VFX • Motion Graphics",
       "badge": "Commercial / Brand Campaign",
       "aspect": "9:16",
       "url": "https://www.tiktok.com/@/video/7520226940834352385",
-      "breakdowns": []
+      "breakdowns": [],
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     }
   ]
 }
