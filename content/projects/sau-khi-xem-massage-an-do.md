@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/sau-khi-xem-massage-an-do.mp4"
 thumbnail: "thumbnails/7303888492621237506.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7303888492621237506"
 description: ""
 ---

@@ -7,5 +7,6 @@ roles:
   - "Motion Graphics"
 video: "videos/freelance/tu-hao-2-tieng-viet-nam.mp4"
 thumbnail: "thumbnails/7544395711182392593.jpg"
+tiktok_url: "https://www.tiktok.com/@/video/7544395711182392593"
 description: ""
 ---

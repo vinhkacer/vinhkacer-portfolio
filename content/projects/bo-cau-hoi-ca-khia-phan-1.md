@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/bo-cau-hoi-ca-khia-phan-1.mp4"
 thumbnail: "thumbnails/7245623121108159749.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7245623121108159749"
 description: ""
 ---

@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/em-chi-an-moi-the-thoi.mp4"
 thumbnail: "thumbnails/7284955655289588994.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7284955655289588994"
 description: ""
 ---

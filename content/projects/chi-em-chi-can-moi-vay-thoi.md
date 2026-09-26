@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/chi-em-chi-can-moi-vay-thoi.mp4"
 thumbnail: "thumbnails/7281247914771483905.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7281247914771483905"
 description: ""
 ---

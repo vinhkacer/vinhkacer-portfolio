@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/hanfu-chinese-traditional-clothes.mp4"
 thumbnail: "thumbnails/7444768523089399096.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7444768523089399096"
 description: ""
 ---

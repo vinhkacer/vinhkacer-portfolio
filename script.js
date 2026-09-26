@@ -266,11 +266,35 @@ function openCinemaModal(item) {
     }
   }
 
-  if (item.url && item.url !== '#' && item.url !== '') {
-    modalExternalLink.href = item.url;
-    modalExternalLink.classList.remove('hidden');
-  } else {
-    modalExternalLink.classList.add('hidden');
+  const modalYouTubeLink = document.getElementById('modalYouTubeLink');
+  const modalTikTokLink = document.getElementById('modalTikTokLink');
+
+  if (modalYouTubeLink) {
+    if (item.youtube_url) {
+      modalYouTubeLink.href = item.youtube_url;
+      modalYouTubeLink.classList.remove('hidden');
+    } else {
+      modalYouTubeLink.classList.add('hidden');
+    }
+  }
+
+  if (modalTikTokLink) {
+    if (item.tiktok_url) {
+      modalTikTokLink.href = item.tiktok_url;
+      modalTikTokLink.classList.remove('hidden');
+    } else {
+      modalTikTokLink.classList.add('hidden');
+    }
+  }
+
+  if (modalExternalLink) {
+    const isOtherUrl = item.url && item.url !== '#' && item.url !== '' && item.url !== item.youtube_url && item.url !== item.tiktok_url;
+    if (isOtherUrl) {
+      modalExternalLink.href = item.url;
+      modalExternalLink.classList.remove('hidden');
+    } else {
+      modalExternalLink.classList.add('hidden');
+    }
   }
 
   if (item.video_src) {
@@ -450,6 +474,35 @@ function create16x9Card(item) {
     `;
   }
 
+  // Social platform buttons (YouTube / TikTok)
+  let socialLinksHtml = '';
+  if (item.youtube_url) {
+    socialLinksHtml += `
+      <a href="${item.youtube_url}" target="_blank" rel="noopener noreferrer" 
+         onclick="event.stopPropagation()"
+         class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-red-600/15 hover:bg-red-600 border border-red-500/30 hover:border-red-500 text-red-400 hover:text-white text-xs font-mono font-medium transition-all duration-300 shadow-sm"
+         title="Xem video trên YouTube (Mở tab mới)">
+        <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        <span>YouTube</span>
+      </a>
+    `;
+  }
+  if (item.tiktok_url) {
+    socialLinksHtml += `
+      <a href="${item.tiktok_url}" target="_blank" rel="noopener noreferrer" 
+         onclick="event.stopPropagation()"
+         class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white hover:text-black border border-white/10 hover:border-white text-zinc-300 text-xs font-mono font-medium transition-all duration-300 shadow-sm"
+         title="Xem video trên TikTok (Mở tab mới)">
+        <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
+          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+        </svg>
+        <span>TikTok</span>
+      </a>
+    `;
+  }
+
   card.innerHTML = `
     <div class="video-16-9-container relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
       <!-- Video Player with controls, preload="metadata", playsinline and object-cover without black sidebars -->
@@ -475,8 +528,9 @@ function create16x9Card(item) {
       </div>
 
       <div class="shrink-0 flex flex-wrap items-center gap-2.5">
-        ${item.role ? `<span class="text-xs font-mono text-neon-cyan font-medium px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10">${item.role}</span>` : ''}
+        ${item.role ? `<span class="text-xs font-mono text-neon-cyan font-medium px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 shadow-sm">${item.role}</span>` : ''}
         ${breakdownBtnsHtml}
+        ${socialLinksHtml}
       </div>
     </div>
   `;
@@ -504,6 +558,35 @@ function createVerticalCard(item) {
         <span class="animate-pulse">✨</span>
         <span>${label}</span>
       </button>
+    `;
+  }
+
+  // Social link buttons for 9:16 vertical cards
+  let verticalSocialHtml = '';
+  if (item.youtube_url) {
+    verticalSocialHtml += `
+      <a href="${item.youtube_url}" target="_blank" rel="noopener noreferrer" 
+         onclick="event.stopPropagation()"
+         class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-obsidian-950/90 hover:bg-red-600 hover:text-white border border-red-500/30 hover:border-red-500 text-red-400 text-[10px] font-mono font-medium transition-all duration-200 backdrop-blur-md shadow-sm"
+         title="Xem video trên YouTube (Mở tab mới)">
+        <svg class="w-3 h-3 fill-current shrink-0" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        <span>YouTube</span>
+      </a>
+    `;
+  }
+  if (item.tiktok_url) {
+    verticalSocialHtml += `
+      <a href="${item.tiktok_url}" target="_blank" rel="noopener noreferrer" 
+         onclick="event.stopPropagation()"
+         class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-obsidian-950/90 hover:bg-white hover:text-black border border-white/15 hover:border-white text-zinc-300 text-[10px] font-mono font-medium transition-all duration-200 backdrop-blur-md shadow-sm"
+         title="Xem video trên TikTok (Mở tab mới)">
+        <svg class="w-3 h-3 fill-current shrink-0" viewBox="0 0 24 24">
+          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+        </svg>
+        <span>TikTok</span>
+      </a>
     `;
   }
 
@@ -538,12 +621,15 @@ function createVerticalCard(item) {
         <h3 class="text-xs sm:text-sm font-display font-bold text-white group-hover:text-neon-cyan transition-colors line-clamp-2 leading-snug">
           ${item.title}
         </h3>
-        ${item.role ? `
-        <div class="mt-2.5 flex items-center justify-end">
-          <span class="text-[9px] sm:text-[10px] font-mono text-neon-cyan/90 font-medium truncate px-2.5 py-1 rounded-lg bg-obsidian-950/85 border border-white/15 backdrop-blur-md shadow-sm max-w-full">
+        <div class="mt-2.5 flex items-center justify-between gap-1.5">
+          <div class="flex items-center gap-1.5 shrink-0">
+            ${verticalSocialHtml}
+          </div>
+          ${item.role ? `
+          <span class="text-[9px] sm:text-[10px] font-mono text-neon-cyan/90 font-medium truncate px-2.5 py-1 rounded-lg bg-obsidian-950/85 border border-white/15 backdrop-blur-md shadow-sm max-w-[65%] text-right">
             ${item.role}
-          </span>
-        </div>` : ''}
+          </span>` : ''}
+        </div>
       </div>
     </div>
   `;
@@ -872,6 +958,32 @@ function normalizeCMSItem(item, defaultId = null) {
     }
   }
 
+  // Resolve social platform URLs (TikTok / YouTube)
+  let tiktokUrl = (item.tiktok_url || '').trim();
+  let youtubeUrl = (item.youtube_url || '').trim();
+
+  if (!tiktokUrl && item.url && item.url.includes('tiktok.com')) {
+    tiktokUrl = item.url.trim();
+  }
+  if (!youtubeUrl && item.url && (item.url.includes('youtube.com') || item.url.includes('youtu.be'))) {
+    youtubeUrl = item.url.trim();
+  }
+
+  if (!tiktokUrl && existing) {
+    if (existing.tiktok_url) tiktokUrl = existing.tiktok_url;
+    else if (existing.url && existing.url.includes('tiktok.com')) tiktokUrl = existing.url;
+  }
+  if (!youtubeUrl && existing) {
+    if (existing.youtube_url) youtubeUrl = existing.youtube_url;
+    else if (existing.url && (existing.url.includes('youtube.com') || existing.url.includes('youtu.be'))) youtubeUrl = existing.url;
+  }
+
+  if (!youtubeUrl) {
+    if (projId.includes('cam-bat-den')) youtubeUrl = 'https://www.youtube.com/watch?v=L-zp0dPv7IU';
+    else if (projId.includes('danmy')) youtubeUrl = 'https://www.youtube.com/watch?v=msf4UwVORPA';
+    else if (projId.includes('wheelie')) youtubeUrl = 'https://www.youtube.com/watch?v=QMlud_TC3aA';
+  }
+
   return {
     id: projId,
     title: item.title || 'Dự án mới',
@@ -882,11 +994,13 @@ function normalizeCMSItem(item, defaultId = null) {
     badge: badge,
     thumbnail: thumb,
     video_src: videoSrc,
+    tiktok_url: tiktokUrl,
+    youtube_url: youtubeUrl,
+    url: youtubeUrl || tiktokUrl || item.url || '',
     has_breakdown: breakdowns.length > 0,
     breakdown_src: breakdowns.length > 0 ? breakdowns[0].src : '',
     breakdown_thumb: breakdowns.length > 0 ? breakdowns[0].thumb : '',
     description: item.description || '',
-    url: item.url || '',
     breakdowns: breakdowns
   };
 }

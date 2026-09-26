@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/du-trend-hoi-muon-ti.mp4"
 thumbnail: "thumbnails/7325298596356689153.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7325298596356689153"
 description: ""
 ---

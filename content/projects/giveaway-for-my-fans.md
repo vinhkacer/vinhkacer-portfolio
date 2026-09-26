@@ -7,5 +7,6 @@ roles:
   - "Sound Design"
 video: "videos/thunglong/giveaway-for-my-fans.mp4"
 thumbnail: "thumbnails/7428082811434716421.jpg"
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7428082811434716421"
 description: ""
 ---
