@@ -2,7 +2,7 @@
 title: Cầm — Bắt Đền [Official Music Video]
 category: MV
 roles:
-  - VFX
+  - 3D Animation
 video: videos/mv/cam-bat-den-nen.mp4
 thumbnail: thumbnails/mv/cam_bat_den.jpg
 breakdown_video: videos/breakdown/cam-bat-den-breakdown.mp4
