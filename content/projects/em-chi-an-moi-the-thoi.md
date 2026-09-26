@@ -1,4 +1,5 @@
 ---
+order: 12
 title: "Em Chỉ Ăn Mỗi Thế Thôi Mà (Bàn Chải P/S Than Bạc)"
 category: "Thủng Long"
 roles:

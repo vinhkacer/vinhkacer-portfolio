@@ -1,4 +1,5 @@
 ---
+order: 43
 title: "Haidilao #APT Dance Challenge — Dance with Us!"
 category: "Commercial"
 roles:

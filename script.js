@@ -37,7 +37,7 @@ function hasManualOrder(item) {
   if (item.featured === true || item.featured === 'true' || item.featured === 1) return true;
   if (item.order !== undefined && item.order !== null && item.order !== '') {
     const num = Number(item.order);
-    return !isNaN(num) && num > 0;
+    return !isNaN(num) && num >= 0;
   }
   return false;
 }
@@ -47,7 +47,7 @@ function getManualOrder(item) {
   if (!item) return 999999;
   if (item.order !== undefined && item.order !== null && item.order !== '') {
     const num = Number(item.order);
-    if (!isNaN(num) && num > 0) return num;
+    if (!isNaN(num) && num >= 0) return num;
   }
   if (item.featured === true || item.featured === 'true' || item.featured === 1) return 0;
   return 999999;
@@ -1484,10 +1484,10 @@ function normalizeCMSItem(item, defaultId = null) {
   let orderNum = null;
   if (item.order !== undefined && item.order !== null && item.order !== '') {
     const n = Number(item.order);
-    if (!isNaN(n) && n > 0) orderNum = n;
+    if (!isNaN(n) && n >= 0) orderNum = n;
   } else if (existing && existing.order !== undefined && existing.order !== null && existing.order !== '') {
     const n = Number(existing.order);
-    if (!isNaN(n) && n > 0) orderNum = n;
+    if (!isNaN(n) && n >= 0) orderNum = n;
   }
   const itemDate = item.date || (existing && existing.date) || '';
 

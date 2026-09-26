@@ -24,8 +24,68 @@ class StreamingHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.send_header("Cache-Control", "no-cache")
         super().end_headers()
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.end_headers()
+
+    def do_POST(self):
+        if self.path == "/api/save-order":
+            try:
+                import json
+                content_length = int(self.headers.get("Content-Length", 0))
+                body = self.rfile.read(content_length)
+                data = json.loads(body.decode("utf-8"))
+                projects = data.get("projects", [])
+
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+                proj_dir = os.path.join(base_dir, "content", "projects")
+
+                updated_count = 0
+                for p in projects:
+                    filename = p.get("filename")
+                    order = p.get("order")
+                    if not filename or order is None:
+                        continue
+                    filepath = os.path.join(proj_dir, filename)
+                    if os.path.isfile(filepath):
+                        with open(filepath, "r", encoding="utf-8") as f:
+                            text = f.read()
+                        if re.search(r"^order:\s*\d+", text, flags=re.MULTILINE):
+                            new_text = re.sub(r"^order:\s*\d+", f"order: {order}", text, flags=re.MULTILINE)
+                        else:
+                            new_text = re.sub(r"^---\r?\n", f"---\norder: {order}\n", text)
+                        with open(filepath, "w", encoding="utf-8") as f:
+                            f.write(new_text)
+                        updated_count += 1
+
+                index_path = os.path.join(proj_dir, "index.json")
+                if os.path.isfile(index_path):
+                    with open(index_path, "r", encoding="utf-8") as f:
+                        index_data = json.load(f)
+                    index_data["projects"] = projects
+                    with open(index_path, "w", encoding="utf-8") as f:
+                        json.dump(index_data, f, indent=2, ensure_ascii=False)
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                resp = json.dumps({"success": True, "updated": updated_count})
+                self.wfile.write(resp.encode("utf-8"))
+                return
+            except Exception as e:
+                import json
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                resp = json.dumps({"error": str(e)})
+                self.wfile.write(resp.encode("utf-8"))
+                return
+        self.send_error(404, "Endpoint not found")
 
     def send_head(self):
         if "Range" not in self.headers:

@@ -1153,36 +1153,65 @@
       showToast("↺ Đã hoàn tác về thứ tự ban đầu!");
     }
 
-    // 6. Batch Save to GitHub API
+    // 6. Batch Save (Local disk + GitHub API)
     async function handleSaveAll() {
-      const token = getStoredToken();
-      if (!token) {
-        openTokenModal();
-        return;
-      }
-
       const btn = document.getElementById("btnSaveAll");
       const icon = document.getElementById("saveBtnIcon");
       const text = document.getElementById("saveBtnText");
 
       btn.disabled = true;
       icon.innerHTML = `<div class="spinner"></div>`;
-      text.textContent = "Đang kết nối GitHub...";
+      text.textContent = "Đang xử lý lưu...";
 
       try {
-        // Step A: Prepare tree items for updated files
-        text.textContent = "Đang đóng gói dữ liệu (Git Tree)...";
-
-        // Read or construct updated content for projects
         const updatedProjects = ALL_PROJECTS.map(p => ({
           ...p,
           order: p.order
         }));
 
+        // 1. Try local server save (if running on local development server)
+        let localSaved = false;
+        try {
+          const localRes = await fetch("/api/save-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ projects: updatedProjects })
+          });
+          if (localRes.ok) {
+            localSaved = true;
+            console.log("✓ Đã ghi trực tiếp trường 'order' vào file markdown trên máy local!");
+          }
+        } catch (e) {
+          // Not on local server, continue
+        }
+
+        const token = getStoredToken();
+        if (!token && localSaved) {
+          INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(ALL_PROJECTS));
+          markDirty(false);
+          showToast("✓ Đã lưu thành công vào file trên máy local!", "success");
+          return;
+        }
+
+        if (!token) {
+          openTokenModal();
+          throw new Error("Chưa có GitHub Token. Vui lòng nhập token PAT để đẩy commit lên Cloudflare Pages.");
+        }
+
+        // 2. Commit to GitHub API (Atomic Git Tree commit)
+        text.textContent = "Đang kết nối GitHub API...";
+
         // Build updated index.json content
-        const indexRes = await fetch("../content/projects/index.json");
-        const indexData = await indexRes.json();
-        indexData.projects = updatedProjects;
+        let indexData = { files: [], projects: updatedProjects };
+        try {
+          const indexRes = await fetch("../content/projects/index.json");
+          if (indexRes.ok) {
+            const cur = await indexRes.json();
+            cur.projects = updatedProjects;
+            indexData = cur;
+          }
+        } catch (e) {}
+
         const newIndexJsonContent = JSON.stringify(indexData, null, 2);
 
         // Fetch latest commit SHA of main
@@ -1194,16 +1223,16 @@
         });
 
         if (!refRes.ok) {
-          throw new Error(`Lỗi kết nối GitHub (${refRes.status}): Kiểm tra lại Token PAT.`);
+          throw new Error(`Lỗi kết nối GitHub (${refRes.status}): Token PAT không hợp lệ hoặc đã hết hạn.`);
         }
 
         const refData = await refRes.json();
         const baseCommitSha = refData.object.sha;
 
-        // Step B: Build Git tree entries
+        // Build Git tree entries
         const treeEntries = [];
 
-        // 1. Add content/projects/index.json
+        // Add content/projects/index.json
         treeEntries.push({
           path: "content/projects/index.json",
           mode: "100644",
@@ -1211,21 +1240,25 @@
           content: newIndexJsonContent
         });
 
-        // 2. Add individual markdown files with updated order: X frontmatter
+        // Add individual markdown files with updated order: X frontmatter
+        text.textContent = "Đang chuẩn bị các file markdown...";
         for (const proj of ALL_PROJECTS) {
-          const filename = proj.filename.endsWith('.md') ? proj.filename : `${proj.id}.md`;
+          const filename = proj.filename || (proj.id && proj.id.endsWith('.md') ? proj.id : `${proj.id}.md`);
           let mdText = '';
 
           // Attempt A: local fetch
           try {
             const mdRes = await fetch(`../content/projects/${filename}`);
             if (mdRes.ok) {
-              mdText = await mdRes.text();
+              const t = await mdRes.text();
+              if (t.includes('---') && !t.includes('<!DOCTYPE html>')) {
+                mdText = t;
+              }
             }
           } catch (e) {}
 
           // Attempt B: GitHub contents raw fetch
-          if (!mdText || !mdText.includes('---')) {
+          if (!mdText) {
             try {
               const ghRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/contents/content/projects/${filename}?ref=${REPO_BRANCH}`, {
                 headers: {
@@ -1234,13 +1267,15 @@
                 }
               });
               if (ghRes.ok) {
-                mdText = await ghRes.text();
+                const t = await ghRes.text();
+                if (t.includes('---') && !t.includes('<!DOCTYPE html>')) {
+                  mdText = t;
+                }
               }
             } catch (e) {}
           }
 
-          if (mdText && mdText.includes('---')) {
-            // Replace or insert order: ...
+          if (mdText) {
             if (/^order:\s*\d+/m.test(mdText)) {
               mdText = mdText.replace(/^order:\s*\d+/m, `order: ${proj.order}`);
             } else {
@@ -1255,7 +1290,7 @@
           }
         }
 
-        // Step C: Create Git Tree
+        // Create Git Tree
         text.textContent = `Đang tải ${treeEntries.length} file lên Git Tree...`;
         const treeRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/trees`, {
           method: "POST",
@@ -1273,7 +1308,7 @@
         if (!treeRes.ok) throw new Error("Không thể tạo Git Tree trên GitHub.");
         const treeData = await treeRes.json();
 
-        // Step D: Create Atomic Commit
+        // Create Atomic Commit
         text.textContent = "Đang tạo Commit...";
         const commitRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/commits`, {
           method: "POST",
@@ -1292,7 +1327,7 @@
         if (!commitRes.ok) throw new Error("Không thể tạo Commit trên GitHub.");
         const commitData = await commitRes.json();
 
-        // Step E: Update branch ref
+        // Update branch ref
         text.textContent = "Đang đẩy lên nhánh main...";
         const pushRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/git/refs/heads/${REPO_BRANCH}`, {
           method: "PATCH",
@@ -1312,9 +1347,11 @@
         // Success!
         INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(ALL_PROJECTS));
         markDirty(false);
+        console.log(`✓ Đã commit ${treeEntries.length} file lên GitHub thành công (SHA: ${commitData.sha})`);
         showToast("Đã cập nhật lên GitHub, trang chủ sẽ update sau ~1 phút!", "success");
       } catch (err) {
         console.error("Save error:", err);
+        alert("Lỗi khi lưu thứ tự: " + err.message);
         showToast(`❌ Lỗi: ${err.message}`, "error");
       } finally {
         btn.disabled = false;
