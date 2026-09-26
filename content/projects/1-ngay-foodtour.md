@@ -1,5 +1,5 @@
 ---
-order: 32
+order: 31
 title: "1 Ngày Foodtour Bất Quy Tắc 🤤"
 category: "Thủng Long"
 roles:
