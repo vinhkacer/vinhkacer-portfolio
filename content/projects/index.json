@@ -58,12 +58,9 @@
       "rawCategory": "MV",
       "order": 1,
       "featured": false,
-      "role": "3D Animation",
+      "role": "Edit • VFX • Color Grading",
       "thumbnail": "thumbnails/mv/cam_bat_den.jpg",
-      "date": "",
-      "roles": [
-        "3D Animation"
-      ]
+      "date": ""
     },
     {
       "id": "danmy-vi-da-la-con-gai.mp4",
@@ -71,14 +68,11 @@
       "title": "DANMY x OSCREW — 'Vì Đã Là Con Gái' [Official MV]",
       "category": "MV",
       "rawCategory": "MV",
-      "order": 2,
+      "order": 3,
       "featured": false,
-      "role": "VFX",
+      "role": "Edit • Motion Graphics • VFX",
       "thumbnail": "thumbnails/mv/vi_da_la_con_gai.jpg",
-      "date": "",
-      "roles": [
-        "VFX"
-      ]
+      "date": ""
     },
     {
       "id": "wheelie-mon-qua-que.mp4",
@@ -86,15 +80,11 @@
       "title": "@wheelie0nther0ad — Món Quà Quê ft. @ICYFAMOUSS [Official MV]",
       "category": "MV",
       "rawCategory": "MV",
-      "order": 3,
+      "order": 2,
       "featured": false,
-      "role": "VFX • 3D Animation",
+      "role": "Edit • Sound Design • VFX",
       "thumbnail": "thumbnails/mv/mon_qua_que.jpg",
-      "date": "",
-      "roles": [
-        "VFX",
-        "3D Animation"
-      ]
+      "date": ""
     },
     {
       "id": "7520226940834352385",
@@ -106,12 +96,7 @@
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7520226940834352385.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     },
     {
       "id": "7544395711182392593",
@@ -123,12 +108,7 @@
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7544395711182392593.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     },
     {
       "id": "7276797810253614337",
@@ -140,12 +120,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7276797810253614337.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7281247914771483905",
@@ -157,12 +132,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7281247914771483905.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7521720993946160385",
@@ -174,12 +144,7 @@
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7521720993946160385.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     },
     {
       "id": "7325298596356689153",
@@ -191,12 +156,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7325298596356689153.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7305745167993031937",
@@ -208,12 +168,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7305745167993031937.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7303888492621237506",
@@ -225,12 +180,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7303888492621237506.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7315758991269694721",
@@ -242,12 +192,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7315758991269694721.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7332087700129877249",
@@ -259,12 +204,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7332087700129877249.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7369216070894374162",
@@ -276,12 +216,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7369216070894374162.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7284955655289588994",
@@ -293,12 +228,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7284955655289588994.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7297587094958902529",
@@ -310,12 +240,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7297587094958902529.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7212612550922407194",
@@ -327,12 +252,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7212612550922407194.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7245623121108159749",
@@ -344,12 +264,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7245623121108159749.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7279397866169289986",
@@ -361,12 +276,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7279397866169289986.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7290173297638018311",
@@ -378,12 +288,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7290173297638018311.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7307238023320603911",
@@ -395,12 +300,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7307238023320603911.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7317614770717297921",
@@ -412,12 +312,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7317614770717297921.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7342870241090768130",
@@ -429,12 +324,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7342870241090768130.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7291276702813064449",
@@ -446,12 +336,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7291276702813064449.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7287550952079396098",
@@ -463,12 +348,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7287550952079396098.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7236720841944206598",
@@ -480,12 +360,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7236720841944206598.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7208891929671650587",
@@ -497,12 +372,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7208891929671650587.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7263072598836202760",
@@ -514,12 +384,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7263072598836202760.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7302069166826179842",
@@ -531,12 +396,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7302069166826179842.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7330969014832860418",
@@ -548,12 +408,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7330969014832860418.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7315392879562591490",
@@ -565,12 +420,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7315392879562591490.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7259733140934102280",
@@ -582,12 +432,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7259733140934102280.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7339135630951304449",
@@ -599,12 +444,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7339135630951304449.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7291641220160326913",
@@ -616,12 +456,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7291641220160326913.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7223728609372998918",
@@ -633,12 +468,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7223728609372998918.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7539895638197112080",
@@ -650,12 +480,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7539895638197112080.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7226334534378310918",
@@ -667,12 +492,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7226334534378310918.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
       "id": "7469760253500853509",
@@ -684,46 +504,7 @@
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7469760253500853509.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
-    },
-    {
-      "id": "7435672378299944247",
-      "filename": "haidilao-apt-dance-challenge.md",
-      "title": "Haidilao #APT Dance Challenge — Dance with Us!",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 43,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7435672378299944247.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
-    },
-    {
-      "id": "7425802752959253765",
-      "filename": "haidilao-friendship-magic.md",
-      "title": "Haidilao Friendship Magic — Behind The Scene Fun",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 44,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7425802752959253765.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     },
     {
       "id": "7444768523089399096",
@@ -735,29 +516,7 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7444768523089399096.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
-    },
-    {
-      "id": "7448873288429767941",
-      "filename": "haidilao-late-night-snacks.md",
-      "title": "Message copied! Go to Haidilao for late night snacks  ... [7448873288429767941].mp4",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 41,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7448873288429767941.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     },
     {
       "id": "7428822702070304005",
@@ -769,46 +528,19 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7428822702070304005.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
     },
     {
-      "id": "7447014404505259270",
-      "filename": "haidilao-great-food-great-mood.md",
-      "title": "Haidilao Hotpot — Great Food, Great Mood",
+      "id": "7448873288429767941",
+      "filename": "haidilao-late-night-snacks.md",
+      "title": "Message copied! Go to Haidilao for late night snacks  ... [7448873288429767941].mp4",
       "category": "Commercial",
       "rawCategory": "Commercial",
-      "order": 45,
+      "order": 41,
       "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7447014404505259270.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
-    },
-    {
-      "id": "7439180307032476984",
-      "filename": "haidilao-table-magic-tricks.md",
-      "title": "Haidilao Table Magic — Show You Some Magic Tricks",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 46,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7439180307032476984.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7448873288429767941.jpg",
+      "date": ""
     },
     {
       "id": "7428082811434716421",
@@ -820,12 +552,55 @@
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7428082811434716421.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Sound Design"
-      ]
+      "date": ""
+    },
+    {
+      "id": "7435672378299944247",
+      "filename": "haidilao-apt-dance-challenge.md",
+      "title": "Haidilao #APT Dance Challenge — Dance with Us!",
+      "category": "Commercial",
+      "rawCategory": "Commercial",
+      "order": 43,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7435672378299944247.jpg",
+      "date": ""
+    },
+    {
+      "id": "7425802752959253765",
+      "filename": "haidilao-friendship-magic.md",
+      "title": "Haidilao Friendship Magic — Behind The Scene Fun",
+      "category": "Commercial",
+      "rawCategory": "Commercial",
+      "order": 44,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7425802752959253765.jpg",
+      "date": ""
+    },
+    {
+      "id": "7447014404505259270",
+      "filename": "haidilao-great-food-great-mood.md",
+      "title": "Haidilao Hotpot — Great Food, Great Mood",
+      "category": "Commercial",
+      "rawCategory": "Commercial",
+      "order": 45,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7447014404505259270.jpg",
+      "date": ""
+    },
+    {
+      "id": "7439180307032476984",
+      "filename": "haidilao-table-magic-tricks.md",
+      "title": "Haidilao Table Magic — Show You Some Magic Tricks",
+      "category": "Commercial",
+      "rawCategory": "Commercial",
+      "order": 46,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7439180307032476984.jpg",
+      "date": ""
     },
     {
       "id": "7466795322665094406",
@@ -837,12 +612,7 @@
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7466795322665094406.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     },
     {
       "id": "7441776844061281591",
@@ -854,12 +624,7 @@
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7441776844061281591.jpg",
-      "date": "",
-      "roles": [
-        "Edit",
-        "VFX",
-        "Motion Graphics"
-      ]
+      "date": ""
     }
   ]
 }
