@@ -157,6 +157,42 @@ function playYouTubeFacade(element, ytId) {
   `;
 }
 
+// Render Local MP4 Video Facade (Zero network traffic on initial page load, plays on click)
+function createMP4FacadeHtml(item) {
+  const safeTitle = (item.title || 'Video').replace(/"/g, '&quot;');
+  return `
+    <div class="mp4-facade group" onclick="event.stopPropagation(); playMP4Facade(this, '${item.video_src}', '${item.thumbnail}')" title="Bấm để phát video">
+      <img src="${item.thumbnail}" 
+           alt="${safeTitle}" 
+           loading="lazy" 
+           decoding="async" 
+           class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+      <button type="button" class="mp4-play-btn" aria-label="Phát Video">
+        <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+  `;
+}
+
+// Trigger MP4 Facade playback: stops all other media and starts video immediately
+function playMP4Facade(element, src, poster) {
+  playBeep(800, 0.05);
+  pauseAllVideos();
+
+  const container = element.closest('.video-16-9-container') || element.parentElement || element;
+  container.innerHTML = `
+    <video controls autoplay playsinline preload="auto" poster="${poster}" class="w-full h-full object-cover">
+      <source src="${src}" type="video/mp4">
+      Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
+    </video>
+  `;
+  const vid = container.querySelector('video');
+  if (vid) {
+    vid.play().catch(() => {});
+  }
+}
+
 // Play subtle synthesized audio tone via Web Audio API
 function playBeep(freq = 880, duration = 0.08) {
   try {
@@ -896,13 +932,8 @@ function create16x9Card(item) {
   if (ytId) {
     playerElementHtml = createYouTubeFacadeHtml(ytId, item.title);
   } else {
-    playerElementHtml = `
-      <!-- Video Player with controls, preload="metadata", playsinline and object-cover without black sidebars -->
-      <video controls preload="metadata" playsinline poster="${item.thumbnail}" class="w-full h-full object-cover">
-        <source src="${item.video_src}" type="video/mp4">
-        Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
-      </video>
-    `;
+    // Ultra-lightweight MP4 Facade: zero network requests until user clicks play
+    playerElementHtml = createMP4FacadeHtml(item);
   }
 
 
@@ -999,10 +1030,48 @@ function createVerticalCard(item) {
   const card = document.createElement('div');
   card.className = 'glass-card rounded-2xl overflow-hidden group flex flex-col cursor-pointer relative';
   card.onclick = () => openCinemaModal(item);
+
+  // Smooth hover preview: loads muted preview only when user hovers intentionally for >400ms
+  let hoverVideoTimer = null;
+  card.addEventListener('mouseenter', () => {
+    if (!item.video_src || item.youtube_url) return;
+    hoverVideoTimer = setTimeout(() => {
+      const container = card.querySelector('.thumb-container-9-16');
+      if (!container || container.querySelector('video')) return;
+      const vid = document.createElement('video');
+      vid.className = 'absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 opacity-0 pointer-events-none';
+      vid.src = item.video_src;
+      vid.muted = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.autoplay = true;
+      vid.preload = 'auto';
+      vid.oncanplay = () => {
+        vid.classList.remove('opacity-0');
+        vid.play().catch(() => {});
+      };
+      container.insertBefore(vid, container.firstChild);
+    }, 400);
+  });
+
+  card.addEventListener('mouseleave', () => {
+    if (hoverVideoTimer) clearTimeout(hoverVideoTimer);
+    const container = card.querySelector('.thumb-container-9-16');
+    if (container) {
+      const vid = container.querySelector('video');
+      if (vid) {
+        vid.pause();
+        vid.src = '';
+        vid.load();
+        vid.remove();
+      }
+    }
+  });
+
   card.innerHTML = `
-    <div class="relative w-full aspect-[9/16] bg-black overflow-hidden">
+    <div class="relative w-full aspect-[9/16] bg-black overflow-hidden thumb-container-9-16">
       <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" decoding="async">
-      <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity pointer-events-none"></div>
       
       <div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5 z-10">
         <div class="flex items-center gap-1 min-w-0 max-w-[85%]">
@@ -1021,14 +1090,10 @@ function createVerticalCard(item) {
           ${tagText}
         </span>
       </div>
-        <span class="text-[9px] font-mono text-slate-400 bg-black/60 px-1.5 py-0.5 rounded shrink-0">
-          ${tagText}
-        </span>
-      </div>
 
       ${breakdownFloatingBtn}
 
-      <div class="absolute inset-0 flex items-center justify-center z-10">
+      <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <div class="w-12 h-12 rounded-full bg-white/90 text-obsidian-950 flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 group-hover:bg-neon-cyan transition-all duration-300">
           <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>

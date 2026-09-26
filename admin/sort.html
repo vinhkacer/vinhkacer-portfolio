@@ -872,6 +872,10 @@
         const u = JSON.parse(localStorage.getItem("decap-cms-user") || "{}");
         if (u.token && u.token.trim()) return u.token.trim();
       } catch (e) {}
+      try {
+        const nu = JSON.parse(localStorage.getItem("netlify-cms-user") || "{}");
+        if (nu.token && nu.token.trim()) return nu.token.trim();
+      } catch (e) {}
       return null;
     }
 
@@ -1209,28 +1213,45 @@
 
         // 2. Add individual markdown files with updated order: X frontmatter
         for (const proj of ALL_PROJECTS) {
-          // Identify filename
           const filename = proj.filename.endsWith('.md') ? proj.filename : `${proj.id}.md`;
+          let mdText = '';
+
+          // Attempt A: local fetch
           try {
             const mdRes = await fetch(`../content/projects/${filename}`);
             if (mdRes.ok) {
-              let mdText = await mdRes.text();
-              // Replace or insert order: ...
-              if (/^order:\s*\d+/m.test(mdText)) {
-                mdText = mdText.replace(/^order:\s*\d+/m, `order: ${proj.order}`);
-              } else {
-                // Insert order right after ---
-                mdText = mdText.replace(/^---\r?\n/, `---\norder: ${proj.order}\n`);
-              }
-              treeEntries.push({
-                path: `content/projects/${filename}`,
-                mode: "100644",
-                type: "blob",
-                content: mdText
-              });
+              mdText = await mdRes.text();
             }
-          } catch (e) {
-            console.warn(`Could not read markdown for ${filename}:`, e);
+          } catch (e) {}
+
+          // Attempt B: GitHub contents raw fetch
+          if (!mdText || !mdText.includes('---')) {
+            try {
+              const ghRes = await fetch(`https://api.github.com/repos/${REPO_NAME}/contents/content/projects/${filename}?ref=${REPO_BRANCH}`, {
+                headers: {
+                  "Authorization": `token ${token}`,
+                  "Accept": "application/vnd.github.v3.raw"
+                }
+              });
+              if (ghRes.ok) {
+                mdText = await ghRes.text();
+              }
+            } catch (e) {}
+          }
+
+          if (mdText && mdText.includes('---')) {
+            // Replace or insert order: ...
+            if (/^order:\s*\d+/m.test(mdText)) {
+              mdText = mdText.replace(/^order:\s*\d+/m, `order: ${proj.order}`);
+            } else {
+              mdText = mdText.replace(/^---\r?\n/, `---\norder: ${proj.order}\n`);
+            }
+            treeEntries.push({
+              path: `content/projects/${filename}`,
+              mode: "100644",
+              type: "blob",
+              content: mdText
+            });
           }
         }
 
@@ -1291,7 +1312,7 @@
         // Success!
         INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(ALL_PROJECTS));
         markDirty(false);
-        showToast("🚀 Đã lưu thành công lên GitHub! Cloudflare Pages đang tự động deploy.", "success");
+        showToast("Đã cập nhật lên GitHub, trang chủ sẽ update sau ~1 phút!", "success");
       } catch (err) {
         console.error("Save error:", err);
         showToast(`❌ Lỗi: ${err.message}`, "error");
