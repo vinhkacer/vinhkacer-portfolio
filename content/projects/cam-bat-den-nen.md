@@ -1,6 +1,6 @@
 ---
 title: Cầm — Bắt Đền [Official Music Video]
-category: MV
+category: "MV"
 order: 1
 featured: true
 roles:

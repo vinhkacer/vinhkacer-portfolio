@@ -1,7 +1,7 @@
 ---
 order: 8
 title: Salitos x Mosvici — Cú Bắt Tay Tình Thân Mến Thân
-category: Thủng Long
+category: "Thủng Long"
 roles:
   - Edit
   - VFX

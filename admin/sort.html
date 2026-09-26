@@ -916,6 +916,49 @@
     }
 
     // 2. Fetch Projects Data
+    function hasManualOrder(item) {
+      if (!item) return false;
+      if (item.featured === true || item.featured === 'true' || item.featured === 1) return true;
+      if (item.order !== undefined && item.order !== null && item.order !== '') {
+        const num = Number(item.order);
+        return !isNaN(num) && num >= 0;
+      }
+      return false;
+    }
+
+    function getManualOrder(item) {
+      if (!item) return 999999;
+      if (item.order !== undefined && item.order !== null && item.order !== '') {
+        const num = Number(item.order);
+        if (!isNaN(num) && num >= 0) return num;
+      }
+      if (item.featured === true || item.featured === 'true' || item.featured === 1) return 0;
+      return 999999;
+    }
+
+    // Identical sorting logic as script.js for 100% parity with home page
+    function compareProjects(a, b) {
+      const aHasOrder = hasManualOrder(a);
+      const bHasOrder = hasManualOrder(b);
+
+      if (aHasOrder && bHasOrder) {
+        const diff = getManualOrder(a) - getManualOrder(b);
+        if (diff !== 0) return diff;
+      } else if (aHasOrder && !bHasOrder) {
+        return -1;
+      } else if (!aHasOrder && bHasOrder) {
+        return 1;
+      }
+
+      // Tier 2: sort by date descending
+      const aDate = (a && a.date) ? new Date(a.date).getTime() : 0;
+      const bDate = (b && b.date) ? new Date(b.date).getTime() : 0;
+      if (aDate !== bDate) return bDate - aDate;
+
+      // Tie-break A-Z
+      return (a && a.title ? a.title : '').localeCompare(b && b.title ? b.title : '');
+    }
+
     async function loadProjects() {
       updateAuthBadge();
       showToast("Đang tải danh sách video...", "info");
@@ -933,6 +976,13 @@
             if (cat.includes('mv') || cat.includes('music') || cat.includes('cinematic')) mappedCat = 'mv';
             else if (cat.includes('thung') || cat.includes('long')) mappedCat = 'thunglong';
 
+            let rawCat = p.rawCategory || p.category || '';
+            if (!rawCat) {
+              if (mappedCat === 'mv') rawCat = 'MV';
+              else if (mappedCat === 'thunglong') rawCat = 'Thủng Long';
+              else rawCat = 'Commercial';
+            }
+
             let orderNum = 100;
             if (p.order !== undefined && p.order !== null && !isNaN(Number(p.order))) {
               orderNum = Number(p.order);
@@ -945,7 +995,7 @@
               filename: p.filename || `${p.id || idx}.md`,
               title: p.title || 'Video không tên',
               category: mappedCat,
-              rawCategory: p.category || 'Commercial',
+              rawCategory: rawCat,
               order: orderNum,
               featured: Boolean(p.featured),
               role: p.role || '',
@@ -955,11 +1005,8 @@
           });
         }
 
-        // Sort initially by order ascending, then title
-        list.sort((a, b) => {
-          if (a.order !== b.order) return a.order - b.order;
-          return a.title.localeCompare(b.title);
-        });
+        // Sort ascending using identical compareProjects logic
+        list.sort(compareProjects);
 
         ALL_PROJECTS = list;
         INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(list));
@@ -983,32 +1030,42 @@
       listTl.innerHTML = "";
       listCm.innerHTML = "";
 
-      let countMv = 0;
-      let countTl = 0;
-      let countCm = 0;
+      // Sort items within each category group before injecting
+      const mvItems = ALL_PROJECTS.filter(p => p.category === 'mv').sort(compareProjects);
+      const tlItems = ALL_PROJECTS.filter(p => p.category === 'thunglong').sort(compareProjects);
+      const cmItems = ALL_PROJECTS.filter(p => p.category === 'commercial').sort(compareProjects);
 
-      ALL_PROJECTS.forEach((item, index) => {
-        const card = createCardElement(item);
-        if (item.category === 'mv') {
-          listMv.appendChild(card);
-          countMv++;
-        } else if (item.category === 'thunglong') {
-          listTl.appendChild(card);
-          countTl++;
-        } else {
-          listCm.appendChild(card);
-          countCm++;
-        }
-      });
+      mvItems.forEach(item => listMv.appendChild(createCardElement(item)));
+      tlItems.forEach(item => listTl.appendChild(createCardElement(item)));
+      cmItems.forEach(item => listCm.appendChild(createCardElement(item)));
 
-      document.getElementById("countAll").textContent = ALL_PROJECTS.length;
-      document.getElementById("countMv").textContent = countMv;
-      document.getElementById("countTl").textContent = countTl;
-      document.getElementById("countCm").textContent = countCm;
+      updateCounters();
+    }
 
-      document.getElementById("badge-mv").textContent = `${countMv} video`;
-      document.getElementById("badge-thunglong").textContent = `${countTl} video`;
-      document.getElementById("badge-commercial").textContent = `${countCm} video`;
+    // Dynamic badge & counter update
+    function updateCounters() {
+      const countMv = document.querySelectorAll('#list-mv .project-card').length;
+      const countTl = document.querySelectorAll('#list-thunglong .project-card').length;
+      const countCm = document.querySelectorAll('#list-commercial .project-card').length;
+      const total = countMv + countTl + countCm;
+
+      const elCountAll = document.getElementById("countAll");
+      const elCountMv = document.getElementById("countMv");
+      const elCountTl = document.getElementById("countTl");
+      const elCountCm = document.getElementById("countCm");
+
+      if (elCountAll) elCountAll.textContent = total;
+      if (elCountMv) elCountMv.textContent = countMv;
+      if (elCountTl) elCountTl.textContent = countTl;
+      if (elCountCm) elCountCm.textContent = countCm;
+
+      const badgeMv = document.getElementById("badge-mv");
+      const badgeTl = document.getElementById("badge-thunglong");
+      const badgeCm = document.getElementById("badge-commercial");
+
+      if (badgeMv) badgeMv.textContent = `${countMv} video`;
+      if (badgeTl) badgeTl.textContent = `${countTl} video`;
+      if (badgeCm) badgeCm.textContent = `${countCm} video`;
     }
 
     // Helper: Build individual card element
@@ -1051,7 +1108,7 @@
       return el;
     }
 
-    // 4. Initialize SortableJS on all 3 column lists
+    // 4. Initialize SortableJS on all 3 column lists with inter-column drag support
     function initSortables() {
       sortableInstances.forEach(inst => inst.destroy());
       sortableInstances = [];
@@ -1068,7 +1125,15 @@
           ghostClass: 'sortable-ghost',
           chosenClass: 'sortable-chosen',
           dragClass: 'sortable-drag',
+          onAdd: function (evt) {
+            updateCounters();
+            handleOrderRecalculate();
+          },
+          onUpdate: function (evt) {
+            handleOrderRecalculate();
+          },
           onEnd: function (evt) {
+            updateCounters();
             handleOrderRecalculate();
           }
         });
@@ -1076,14 +1141,18 @@
       });
     }
 
-    // 5. Automatic recalculation of order from top to bottom
+    // 5. Automatic recalculation of order and category sync across 3 columns
     function handleOrderRecalculate() {
-      // Collect cards in actual current DOM order across the 3 lists
-      const listIds = ['list-mv', 'list-thunglong', 'list-commercial'];
+      const listConfigs = [
+        { id: 'list-mv', catSlug: 'mv', rawCat: 'MV' },
+        { id: 'list-thunglong', catSlug: 'thunglong', rawCat: 'Thủng Long' },
+        { id: 'list-commercial', catSlug: 'commercial', rawCat: 'Commercial' }
+      ];
+
       let globalIndex = 1;
 
-      listIds.forEach(listId => {
-        const listEl = document.getElementById(listId);
+      listConfigs.forEach(cfg => {
+        const listEl = document.getElementById(cfg.id);
         if (!listEl) return;
         const cards = Array.from(listEl.querySelectorAll('.project-card'));
         cards.forEach(card => {
@@ -1091,14 +1160,42 @@
           const proj = ALL_PROJECTS.find(p => p.id === id);
           if (proj) {
             proj.order = globalIndex;
+
+            // Check if card moved across columns
+            if (proj.category !== cfg.catSlug) {
+              proj.category = cfg.catSlug;
+              proj.rawCategory = cfg.rawCat;
+              card.dataset.category = cfg.catSlug;
+
+              // Update thumbnail styling (16:9 widescreen vs 9:16 vertical)
+              const thumbBox = card.querySelector('.thumb-box');
+              if (thumbBox) {
+                if (cfg.catSlug === 'mv') {
+                  thumbBox.classList.add('mv-thumb');
+                } else {
+                  thumbBox.classList.remove('mv-thumb');
+                }
+              }
+
+              // Update card tag text if it was displaying old category
+              const tagEl = card.querySelector('.card-tag');
+              if (tagEl && (!proj.role || tagEl.textContent === 'MV' || tagEl.textContent === 'Thủng Long' || tagEl.textContent === 'Commercial')) {
+                tagEl.textContent = cfg.rawCat;
+              }
+            }
+
             // Update order pill in DOM
             const numEl = card.querySelector('.order-num');
             if (numEl) numEl.textContent = globalIndex;
+            const pillEl = card.querySelector('.order-pill');
+            if (pillEl) pillEl.title = `Thứ tự hiển thị: ${globalIndex}`;
+
             globalIndex++;
           }
         });
       });
 
+      updateCounters();
       markDirty(true);
     }
 
@@ -1164,10 +1261,20 @@
       text.textContent = "Đang xử lý lưu...";
 
       try {
-        const updatedProjects = ALL_PROJECTS.map(p => ({
-          ...p,
-          order: p.order
-        }));
+        const updatedProjects = ALL_PROJECTS.map(p => {
+          let catVal = p.rawCategory;
+          if (!catVal) {
+            if (p.category === 'mv') catVal = 'MV';
+            else if (p.category === 'thunglong') catVal = 'Thủng Long';
+            else catVal = 'Commercial';
+          }
+          return {
+            ...p,
+            order: p.order,
+            category: catVal,
+            rawCategory: catVal
+          };
+        });
 
         // 1. Try local server save (if running on local development server)
         let localSaved = false;
@@ -1179,7 +1286,7 @@
           });
           if (localRes.ok) {
             localSaved = true;
-            console.log("✓ Đã ghi trực tiếp trường 'order' vào file markdown trên máy local!");
+            console.log("✓ Đã ghi trực tiếp trường 'order' và 'category' vào file markdown trên máy local!");
           }
         } catch (e) {
           // Not on local server, continue
@@ -1240,7 +1347,7 @@
           content: newIndexJsonContent
         });
 
-        // Add individual markdown files with updated order: X frontmatter
+        // Add individual markdown files with updated order: X and category: "Y" frontmatter
         text.textContent = "Đang chuẩn bị các file markdown...";
         for (const proj of ALL_PROJECTS) {
           const filename = proj.filename || (proj.id && proj.id.endsWith('.md') ? proj.id : `${proj.id}.md`);
@@ -1276,11 +1383,21 @@
           }
 
           if (mdText) {
+            // Update order
             if (/^order:\s*\d+/m.test(mdText)) {
               mdText = mdText.replace(/^order:\s*\d+/m, `order: ${proj.order}`);
             } else {
               mdText = mdText.replace(/^---\r?\n/, `---\norder: ${proj.order}\n`);
             }
+
+            // Update category
+            const rawCat = proj.rawCategory || (proj.category === 'mv' ? 'MV' : (proj.category === 'thunglong' ? 'Thủng Long' : 'Commercial'));
+            if (/^category:\s*.+/m.test(mdText)) {
+              mdText = mdText.replace(/^category:\s*.+/m, `category: "${rawCat}"`);
+            } else {
+              mdText = mdText.replace(/^---\r?\n/, `---\ncategory: "${rawCat}"\n`);
+            }
+
             treeEntries.push({
               path: `content/projects/${filename}`,
               mode: "100644",
@@ -1318,7 +1435,7 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            message: `chore: Cập nhật thứ tự hiển thị ${ALL_PROJECTS.length} dự án (Sort Studio)`,
+            message: `chore: Cập nhật thứ tự và phân nhóm ${ALL_PROJECTS.length} dự án (Sort Studio)`,
             tree: treeData.sha,
             parents: [baseCommitSha]
           })

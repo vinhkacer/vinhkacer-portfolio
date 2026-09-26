@@ -1,7 +1,7 @@
 ---
 order: 38
 title: Haidilao Hotpot — Always There for Your Happiness
-category: Commercial
+category: "Commercial"
 roles:
   - Edit
   - VFX

@@ -1324,29 +1324,30 @@ function normalizeCMSItem(item, defaultId = null) {
     }
   }
 
-  const rawCat = (item.category || '').trim();
+  const rawCat = (item.rawCategory || item.category || '').trim();
+  const rawCatLower = rawCat.toLowerCase();
   let category = 'cinematic';
   let aspect = '16:9';
   let badge = 'OFFICIAL MV';
 
-  if (rawCat === 'MV') {
+  if (rawCat === 'MV' || rawCatLower === 'mv' || rawCatLower.includes('music') || rawCatLower.includes('cinematic')) {
     category = 'cinematic';
     aspect = '16:9';
     badge = 'OFFICIAL MV';
-  } else if (rawCat === 'Thủng Long') {
+  } else if (rawCat === 'Thủng Long' || rawCatLower === 'thunglong' || rawCatLower.includes('thung') || rawCatLower.includes('long')) {
     category = 'thunglong';
     aspect = '9:16';
     badge = item.badge || 'SHORT-FORM SITCOM';
-  } else if (rawCat === 'Commercial') {
+  } else if (rawCat === 'Commercial' || rawCatLower === 'commercial' || rawCatLower === 'freelance') {
     category = 'freelance';
     aspect = item.aspect || '9:16';
     badge = item.badge || 'COMMERCIAL';
-  } else if (rawCat === 'VFX Breakdown') {
+  } else if (rawCat === 'VFX Breakdown' || rawCatLower.includes('breakdown')) {
     category = 'cinematic';
     aspect = '9:16';
     badge = item.badge || '✨ VFX BREAKDOWN (9:16)';
-  } else if (rawCat === 'cinematic' || rawCat === 'thunglong' || rawCat === 'freelance') {
-    category = rawCat;
+  } else if (rawCatLower === 'cinematic' || rawCatLower === 'thunglong' || rawCatLower === 'freelance') {
+    category = rawCatLower;
     aspect = item.aspect || (category === 'cinematic' ? '16:9' : '9:16');
     badge = category === 'cinematic' ? 'OFFICIAL MV' : (item.badge || 'VIDEO');
   }

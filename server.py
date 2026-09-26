@@ -49,18 +49,36 @@ class StreamingHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 for p in projects:
                     filename = p.get("filename")
                     order = p.get("order")
+                    raw_cat = p.get("rawCategory") or p.get("category")
                     if not filename or order is None:
                         continue
                     filepath = os.path.join(proj_dir, filename)
                     if os.path.isfile(filepath):
                         with open(filepath, "r", encoding="utf-8") as f:
                             text = f.read()
+
+                        # Update order
                         if re.search(r"^order:\s*\d+", text, flags=re.MULTILINE):
-                            new_text = re.sub(r"^order:\s*\d+", f"order: {order}", text, flags=re.MULTILINE)
+                            text = re.sub(r"^order:\s*\d+", f"order: {order}", text, flags=re.MULTILINE)
                         else:
-                            new_text = re.sub(r"^---\r?\n", f"---\norder: {order}\n", text)
+                            text = re.sub(r"^---\r?\n", f"---\norder: {order}\n", text)
+
+                        # Update category for Decap CMS compatibility
+                        if raw_cat:
+                            cat_val = "Commercial"
+                            rc_lower = raw_cat.lower()
+                            if "mv" in rc_lower or "music" in rc_lower or "cinematic" in rc_lower:
+                                cat_val = "MV"
+                            elif "thung" in rc_lower or "long" in rc_lower:
+                                cat_val = "Thủng Long"
+                            
+                            if re.search(r"^category:\s*.+", text, flags=re.MULTILINE):
+                                text = re.sub(r"^category:\s*.+", f'category: "{cat_val}"', text, flags=re.MULTILINE)
+                            else:
+                                text = re.sub(r"^---\r?\n", f'---\ncategory: "{cat_val}"\n', text)
+
                         with open(filepath, "w", encoding="utf-8") as f:
-                            f.write(new_text)
+                            f.write(text)
                         updated_count += 1
 
                 index_path = os.path.join(proj_dir, "index.json")

@@ -56,6 +56,23 @@ projects.forEach((proj, idx) => {
     content = content.replace(/^---\r?\n/, `---\norder: ${order}\n`);
   }
 
+  const rawCat = proj.rawCategory || proj.category;
+  if (rawCat) {
+    let catVal = 'Commercial';
+    const rcLower = rawCat.toLowerCase();
+    if (rcLower.includes('mv') || rcLower.includes('music') || rcLower.includes('cinematic')) {
+      catVal = 'MV';
+    } else if (rcLower.includes('thung') || rcLower.includes('long')) {
+      catVal = 'Thủng Long';
+    }
+
+    if (/^category:\s*.+/m.test(content)) {
+      content = content.replace(/^category:\s*.+/m, `category: "${catVal}"`);
+    } else {
+      content = content.replace(/^---\r?\n/, `---\ncategory: "${catVal}"\n`);
+    }
+  }
+
   fs.writeFileSync(filePath, content, 'utf8');
   updatedCount++;
 });
