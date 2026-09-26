@@ -74,8 +74,19 @@ class StreamingHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                             
                             if re.search(r"^category:\s*.+", text, flags=re.MULTILINE):
                                 text = re.sub(r"^category:\s*.+", f'category: "{cat_val}"', text, flags=re.MULTILINE)
+                        # Update roles
+                        roles = p.get("roles")
+                        if isinstance(roles, list):
+                            roles_regex = r"^roles:\s*(?:\r?\n(?:\s*-\s*[^\r\n]+(?:\r?\n|$))+|\[\]\r?\n?)"
+                            if len(roles) > 0:
+                                roles_yaml = "roles:\n" + "\n".join([f"  - {r}" for r in roles]) + "\n"
+                                if re.search(roles_regex, text, flags=re.MULTILINE):
+                                    text = re.sub(roles_regex, roles_yaml, text, flags=re.MULTILINE)
+                                else:
+                                    text = re.sub(r"^---\r?\n", f"---\n{roles_yaml}", text)
                             else:
-                                text = re.sub(r"^---\r?\n", f'---\ncategory: "{cat_val}"\n', text)
+                                if re.search(roles_regex, text, flags=re.MULTILINE):
+                                    text = re.sub(roles_regex, "roles: []\n", text, flags=re.MULTILINE)
 
                         with open(filepath, "w", encoding="utf-8") as f:
                             f.write(text)

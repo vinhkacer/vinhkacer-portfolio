@@ -54,577 +54,812 @@
       "id": "cam-bat-den.mp4",
       "filename": "cam-bat-den-nen.md",
       "title": "Cầm — Bắt Đền [Official Music Video]",
-      "category": "MV",
+      "category": "mv",
       "rawCategory": "MV",
       "order": 1,
       "featured": false,
-      "role": "Edit • VFX • Color Grading",
+      "role": "3D Animation",
       "thumbnail": "thumbnails/mv/cam_bat_den.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "3D Animation"
+      ]
     },
     {
       "id": "danmy-vi-da-la-con-gai.mp4",
       "filename": "danmy-vi-da-la-con-gai-nen.md",
       "title": "DANMY x OSCREW — 'Vì Đã Là Con Gái' [Official MV]",
-      "category": "MV",
+      "category": "mv",
       "rawCategory": "MV",
       "order": 2,
       "featured": false,
-      "role": "Edit • Motion Graphics • VFX",
+      "role": "VFX",
       "thumbnail": "thumbnails/mv/vi_da_la_con_gai.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "VFX"
+      ]
     },
     {
       "id": "wheelie-mon-qua-que.mp4",
       "filename": "wheelie-mon-qua-que-nen.md",
       "title": "@wheelie0nther0ad — Món Quà Quê ft. @ICYFAMOUSS [Official MV]",
-      "category": "MV",
+      "category": "mv",
       "rawCategory": "MV",
       "order": 3,
       "featured": false,
-      "role": "Edit • Sound Design • VFX",
+      "role": "VFX • 3D Animation",
       "thumbnail": "thumbnails/mv/mon_qua_que.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "VFX",
+        "3D Animation"
+      ]
     },
     {
       "id": "7520226940834352385",
       "filename": "clear-men-fake-situation.md",
       "title": "Clear Men — Tụi Này Ngứa Đòn Cứ Thích Nhờn Với Anh",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 4,
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7520226940834352385.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7544395711182392593",
       "filename": "tu-hao-2-tieng-viet-nam.md",
       "title": "Tự Hào 2 Tiếng Việt Nam 🇻🇳 (Special National Day Film)",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
+      "category": "commercial",
+      "rawCategory": "Commercial",
       "order": 5,
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7544395711182392593.jpg",
-      "date": ""
-    },
-    {
-      "id": "7276797810253614337",
-      "filename": "khi-ban-biet-cach-flexing.md",
-      "title": "Khi Bạn Biết Cách Flexing Về Nghề 🤭",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 6,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7276797810253614337.jpg",
-      "date": ""
-    },
-    {
-      "id": "7281247914771483905",
-      "filename": "chi-em-chi-can-moi-vay-thoi.md",
-      "title": "Chị Em Chỉ Cần Mỗi Vậy Thôi Mà (Bánh Trung Thu Hữu Nghị)",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 7,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7281247914771483905.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7521720993946160385",
       "filename": "salitos-x-mosvici-tinh-than.md",
       "title": "Salitos x Mosvici — Cú Bắt Tay Tình Thân Mến Thân",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 8,
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7521720993946160385.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7276797810253614337",
+      "filename": "khi-ban-biet-cach-flexing.md",
+      "title": "Khi Bạn Biết Cách Flexing Về Nghề 🤭",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 6,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7276797810253614337.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7325298596356689153",
       "filename": "du-trend-hoi-muon-ti.md",
       "title": "Đu Trend Hơi Muộn Tí Nên Chơi Tới Luôn 👷‍♂️",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 9,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7325298596356689153.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7281247914771483905",
+      "filename": "chi-em-chi-can-moi-vay-thoi.md",
+      "title": "Chị Em Chỉ Cần Mỗi Vậy Thôi Mà (Bánh Trung Thu Hữu Nghị)",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 7,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7281247914771483905.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7305745167993031937",
       "filename": "roi-ai-la-sep-ai-la-nhan-vien.md",
       "title": "Rồi Ai Là Sếp Ai Là Nhân Viên 🙃",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 10,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7305745167993031937.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7303888492621237506",
       "filename": "sau-khi-xem-massage-an-do.md",
       "title": "Sau Khi Xem Massage Ấn Độ Quá 180 Phút (Johnson's Baby)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 11,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7303888492621237506.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7315758991269694721",
       "filename": "khi-ban-xem-massage-an-do.md",
       "title": "Khi Bạn Xem Massage Ấn Độ Quá 360 Phút 😵‍💫 (Sạch Gầu 5in1)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 12,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7315758991269694721.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7332087700129877249",
       "filename": "co-oi-co-dung-ve.md",
       "title": "Cô Ơi Cô Đừng Về 🥺 (Nước Giặt Xả Joins 2in1)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 13,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7332087700129877249.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7369216070894374162",
       "filename": "may-ma-than-thu-phi-pham.md",
       "title": "May mà thân thủ phi phàm 😅",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 14,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7369216070894374162.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7284955655289588994",
       "filename": "em-chi-an-moi-the-thoi.md",
       "title": "Em Chỉ Ăn Mỗi Thế Thôi Mà (Bàn Chải P/S Than Bạc)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 15,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7284955655289588994.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7297587094958902529",
       "filename": "du-trend-trong-1-ngay-mua-gio.md",
       "title": "Đu Trend Trong 1 Ngày Mưa Gió 🤣🌧️💦",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 16,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7297587094958902529.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7212612550922407194",
       "filename": "1-ngay-hoa-mat-con-gai.md",
       "title": "1 Ngày Hoa Mắt Với Con Gái 17 Tháng Tuổi (Fatzbaby)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 17,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7212612550922407194.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7245623121108159749",
       "filename": "bo-cau-hoi-ca-khia-phan-1.md",
       "title": "Bộ Câu Hỏi Cà Khịa Dành Cho Chị Em (Phần 1)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 18,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7245623121108159749.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7279397866169289986",
       "filename": "bo-cau-hoi-ca-khia-phan-2.md",
       "title": "Bộ Câu Hỏi Cà Khịa Dành Cho Chị Em (Phần 2)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 19,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7279397866169289986.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7290173297638018311",
       "filename": "dap-hop-thu-lai-dong-qua.md",
       "title": "Các Bố Mẹ Mà Đập Hộp Thử Lại Lãi Đống Quà 😎",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 20,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7290173297638018311.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7307238023320603911",
       "filename": "chay-theo-xa-hoa-phu-du.md",
       "title": "Chạy Theo Xa Hoa Phù Du Mệt Phết 🤣",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 21,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7307238023320603911.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7317614770717297921",
       "filename": "cham-nguoi-lon-phuc-tap.md",
       "title": "Chăm Người Lớn Phức Tạp Ghê Mọi Người Ạ (Aveeno Baby)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 22,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7317614770717297921.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7342870241090768130",
       "filename": "chuan-bi-len-thot.md",
       "title": "Chuẩn Bị Lên Thớt 😌 (Dance Trend)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 23,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7342870241090768130.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7291276702813064449",
       "filename": "cuoc-thi-hoa-hau-nguoi-me.md",
       "title": "Cuộc Thi Hoa Hậu Người Mẹ 👸🏼 (Johnson's Baby)",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 24,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7291276702813064449.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7287550952079396098",
       "filename": "ai-chang-muon-minh-xenh.md",
       "title": "Ai Chẳng Muốn Mình Xênh Với Lung Lênh 🤭",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 25,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7287550952079396098.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7236720841944206598",
       "filename": "cu-thich-the-hien-cho-lam-nen.md",
       "title": "Cứ Thích Thể Hiện Cho Lắm Vào 🤬",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 26,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7236720841944206598.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7208891929671650587",
       "filename": "cung-tuong-the-la-ha-duoc-chi.md",
       "title": "Cưng Tưởng Thế Là Hạ Được Chị Á 🙂",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 27,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7208891929671650587.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7263072598836202760",
       "filename": "food-tour-tai-le-giang.md",
       "title": "Food Tour Tại Lệ Giang - Tung Của 🍪🥐🍖",
-      "category": "Thủng Long",
+      "category": "thunglong",
       "rawCategory": "Thủng Long",
       "order": 28,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7263072598836202760.jpg",
-      "date": ""
-    },
-    {
-      "id": "7302069166826179842",
-      "filename": "hiep-hoi-phao-cuu-sinh-phan-1.md",
-      "title": "Hiệp Hội Phao Cứu Sinh Sẵn Sàng Phục Vụ (Bosch Home VN)",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 29,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7302069166826179842.jpg",
-      "date": ""
-    },
-    {
-      "id": "7330969014832860418",
-      "filename": "hiep-hoi-phao-cuu-sinh-phan-2.md",
-      "title": "Hiệp Hội Phao Cứu Sinh Sẵn Sàng Phục Vụ (Phần 2)",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 30,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7330969014832860418.jpg",
-      "date": ""
-    },
-    {
-      "id": "7315392879562591490",
-      "filename": "1-ngay-foodtour.md",
-      "title": "1 Ngày Foodtour Bất Quy Tắc 🤤",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 31,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7315392879562591490.jpg",
-      "date": ""
-    },
-    {
-      "id": "7259733140934102280",
-      "filename": "lam-gi-co-chuyen-noi-den-sang-mai.md",
-      "title": "Làm Gì Có Chuyện Nối Đến Sáng Mai 🤣",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 32,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7259733140934102280.jpg",
-      "date": ""
-    },
-    {
-      "id": "7339135630951304449",
-      "filename": "may-cho-anh-day-nhe.md",
-      "title": "May Cho Anh Đấy Nhé 😌",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 33,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7339135630951304449.jpg",
-      "date": ""
-    },
-    {
-      "id": "7291641220160326913",
-      "filename": "quan-trong-la-cai-tam-long.md",
-      "title": "Quan Trọng Là Cái Tấm Lòng",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 34,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7291641220160326913.jpg",
-      "date": ""
-    },
-    {
-      "id": "7223728609372998918",
-      "filename": "thich-ngam-gai-khong-ha.md",
-      "title": "Thích Ngắm Gái Không Hả 😡👊",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 35,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7223728609372998918.jpg",
-      "date": ""
-    },
-    {
-      "id": "7539895638197112080",
-      "filename": "thom-den-muc-chi-em-muon-dong-khau.md",
-      "title": "Thơm đến mức chị em muốn ＂động khẩu＂    ... [7539895638197112080].mp4",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 36,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7539895638197112080.jpg",
-      "date": ""
-    },
-    {
-      "id": "7226334534378310918",
-      "filename": "voi-moi-mon-skincare.md",
-      "title": "Với Mỗi Món Skincare, Vợ Có Thể Viết Cả Bách Khoa Toàn Thư",
-      "category": "Thủng Long",
-      "rawCategory": "Thủng Long",
-      "order": 37,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7226334534378310918.jpg",
-      "date": ""
-    },
-    {
-      "id": "7469760253500853509",
-      "filename": "haidilao-hotpot-for-happiness.md",
-      "title": "Haidilao Hotpot — Always There for Your Happiness",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 38,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7469760253500853509.jpg",
-      "date": ""
-    },
-    {
-      "id": "7435672378299944247",
-      "filename": "haidilao-apt-dance-challenge.md",
-      "title": "Haidilao #APT Dance Challenge — Dance with Us!",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 43,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7435672378299944247.jpg",
-      "date": ""
-    },
-    {
-      "id": "7425802752959253765",
-      "filename": "haidilao-friendship-magic.md",
-      "title": "Haidilao Friendship Magic — Behind The Scene Fun",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 44,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7425802752959253765.jpg",
-      "date": ""
-    },
-    {
-      "id": "7444768523089399096",
-      "filename": "hanfu-chinese-traditional-clothes.md",
-      "title": "We have HANFU Chinese traditional clothes Try-on activities in certai... [7444768523089399096].mp4",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 39,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7444768523089399096.jpg",
-      "date": ""
-    },
-    {
-      "id": "7448873288429767941",
-      "filename": "haidilao-late-night-snacks.md",
-      "title": "Message copied! Go to Haidilao for late night snacks  ... [7448873288429767941].mp4",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 41,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7448873288429767941.jpg",
-      "date": ""
-    },
-    {
-      "id": "7428822702070304005",
-      "filename": "me-on-work-vs-halloween.md",
-      "title": "Me on work verson VS Me on  version",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 40,
-      "featured": false,
-      "role": "Edit • VFX • Sound Design",
-      "thumbnail": "thumbnails/7428822702070304005.jpg",
-      "date": ""
-    },
-    {
-      "id": "7447014404505259270",
-      "filename": "haidilao-great-food-great-mood.md",
-      "title": "Haidilao Hotpot — Great Food, Great Mood",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 45,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7447014404505259270.jpg",
-      "date": ""
-    },
-    {
-      "id": "7439180307032476984",
-      "filename": "haidilao-table-magic-tricks.md",
-      "title": "Haidilao Table Magic — Show You Some Magic Tricks",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 46,
-      "featured": false,
-      "role": "Edit • VFX • Motion Graphics",
-      "thumbnail": "thumbnails/7439180307032476984.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7428082811434716421",
       "filename": "giveaway-for-my-fans.md",
       "title": "Giveaway for my fans! Follow and comment, I will pick 15 friends to s... [7428082811434716421].mp4",
-      "category": "Commercial",
-      "rawCategory": "Commercial",
-      "order": 42,
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 46,
       "featured": false,
       "role": "Edit • VFX • Sound Design",
       "thumbnail": "thumbnails/7428082811434716421.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7302069166826179842",
+      "filename": "hiep-hoi-phao-cuu-sinh-phan-1.md",
+      "title": "Hiệp Hội Phao Cứu Sinh Sẵn Sàng Phục Vụ (Bosch Home VN)",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 29,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7302069166826179842.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7330969014832860418",
+      "filename": "hiep-hoi-phao-cuu-sinh-phan-2.md",
+      "title": "Hiệp Hội Phao Cứu Sinh Sẵn Sàng Phục Vụ (Phần 2)",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 30,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7330969014832860418.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7315392879562591490",
+      "filename": "1-ngay-foodtour.md",
+      "title": "1 Ngày Foodtour Bất Quy Tắc 🤤",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 31,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7315392879562591490.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7259733140934102280",
+      "filename": "lam-gi-co-chuyen-noi-den-sang-mai.md",
+      "title": "Làm Gì Có Chuyện Nối Đến Sáng Mai 🤣",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 32,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7259733140934102280.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7339135630951304449",
+      "filename": "may-cho-anh-day-nhe.md",
+      "title": "May Cho Anh Đấy Nhé 😌",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 33,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7339135630951304449.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7291641220160326913",
+      "filename": "quan-trong-la-cai-tam-long.md",
+      "title": "Quan Trọng Là Cái Tấm Lòng",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 34,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7291641220160326913.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7223728609372998918",
+      "filename": "thich-ngam-gai-khong-ha.md",
+      "title": "Thích Ngắm Gái Không Hả 😡👊",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 35,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7223728609372998918.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7539895638197112080",
+      "filename": "thom-den-muc-chi-em-muon-dong-khau.md",
+      "title": "Thơm đến mức chị em muốn ＂động khẩu＂    ... [7539895638197112080].mp4",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 36,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7539895638197112080.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7226334534378310918",
+      "filename": "voi-moi-mon-skincare.md",
+      "title": "Với Mỗi Món Skincare, Vợ Có Thể Viết Cả Bách Khoa Toàn Thư",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 37,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7226334534378310918.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7469760253500853509",
+      "filename": "haidilao-hotpot-for-happiness.md",
+      "title": "Haidilao Hotpot — Always There for Your Happiness",
+      "category": "commercial",
+      "rawCategory": "Commercial",
+      "order": 38,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7469760253500853509.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7435672378299944247",
+      "filename": "haidilao-apt-dance-challenge.md",
+      "title": "Haidilao #APT Dance Challenge — Dance with Us!",
+      "category": "commercial",
+      "rawCategory": "Commercial",
+      "order": 39,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7435672378299944247.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7428822702070304005",
+      "filename": "me-on-work-vs-halloween.md",
+      "title": "Me on work verson VS Me on  version",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 43,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7428822702070304005.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
+    },
+    {
+      "id": "7448873288429767941",
+      "filename": "haidilao-late-night-snacks.md",
+      "title": "Message copied! Go to Haidilao for late night snacks  ... [7448873288429767941].mp4",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 42,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7448873288429767941.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7425802752959253765",
+      "filename": "haidilao-friendship-magic.md",
+      "title": "Haidilao Friendship Magic — Behind The Scene Fun",
+      "category": "commercial",
+      "rawCategory": "Commercial",
+      "order": 40,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7425802752959253765.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7447014404505259270",
+      "filename": "haidilao-great-food-great-mood.md",
+      "title": "Haidilao Hotpot — Great Food, Great Mood",
+      "category": "commercial",
+      "rawCategory": "Commercial",
+      "order": 44,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7447014404505259270.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7439180307032476984",
+      "filename": "haidilao-table-magic-tricks.md",
+      "title": "Haidilao Table Magic — Show You Some Magic Tricks",
+      "category": "commercial",
+      "rawCategory": "Commercial",
+      "order": 45,
+      "featured": false,
+      "role": "Edit • VFX • Motion Graphics",
+      "thumbnail": "thumbnails/7439180307032476984.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     },
     {
       "id": "7466795322665094406",
       "filename": "haidilao-tomato-or-potato.md",
       "title": "Haidilao Tomato or Potato? — Interactive Viral Choice",
-      "category": "Commercial",
+      "category": "commercial",
       "rawCategory": "Commercial",
       "order": 47,
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7466795322665094406.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
+    },
+    {
+      "id": "7444768523089399096",
+      "filename": "hanfu-chinese-traditional-clothes.md",
+      "title": "We have HANFU Chinese traditional clothes Try-on activities in certai... [7444768523089399096].mp4",
+      "category": "thunglong",
+      "rawCategory": "Thủng Long",
+      "order": 41,
+      "featured": false,
+      "role": "Edit • VFX • Sound Design",
+      "thumbnail": "thumbnails/7444768523089399096.jpg",
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Sound Design"
+      ]
     },
     {
       "id": "7441776844061281591",
       "filename": "haidilao-wednesday-drink.md",
       "title": "Haidilao Wednesday Vibes — Buy You A Drink!",
-      "category": "Commercial",
+      "category": "commercial",
       "rawCategory": "Commercial",
       "order": 48,
       "featured": false,
       "role": "Edit • VFX • Motion Graphics",
       "thumbnail": "thumbnails/7441776844061281591.jpg",
-      "date": ""
+      "date": "",
+      "roles": [
+        "Edit",
+        "VFX",
+        "Motion Graphics"
+      ]
     }
   ]
 }

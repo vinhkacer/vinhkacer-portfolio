@@ -73,6 +73,23 @@ projects.forEach((proj, idx) => {
     }
   }
 
+  const roles = proj.roles;
+  if (Array.isArray(roles)) {
+    const rolesRegex = /^roles:\s*(?:\r?\n(?:\s*-\s*[^\r\n]+(?:\r?\n|$))+|\[\]\r?\n?)/m;
+    if (roles.length > 0) {
+      const rolesYaml = "roles:\n" + roles.map(r => `  - ${r}`).join("\n") + "\n";
+      if (rolesRegex.test(content)) {
+        content = content.replace(rolesRegex, rolesYaml);
+      } else {
+        content = content.replace(/^---\r?\n/, `---\n${rolesYaml}`);
+      }
+    } else {
+      if (rolesRegex.test(content)) {
+        content = content.replace(rolesRegex, "roles: []\n");
+      }
+    }
+  }
+
   fs.writeFileSync(filePath, content, 'utf8');
   updatedCount++;
 });
