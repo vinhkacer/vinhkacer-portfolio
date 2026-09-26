@@ -69,7 +69,11 @@
           "src": "videos/breakdown/cam-bat-den-breakdown.mp4",
           "thumb": "thumbnails/breakdown/cam_breakdown.jpg"
         }
-      ]
+      ],
+      "breakdown_video": "videos/breakdown/cam-bat-den-breakdown.mp4",
+      "breakdown_thumb": "thumbnails/breakdown/cam_breakdown.jpg",
+      "has_breakdown": true,
+      "breakdown_src": "videos/breakdown/cam-bat-den-breakdown.mp4"
     },
     {
       "id": "danmy-vi-da-la-con-gai.mp4",
@@ -97,7 +101,13 @@
           "src": "videos/breakdown/danmy-breakdown-02.mp4",
           "thumb": "thumbnails/breakdown/danmy_breakdown_2.jpg"
         }
-      ]
+      ],
+      "breakdown_video": "videos/breakdown/danmy-breakdown-01.mp4",
+      "breakdown_thumb": "thumbnails/breakdown/danmy_breakdown.jpg",
+      "breakdown_video_2": "videos/breakdown/danmy-breakdown-02.mp4",
+      "breakdown_thumb_2": "thumbnails/breakdown/danmy_breakdown_2.jpg",
+      "has_breakdown": true,
+      "breakdown_src": "videos/breakdown/danmy-breakdown-01.mp4"
     },
     {
       "id": "wheelie-mon-qua-que.mp4",
@@ -118,7 +128,11 @@
           "src": "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4",
           "thumb": "thumbnails/breakdown/wheelie_breakdown_2.jpg"
         }
-      ]
+      ],
+      "breakdown_video": "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4",
+      "breakdown_thumb": "thumbnails/breakdown/wheelie_breakdown_2.jpg",
+      "has_breakdown": true,
+      "breakdown_src": "videos/breakdown/wheelie-mon-qua-que-breakdown.mp4"
     },
     {
       "id": "7315392879562591490",

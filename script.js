@@ -375,7 +375,7 @@ function triggerBreakdown(itemId, partIndex = 0) {
     ...(PORTFOLIO_DATA['thunglong'] || []),
     ...(PORTFOLIO_DATA['freelance'] || [])
   ];
-  const item = allItems.find(x => x.id === itemId);
+  const item = allItems.find(x => x.id === itemId || (x.filename && x.filename.includes(itemId)) || (x.title && x.title === itemId));
   if (!item) return;
 
   const list = (item.breakdowns && item.breakdowns.length > 0) ? item.breakdowns : (
@@ -394,31 +394,49 @@ function triggerBreakdown(itemId, partIndex = 0) {
 // Build 16:9 Cinematic Card (Full-width in All & MV tabs)
 function create16x9Card(item) {
   const card = document.createElement('div');
-  // col-span-full and card-16-9-wide ensure the 16:9 card spans ALL columns of the grid
   card.className = 'col-span-full card-16-9-wide glass-card rounded-3xl p-5 sm:p-7 flex flex-col gap-5 border border-white/10 hover:border-cyan-400/50 transition-all duration-300';
 
+  // Breakdown Buttons
   let breakdownBtnsHtml = '';
-  if (item.breakdowns && item.breakdowns.length > 1) {
-    // 2 or more breakdowns: render separate pill buttons
-    breakdownBtnsHtml = item.breakdowns.map((bd, idx) => `
+  const bdList = (item.breakdowns && item.breakdowns.length > 0) ? item.breakdowns : (
+    (item.has_breakdown || item.breakdown_src) ? [{ title: "Breakdown 01", label: "VFX Breakdown (9:16)", src: item.breakdown_src, thumb: item.breakdown_thumb || '' }] : []
+  );
+
+  if (bdList.length > 1) {
+    // 2 or more breakdowns: render separate pill buttons for each part
+    breakdownBtnsHtml = bdList.map((bd, idx) => `
       <button onclick="triggerBreakdown('${item.id}', ${idx})" 
-              class="vfx-breakdown-btn" 
+              class="vfx-breakdown-btn group flex items-center gap-1.5" 
               title="Xem ${bd.title}">
-        <span class="text-neon-cyan">✨</span>
+        <span class="text-neon-cyan animate-pulse">✨</span>
         <span>${bd.label || `Breakdown 0${idx + 1}`}</span>
       </button>
     `).join('');
-  } else if ((item.breakdowns && item.breakdowns.length === 1) || item.has_breakdown) {
+  } else if (bdList.length === 1) {
     // 1 breakdown: standard single pill button
-    const bd = (item.breakdowns && item.breakdowns[0]) ? item.breakdowns[0] : null;
-    const label = bd ? (bd.label || 'VFX Breakdown (9:16)') : 'VFX Breakdown (9:16)';
+    const bd = bdList[0];
+    const label = bd.label || 'VFX Breakdown (9:16)';
     breakdownBtnsHtml = `
       <button onclick="triggerBreakdown('${item.id}', 0)" 
-              class="vfx-breakdown-btn" 
+              class="vfx-breakdown-btn group flex items-center gap-1.5" 
               title="Xem bóc tách kỹ xảo VFX tỉ lệ dọc 9:16">
-        <span class="text-neon-cyan">✨</span>
+        <span class="text-neon-cyan animate-pulse">✨</span>
         <span>${label}</span>
       </button>
+    `;
+  }
+
+  // Count badge in metadata header
+  let breakdownBadgeHtml = '';
+  if (bdList.length > 0) {
+    const badgeText = bdList.length > 1 ? `${bdList.length} VFX BREAKDOWNS` : 'VFX BREAKDOWN (9:16)';
+    breakdownBadgeHtml = `
+      <span onclick="triggerBreakdown('${item.id}', 0)" 
+            class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/40 text-cyan-300 flex items-center gap-1.5 cursor-pointer hover:bg-cyan-400/25 transition-colors shadow-sm" 
+            title="Bấm để xem ${bdList.length} video bóc tách kỹ xảo VFX">
+        <span class="animate-pulse">✨</span>
+        <span>${badgeText}</span>
+      </span>
     `;
   }
 
@@ -438,6 +456,7 @@ function create16x9Card(item) {
             ${item.badge || '1080P CINEMATIC'}
           </span>
           <span class="text-xs font-mono text-slate-400">16:9 CINEMATIC</span>
+          ${breakdownBadgeHtml}
         </div>
         <h3 class="text-xl sm:text-2xl font-display font-bold text-white leading-snug">
           ${item.title}
@@ -460,6 +479,24 @@ function createVerticalCard(item) {
   const badgeColor = isViral ? 'border-rose-500/40 text-rose-300' : 'border-cyan-400/40 text-cyan-300';
   const tagText = isViral ? '9:16' : 'HD';
 
+  // Check if item has breakdown
+  let breakdownFloatingBtn = '';
+  const bdList = (item.breakdowns && item.breakdowns.length > 0) ? item.breakdowns : (
+    (item.has_breakdown || item.breakdown_src) ? [{ title: "Breakdown 01", label: "VFX Breakdown (9:16)", src: item.breakdown_src, thumb: item.breakdown_thumb || '' }] : []
+  );
+
+  if (bdList.length > 0) {
+    const label = bdList.length > 1 ? `Breakdown (${bdList.length})` : 'Breakdown';
+    breakdownFloatingBtn = `
+      <button onclick="event.stopPropagation(); triggerBreakdown('${item.id}', 0)" 
+              class="absolute top-12 right-3 z-20 text-[9px] font-mono font-bold px-2.5 py-1 rounded-full bg-obsidian-950/90 border border-cyan-400/60 text-cyan-300 hover:bg-cyan-400 hover:text-black transition-all flex items-center gap-1 shadow-neon-glow backdrop-blur-md"
+              title="Xem ${bdList.length} video VFX Breakdown">
+        <span class="animate-pulse">✨</span>
+        <span>${label}</span>
+      </button>
+    `;
+  }
+
   const card = document.createElement('div');
   card.className = 'glass-card rounded-2xl overflow-hidden group flex flex-col cursor-pointer relative';
   card.onclick = () => openCinemaModal(item);
@@ -476,6 +513,8 @@ function createVerticalCard(item) {
           ${tagText}
         </span>
       </div>
+
+      ${breakdownFloatingBtn}
 
       <div class="absolute inset-0 flex items-center justify-center z-10">
         <div class="w-12 h-12 rounded-full bg-white/90 text-obsidian-950 flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 group-hover:bg-neon-cyan transition-all duration-300">
@@ -665,10 +704,83 @@ function normalizeCMSItem(item, defaultId = null) {
     badge = item.badge || 'PROJECT';
   }
 
-  const id = defaultId || item.id || (item.title ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'cms-' + Math.random().toString(36).slice(2, 8));
+  // Parse breakdown videos from CMS fields
+  let bdVideo = item.breakdown_video || item.breakdown_src || item.breakdown || '';
+  if (bdVideo.startsWith('/')) bdVideo = bdVideo.slice(1);
+
+  let bdVideo2 = item.breakdown_video_2 || '';
+  if (bdVideo2.startsWith('/')) bdVideo2 = bdVideo2.slice(1);
+
+  let bdThumb = item.breakdown_thumb || '';
+  if (bdThumb.startsWith('/')) bdThumb = bdThumb.slice(1);
+
+  let bdThumb2 = item.breakdown_thumb_2 || '';
+  if (bdThumb2.startsWith('/')) bdThumb2 = bdThumb2.slice(1);
+
+  let breakdowns = [];
+  if (Array.isArray(item.breakdowns) && item.breakdowns.length > 0) {
+    breakdowns = item.breakdowns.map((b, idx) => ({
+      id: b.id || `bd_${idx + 1}`,
+      title: b.title || `Breakdown 0${idx + 1}`,
+      label: b.label || (item.breakdowns.length > 1 ? `Breakdown 0${idx + 1}` : 'VFX Breakdown (9:16)'),
+      src: (b.src && b.src.startsWith('/')) ? b.src.slice(1) : (b.src || ''),
+      thumb: (b.thumb && b.thumb.startsWith('/')) ? b.thumb.slice(1) : (b.thumb || '')
+    }));
+  } else if (bdVideo) {
+    if (bdVideo2) {
+      breakdowns = [
+        {
+          id: 'bd_1',
+          title: 'Breakdown 01',
+          label: 'Breakdown 01',
+          src: bdVideo,
+          thumb: bdThumb
+        },
+        {
+          id: 'bd_2',
+          title: 'Breakdown 02',
+          label: 'Breakdown 02',
+          src: bdVideo2,
+          thumb: bdThumb2
+        }
+      ];
+    } else {
+      breakdowns = [
+        {
+          id: 'bd_1',
+          title: 'Breakdown 01',
+          label: 'VFX Breakdown (9:16)',
+          src: bdVideo,
+          thumb: bdThumb
+        }
+      ];
+    }
+  }
+
+  const projId = defaultId || item.id || (item.title ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'cms-' + Math.random().toString(36).slice(2, 8));
+
+  // Fallback: If CMS item doesn't have breakdown, check if existing embedded data had it
+  if (breakdowns.length === 0) {
+    const existing = [
+      ...(PORTFOLIO_DATA.cinematic || []),
+      ...(PORTFOLIO_DATA.thunglong || []),
+      ...(PORTFOLIO_DATA.freelance || [])
+    ].find(x => x.id === projId || (x.filename && x.filename.includes(projId)) || (x.title && x.title === item.title));
+    if (existing && existing.breakdowns && existing.breakdowns.length > 0) {
+      breakdowns = existing.breakdowns;
+    } else if (existing && existing.breakdown_src) {
+      breakdowns = [{
+        id: 'bd_1',
+        title: 'Breakdown 01',
+        label: 'VFX Breakdown (9:16)',
+        src: existing.breakdown_src,
+        thumb: existing.breakdown_thumb || ''
+      }];
+    }
+  }
 
   return {
-    id: id,
+    id: projId,
     title: item.title || 'Dự án mới',
     category: category,
     aspect: aspect,
@@ -676,9 +788,12 @@ function normalizeCMSItem(item, defaultId = null) {
     badge: badge,
     thumbnail: thumb,
     video_src: videoSrc,
+    has_breakdown: breakdowns.length > 0,
+    breakdown_src: breakdowns.length > 0 ? breakdowns[0].src : '',
+    breakdown_thumb: breakdowns.length > 0 ? breakdowns[0].thumb : '',
     description: item.description || '',
     url: item.url || '',
-    breakdowns: item.breakdowns || []
+    breakdowns: breakdowns
   };
 }
 

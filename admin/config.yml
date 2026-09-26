@@ -19,4 +19,8 @@ collections:
       - { label: "Thể loại", name: "category", widget: "select", options: ["MV", "Thủng Long", "VFX Breakdown", "Commercial"] }
       - { label: "Video chính (.mp4)", name: "video", widget: "file" }
       - { label: "Ảnh bìa Thumbnail", name: "thumbnail", widget: "image" }
+      - { label: "Video VFX Breakdown (.mp4)", name: "breakdown_video", widget: "file", required: false }
+      - { label: "Ảnh bìa Breakdown Thumbnail", name: "breakdown_thumb", widget: "image", required: false }
+      - { label: "Video VFX Breakdown 02 (.mp4 nếu có)", name: "breakdown_video_2", widget: "file", required: false }
+      - { label: "Ảnh bìa Breakdown 02 Thumbnail", name: "breakdown_thumb_2", widget: "image", required: false }
       - { label: "Mô tả ngắn", name: "description", widget: "text", required: false }
