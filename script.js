@@ -148,23 +148,17 @@ function compareProjects(a, b) {
 function createViewsBadgeHtml(item) {
   if (!item || item.views === undefined || item.views === null || item.views === '') return '';
   const num = parseViews(item.views);
-  if (num <= 0) return '';
+  // Chỉ hiển thị badge khi views >= 1,000,000 (từ 1M trở lên)
+  // Dưới 1M hoặc không có views: hoàn toàn không render badge
+  if (num < 1000000) return '';
 
   const viewsText = getCleanViewsText(item.views, num);
-  if (num >= 1000000) {
-    return `
-      <span class="views-pill viral" title="${viewsText} lượt xem">
-        <span>🔥</span>
-        <span>${viewsText} VIEWS</span>
-      </span>
-    `;
-  } else {
-    return `
-      <span class="views-pill standard" title="${viewsText} lượt xem">
-        <span>${viewsText} VIEWS</span>
-      </span>
-    `;
-  }
+  return `
+    <span class="views-pill viral" title="${viewsText} lượt xem">
+      <span>🔥</span>
+      <span>${viewsText} VIEWS</span>
+    </span>
+  `;
 }
 
 
