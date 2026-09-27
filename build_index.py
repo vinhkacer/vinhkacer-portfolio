@@ -450,7 +450,7 @@ html_content = '''<!DOCTYPE html>
             <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Official Music Video</span>
             <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">3D VFX CGI</span>
             <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Commercial Post-Production</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">DaVinci Color Grading</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Compositing</span>
           </div>
         </div>
       </div>
@@ -473,14 +473,14 @@ html_content = '''<!DOCTYPE html>
           <p class="text-xs font-mono text-slate-400 mt-1">Kênh Viral Content Triệu Views hàng đầu Việt Nam</p>
 
           <p class="text-sm text-slate-300 mt-4 leading-relaxed">
-            Trực tiếp tham gia đóng góp tiền kì, phát triển ý tưởng kịch bản hài hước, thực hiện quay dựng video ngắn triệu view và xử lý hậu kì kỹ xảo visual effects, âm thanh nhịp điệu cuốn hút.
+            Chủ yếu đảm nhiệm dựng phim (Edit), thực hiện kỹ xảo (VFX), Sound Design và Compositing; đồng thời trực tiếp tham gia vào khâu tiền kì để chuẩn bị và định hướng góc máy kỹ thuật cho các shot quay VFX, đảm bảo chất lượng hình ảnh và nhịp điệu cuốn hút cho các video ngắn triệu view.
           </p>
 
           <div class="mt-4 flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Viral Short-form 9:16</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Creative Scripting</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Fast Pacing &amp; Humor Sync</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Brand Integration</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Video Editing</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">VFX &amp; Compositing</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">VFX Pre-production</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Sound Design</span>
           </div>
         </div>
       </div>
@@ -494,23 +494,23 @@ html_content = '''<!DOCTYPE html>
             <span class="inline-block text-xs font-mono font-bold text-neon-purple uppercase tracking-wider px-3 py-1 rounded-full bg-neon-purple/10 border border-neon-purple/30 self-start">
               2021 — 2022
             </span>
-            <span class="text-xs font-mono text-slate-400">I MMG Global</span>
+            <span class="text-xs font-mono text-slate-400">MMG Global</span>
           </div>
 
           <h3 class="text-xl sm:text-2xl font-display font-bold text-white group-hover:text-neon-purple transition-colors">
-            3D Animation Artist tại I MMG Global
+            3D Animation Artist tại MMG Global
           </h3>
           <p class="text-xs font-mono text-slate-400 mt-1">3D Production &amp; Animated Series</p>
 
           <p class="text-sm text-slate-300 mt-4 leading-relaxed">
-            Tạo chuyển động nhân vật, đạo cụ và các vật phẩm hoạt hình 3D theo storyboard và kịch bản có sẵn. Hoàn thiện diễn hoạt và render phục vụ chuỗi video sản phẩm hoàn chỉnh với chất lượng cao.
+            Thực hiện diễn hoạt (animation) chuyển động nhân vật, đạo cụ theo storyboard và kịch bản có sẵn; phụ trách thiết lập khung xương chuyển động (rigging), hoàn thiện các phân cảnh hoạt hình 3D chất lượng cao.
           </p>
 
           <div class="mt-4 flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Character Animation</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Prop Rigging</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Blender / Maya</span>
-            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Lighting &amp; Rendering</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Animation</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Rigging</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Blender</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Maya</span>
           </div>
         </div>
       </div>
