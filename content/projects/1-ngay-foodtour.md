@@ -1,6 +1,6 @@
 ---
 order: 31
-title: 1 Ngày Foodtour Bất Quy Tắc 🤤
+title: Ngày Foodtour Bất Quy Tắc 🤤
 category: Thủng Long
 roles:
   - Edit
