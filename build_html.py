@@ -828,8 +828,8 @@ html_content = f'''<!DOCTYPE html>
       <!-- Modal Video Player Container (Smooth Video Playback: controls, preload, playsinline) -->
       <div class="relative bg-black flex items-center justify-center overflow-hidden flex-1 min-h-[300px] sm:min-h-[460px] max-h-[70vh]">
         
-        <!-- Video element with controls, preload="metadata", playsinline -->
-        <video id="modalVideoPlayer" class="w-full h-full max-h-[70vh] object-contain" controls preload="metadata" playsinline>
+        <!-- Video element with controls, preload="none", playsinline -->
+        <video id="modalVideoPlayer" class="w-full h-full max-h-[70vh] object-contain" controls preload="none" playsinline>
           <source id="modalVideoSource" src="" type="video/mp4">
           Trình duyệt của bạn không hỗ trợ phát thẻ video HTML5.
         </video>
@@ -1015,8 +1015,8 @@ html_content = f'''<!DOCTYPE html>
           
           card.innerHTML = `
             <div class="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
-              <!-- Video Player with controls and preload="metadata" -->
-              <video controls preload="metadata" playsinline poster="${{item.thumbnail}}" class="w-full h-full object-cover">
+              <!-- Video Player with controls and preload="none" -->
+              <video controls preload="none" playsinline poster="${{item.thumbnail}}" class="w-full h-full object-cover">
                 <source src="${{item.video_src}}" type="video/mp4">
                 Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
               </video>

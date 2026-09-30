@@ -182,15 +182,50 @@ function playMP4Facade(element, src, poster) {
 
   const container = element.closest('.video-16-9-container') || element.parentElement || element;
   container.innerHTML = `
-    <video controls autoplay playsinline preload="auto" poster="${poster}" class="w-full h-full object-cover">
+    <video controls autoplay playsinline preload="none" poster="${poster}" class="w-full h-full object-cover">
       <source src="${src}" type="video/mp4">
       Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
     </video>
   `;
   const vid = container.querySelector('video');
   if (vid) {
+    observeVideoVisibility(vid);
     vid.play().catch(() => {});
   }
+}
+
+// IntersectionObserver to auto-pause videos when scrolled out of viewport (saves RAM & CPU)
+let videoVisibilityObserver = null;
+if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+  videoVisibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting && entry.target && !entry.target.paused) {
+        try {
+          entry.target.pause();
+        } catch (e) {}
+      }
+    });
+  }, { threshold: 0.1 });
+}
+
+function observeVideoVisibility(videoEl) {
+  if (videoEl && videoVisibilityObserver) {
+    videoVisibilityObserver.observe(videoEl);
+  }
+}
+
+// Global video play listener: automatically pauses all other videos when any video starts playing
+if (typeof document !== 'undefined') {
+  document.addEventListener('play', (e) => {
+    if (e.target && e.target.tagName === 'VIDEO') {
+      const currentVideo = e.target;
+      document.querySelectorAll('video').forEach(v => {
+        if (v !== currentVideo && !v.paused) {
+          try { v.pause(); } catch (err) {}
+        }
+      });
+    }
+  }, true);
 }
 
 // Play subtle synthesized audio tone via Web Audio API
@@ -429,7 +464,7 @@ function loadBreakdownPart(index) {
     }
     if (videoPlayer && videoSource) {
       videoPlayer.classList.remove('hidden');
-      videoPlayer.setAttribute('preload', 'metadata');
+      videoPlayer.setAttribute('preload', 'none');
       videoPlayer.setAttribute('playsinline', '');
       videoPlayer.pause();
       if (part.thumb) {
@@ -478,7 +513,9 @@ function closeBreakdownModal() {
 
   if (videoPlayer) {
     videoPlayer.pause();
-    if (videoSource) videoSource.src = '';
+    if (videoSource) videoSource.removeAttribute('src');
+    videoPlayer.removeAttribute('src');
+    videoPlayer.load();
     videoPlayer.classList.remove('hidden');
   }
   if (modal) modal.classList.add('hidden');
@@ -602,7 +639,7 @@ function openCinemaModal(item) {
       modalIframe.classList.add('hidden');
     }
     modalVideo.classList.remove('hidden');
-    modalVideo.setAttribute('preload', 'metadata');
+    modalVideo.setAttribute('preload', 'none');
     modalVideo.setAttribute('playsinline', '');
 
     if (item.video_src) {
@@ -637,7 +674,9 @@ function closeCinemaModal() {
 
   if (modalVideo) {
     modalVideo.pause();
-    if (modalSource) modalSource.src = '';
+    if (modalSource) modalSource.removeAttribute('src');
+    modalVideo.removeAttribute('src');
+    modalVideo.load();
     modalVideo.classList.remove('hidden');
   }
 
@@ -1030,43 +1069,6 @@ function createVerticalCard(item) {
   const card = document.createElement('div');
   card.className = 'glass-card rounded-2xl overflow-hidden group flex flex-col cursor-pointer relative';
   card.onclick = () => openCinemaModal(item);
-
-  // Smooth hover preview: loads muted preview only when user hovers intentionally for >400ms
-  let hoverVideoTimer = null;
-  card.addEventListener('mouseenter', () => {
-    if (!item.video_src || item.youtube_url) return;
-    hoverVideoTimer = setTimeout(() => {
-      const container = card.querySelector('.thumb-container-9-16');
-      if (!container || container.querySelector('video')) return;
-      const vid = document.createElement('video');
-      vid.className = 'absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-300 opacity-0 pointer-events-none';
-      vid.src = item.video_src;
-      vid.muted = true;
-      vid.loop = true;
-      vid.playsInline = true;
-      vid.autoplay = true;
-      vid.preload = 'auto';
-      vid.oncanplay = () => {
-        vid.classList.remove('opacity-0');
-        vid.play().catch(() => {});
-      };
-      container.insertBefore(vid, container.firstChild);
-    }, 400);
-  });
-
-  card.addEventListener('mouseleave', () => {
-    if (hoverVideoTimer) clearTimeout(hoverVideoTimer);
-    const container = card.querySelector('.thumb-container-9-16');
-    if (container) {
-      const vid = container.querySelector('video');
-      if (vid) {
-        vid.pause();
-        vid.src = '';
-        vid.load();
-        vid.remove();
-      }
-    }
-  });
 
   card.innerHTML = `
     <div class="relative w-full aspect-[9/16] bg-black overflow-hidden thumb-container-9-16">

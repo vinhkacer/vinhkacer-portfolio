@@ -753,7 +753,7 @@ html_content = '''<!DOCTYPE html>
 
       <!-- Vertical 9:16 Video Container -->
       <div class="relative bg-black flex items-center justify-center overflow-hidden w-full aspect-[9/16] max-h-[78vh]">
-        <video id="breakdownVideoPlayer" class="w-full h-full object-contain" controls preload="metadata" playsinline>
+        <video id="breakdownVideoPlayer" class="w-full h-full object-contain" controls preload="none" playsinline>
           <source id="breakdownVideoSource" src="" type="video/mp4">
           Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
         </video>
@@ -788,7 +788,7 @@ html_content = '''<!DOCTYPE html>
 
       <!-- Modal Video Player Container (Smooth Video Playback: controls, preload, playsinline) -->
       <div class="relative bg-black flex items-center justify-center overflow-hidden flex-1 min-h-[300px] sm:min-h-[460px] max-h-[70vh]">
-        <video id="modalVideoPlayer" class="w-full h-full max-h-[70vh] object-contain" controls preload="metadata" playsinline>
+        <video id="modalVideoPlayer" class="w-full h-full max-h-[70vh] object-contain" controls preload="none" playsinline>
           <source id="modalVideoSource" src="" type="video/mp4">
           Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
         </video>

@@ -305,8 +305,8 @@ function renderProjects() {
 
       card.innerHTML = `
         <div class="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
-          <!-- Video Player with controls and preload="metadata" -->
-          <video controls preload="metadata" playsinline poster="${item.thumbnail}" class="w-full h-full object-cover">
+          <!-- Video Player with controls and preload="none" -->
+          <video controls preload="none" playsinline poster="${item.thumbnail}" class="w-full h-full object-cover">
             <source src="${item.video_src}" type="video/mp4">
             Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
           </video>
