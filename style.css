@@ -178,13 +178,38 @@ h1, h2,
 }
 .video-16-9-container video,
 .thumb-container-9-16 video,
-#modalVideoPlayer,
 #breakdownVideoPlayer {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain !important;
   display: block;
   pointer-events: auto !important;
+}
+
+#modalVideoPlayer {
+  object-fit: contain !important;
+  display: block;
+  pointer-events: auto !important;
+}
+
+.modal-vertical-container #modalVideoPlayer,
+.tiktok-vertical-container #modalVideoPlayer {
+  width: auto !important;
+  height: 100% !important;
+  max-height: 80vh !important;
+  aspect-ratio: 9 / 16 !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+}
+
+.modal-horizontal-container #modalVideoPlayer {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 75vh !important;
+  aspect-ratio: 16 / 9 !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
 }
 
 video::-webkit-media-controls {
@@ -529,17 +554,75 @@ button[id^="tabBtn"].bg-neon-cyan .tab-count {
   box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
 }
 
-/* Dedicated TikTok 9:16 Vertical Video Rules */
-.tiktok-vertical-container {
-  max-width: 380px;
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  margin: 0 auto;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  background: #000;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+/* Dedicated 9:16 Vertical Video & Modal Rules */
+.tiktok-vertical-container,
+.modal-vertical-container {
+  aspect-ratio: 9 / 16 !important;
+  max-height: 80vh !important;
+  height: 78vh !important;
+  width: auto !important;
+  max-width: min(440px, 92vw) !important;
+  margin: 0 auto !important;
+  background-color: #000000 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8) !important;
+}
+
+.tiktok-vertical-container video,
+.tiktok-vertical-container iframe,
+.modal-vertical-container video,
+.modal-vertical-container iframe {
+  width: auto !important;
+  height: 100% !important;
+  max-height: 80vh !important;
+  aspect-ratio: 9 / 16 !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+/* 9:16 Vertical Modal Dialog Wrapper */
+.modal-dialog-vertical {
+  max-width: min(450px, 94vw) !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  border-radius: 1.5rem !important;
+}
+
+/* 16:9 Horizontal Modal Player Container */
+.modal-horizontal-container {
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  max-height: 75vh !important;
+  margin: 0 auto !important;
+  background-color: #000000 !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.modal-horizontal-container video,
+.modal-horizontal-container iframe {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  object-fit: contain !important;
+}
+
+/* 16:9 Horizontal Modal Dialog Wrapper */
+.modal-dialog-horizontal {
+  max-width: 64rem !important; /* max-w-5xl */
+  width: 100% !important;
+  margin: 0 auto !important;
+  border-radius: 1.5rem !important;
 }
 
 .tiktok-pill-badge {

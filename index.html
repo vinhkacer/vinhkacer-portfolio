@@ -838,8 +838,8 @@
       </div>
 
       <!-- Modal Video Player Container (Smooth Video Playback: controls, preload, playsinline) -->
-      <div class="relative bg-black flex items-center justify-center overflow-hidden flex-1 min-h-[300px] sm:min-h-[460px] max-h-[70vh]">
-        <video id="modalVideoPlayer" class="w-full h-full max-h-[70vh] object-contain" controls preload="none" playsinline>
+      <div id="modalVideoContainer" class="relative bg-black flex items-center justify-center overflow-hidden flex-1 modal-horizontal-container">
+        <video id="modalVideoPlayer" class="object-contain" controls preload="none" playsinline>
           <source id="modalVideoSource" src="" type="video/mp4">
           Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
         </video>

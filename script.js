@@ -182,7 +182,7 @@ function playMP4Facade(element, src, poster) {
 
   const container = element.closest('.video-16-9-container') || element.parentElement || element;
   container.innerHTML = `
-    <video controls autoplay playsinline preload="none" class="w-full h-full object-cover relative z-20 pointer-events-auto" style="pointer-events: auto;">
+    <video controls autoplay playsinline preload="none" class="w-full h-full object-contain relative z-20 pointer-events-auto" style="pointer-events: auto; object-fit: contain;">
       <source src="${src}" type="video/mp4">
       Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
     </video>
@@ -537,6 +537,20 @@ function closeBreakdownModal() {
   currentBreakdownItem = null;
 }
 
+// Helper to accurately detect vertical 9:16 video items
+function isVerticalItem(item) {
+  if (!item) return false;
+  if (item.aspect === '9:16') return true;
+  if (item.aspect === '16:9') return false;
+  if (item.category === 'thunglong' || item.category === 'freelance') return true;
+  if (item.category === 'cinematic') return false;
+  const badge = (item.badge || '').toLowerCase();
+  const title = (item.title || '').toLowerCase();
+  if (badge.includes('9:16') || badge.includes('tiktok') || badge.includes('reels') || badge.includes('shorts')) return true;
+  if (title.includes('tiktok') || title.includes('reels') || title.includes('shorts')) return true;
+  return false;
+}
+
 // Open Cinema Modal (for 9:16 vertical grid cards or 16:9 cinematic)
 function openCinemaModal(item) {
   playBeep(750, 0.08);
@@ -552,12 +566,13 @@ function openCinemaModal(item) {
   const modalExternalLink = document.getElementById('modalExternalLink');
   const modalYouTubeLink = document.getElementById('modalYouTubeLink');
   const modalTikTokLink = document.getElementById('modalTikTokLink');
+  const modalVideoContainer = document.getElementById('modalVideoContainer') || (modalVideo ? modalVideo.parentElement : null);
 
   if (!modal || !modalVideo || !modalSource) return;
 
+  const isVertical = isVerticalItem(item);
   modalTitle.textContent = item.title;
-  const is16x9 = item.aspect === '16:9' || item.category === 'cinematic';
-  modalBadge.textContent = is16x9 ? 'OFFICIAL MV' : getFormattedBadge(item);
+  modalBadge.textContent = isVertical ? getFormattedBadge(item) : 'OFFICIAL MV';
 
   const modalRoleContainer = document.getElementById('modalRoleContainer') || (modalRole ? modalRole.parentElement : null);
   if (modalRole) {
@@ -570,25 +585,24 @@ function openCinemaModal(item) {
     }
   }
 
-  // Handle 9:16 vertical ratio adaptation for modal dialog
-  const isVertical = item.aspect === '9:16' || item.category === 'thunglong';
-  const modalVideoContainer = modalVideo.parentElement;
-
+  // Handle 9:16 vertical ratio vs 16:9 horizontal adaptation for modal dialog
   if (modalDialog) {
     if (isVertical) {
-      modalDialog.classList.remove('max-w-5xl');
-      modalDialog.classList.add('max-w-sm', 'sm:max-w-md');
+      modalDialog.classList.remove('modal-dialog-horizontal', 'max-w-5xl');
+      modalDialog.classList.add('modal-dialog-vertical');
     } else {
-      modalDialog.classList.remove('max-w-sm', 'sm:max-w-md');
-      modalDialog.classList.add('max-w-5xl');
+      modalDialog.classList.remove('modal-dialog-vertical', 'max-w-sm', 'sm:max-w-md');
+      modalDialog.classList.add('modal-dialog-horizontal', 'max-w-5xl');
     }
   }
 
   if (modalVideoContainer) {
     if (isVertical) {
-      modalVideoContainer.classList.add('tiktok-vertical-container');
+      modalVideoContainer.classList.remove('modal-horizontal-container');
+      modalVideoContainer.classList.add('modal-vertical-container', 'tiktok-vertical-container');
     } else {
-      modalVideoContainer.classList.remove('tiktok-vertical-container');
+      modalVideoContainer.classList.remove('modal-vertical-container', 'tiktok-vertical-container');
+      modalVideoContainer.classList.add('modal-horizontal-container');
     }
   }
 
@@ -633,16 +647,13 @@ function openCinemaModal(item) {
     if (!modalIframe && modalVideoContainer) {
       modalIframe = document.createElement('iframe');
       modalIframe.id = 'modalYouTubeIframe';
-      modalIframe.className = isVertical 
-        ? 'w-full h-full aspect-[9/16] border-0' 
-        : 'w-full h-full min-h-[300px] sm:min-h-[460px] aspect-video border-0';
       modalIframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
       modalIframe.setAttribute('allowfullscreen', 'true');
       modalVideoContainer.appendChild(modalIframe);
     }
     if (modalIframe) {
       modalIframe.className = isVertical 
-        ? 'w-full h-full aspect-[9/16] border-0' 
+        ? 'w-auto h-full aspect-[9/16] border-0 mx-auto' 
         : 'w-full h-full min-h-[300px] sm:min-h-[460px] aspect-video border-0';
       modalIframe.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1`;
       modalIframe.classList.remove('hidden');
@@ -657,6 +668,19 @@ function openCinemaModal(item) {
     modalVideo.setAttribute('preload', 'none');
     modalVideo.setAttribute('playsinline', '');
     modalVideo.style.pointerEvents = 'auto';
+    modalVideo.style.objectFit = 'contain';
+    if (isVertical) {
+      modalVideo.style.aspectRatio = '9 / 16';
+      modalVideo.style.width = 'auto';
+      modalVideo.style.height = '100%';
+      modalVideo.style.maxHeight = '80vh';
+    } else {
+      modalVideo.style.aspectRatio = '16 / 9';
+      modalVideo.style.width = '100%';
+      modalVideo.style.height = '100%';
+      modalVideo.style.maxHeight = '75vh';
+    }
+
     ['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(evt => {
       modalVideo.addEventListener(evt, (e) => e.stopPropagation());
     });
@@ -684,7 +708,7 @@ function closeCinemaModal() {
   const modalVideo = document.getElementById('modalVideoPlayer');
   const modalSource = document.getElementById('modalVideoSource');
   const modalIframe = document.getElementById('modalYouTubeIframe');
-  const modalVideoContainer = modalVideo ? modalVideo.parentElement : null;
+  const modalVideoContainer = document.getElementById('modalVideoContainer') || (modalVideo ? modalVideo.parentElement : null);
 
   if (modalIframe) {
     modalIframe.src = '';
@@ -696,16 +720,21 @@ function closeCinemaModal() {
     if (modalSource) modalSource.removeAttribute('src');
     modalVideo.removeAttribute('src');
     modalVideo.load();
+    modalVideo.style.aspectRatio = '';
+    modalVideo.style.width = '';
+    modalVideo.style.height = '';
+    modalVideo.style.maxHeight = '';
     modalVideo.classList.remove('hidden');
   }
 
   if (modalDialog) {
-    modalDialog.classList.remove('max-w-sm', 'sm:max-w-md');
-    modalDialog.classList.add('max-w-5xl');
+    modalDialog.classList.remove('modal-dialog-vertical', 'max-w-sm', 'sm:max-w-md');
+    modalDialog.classList.add('modal-dialog-horizontal', 'max-w-5xl');
   }
 
   if (modalVideoContainer) {
-    modalVideoContainer.classList.remove('tiktok-vertical-container');
+    modalVideoContainer.classList.remove('modal-vertical-container', 'tiktok-vertical-container');
+    modalVideoContainer.classList.add('modal-horizontal-container');
   }
 
   if (modal) modal.classList.add('hidden');
@@ -1072,8 +1101,9 @@ function playVerticalCard(card, item) {
   let vid = container.querySelector('video');
   if (!vid) {
     vid = document.createElement('video');
-    vid.className = 'w-full h-full object-cover absolute inset-0 z-20 pointer-events-auto';
+    vid.className = 'w-full h-full object-contain absolute inset-0 z-20 pointer-events-auto';
     vid.style.pointerEvents = 'auto';
+    vid.style.objectFit = 'contain';
     vid.setAttribute('controls', '');
     vid.setAttribute('autoplay', '');
     vid.setAttribute('playsinline', '');
