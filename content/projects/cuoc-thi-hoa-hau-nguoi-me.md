@@ -1,5 +1,5 @@
 ---
-order: 24
+order: 25
 title: "Cuộc Thi Hoa Hậu Người Mẹ 👸🏼 (Johnson's Baby)"
 category: "Thủng Long"
 roles:

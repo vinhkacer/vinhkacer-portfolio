@@ -1,7 +1,7 @@
 ---
 title: DANMY x OSCREW — 'Vì Đã Là Con Gái' [Official MV]
 category: "MV"
-order: 3
+order: 4
 roles:
   - VFX
 video: videos/mv/danmy-vi-da-la-con-gai-nen.mp4

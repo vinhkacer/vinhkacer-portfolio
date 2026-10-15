@@ -1,7 +1,7 @@
 ---
-order: 31
+order: 32
 title: Ngày Foodtour Bất Quy Tắc 🤤
-category: Thủng Long
+category: "Thủng Long"
 roles:
   - Edit
   - Sound Design
