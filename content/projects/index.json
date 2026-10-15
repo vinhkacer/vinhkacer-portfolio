@@ -52,6 +52,22 @@
   ],
   "projects": [
     {
+      "id": "gill-ngua-phi.mp4",
+      "filename": "gill-ngua-phi.md",
+      "title": "GILL – NGỰA PHI (Official MV)",
+      "category": "MV",
+      "rawCategory": "MV",
+      "order": 1,
+      "featured": false,
+      "role": "VFX",
+      "roles": [
+        "VFX"
+      ],
+      "thumbnail": "thumbnails/mv/gill_ngua_phi.jpg",
+      "video": "videos/mv/gill-ngua-phi.mp4",
+      "date": ""
+    },
+    {
       "id": "cam-bat-den.mp4",
       "filename": "cam-bat-den-nen.md",
       "title": "Cầm — Bắt Đền [Official Music Video]",
@@ -64,6 +80,7 @@
         "3D Animation"
       ],
       "thumbnail": "thumbnails/mv/cam_bat_den.jpg",
+      "video": "videos/mv/cam-bat-den-nen.mp4",
       "date": ""
     },
     {
@@ -80,6 +97,7 @@
         "3D Animation"
       ],
       "thumbnail": "thumbnails/mv/mon_qua_que.jpg",
+      "video": "videos/mv/wheelie-mon-qua-que-nen.mp4",
       "date": ""
     },
     {
@@ -95,6 +113,7 @@
         "VFX"
       ],
       "thumbnail": "thumbnails/mv/vi_da_la_con_gai.jpg",
+      "video": "videos/mv/danmy-vi-da-la-con-gai-nen.mp4",
       "date": ""
     },
     {
@@ -110,21 +129,7 @@
         "VFX"
       ],
       "thumbnail": "thumbnails/7520226940834352385.jpg",
-      "date": ""
-    },
-    {
-      "id": "gill-ngua-phi.mp4",
-      "filename": "gill-ngua-phi.md",
-      "title": "GILL – NGỰA PHI (Official MV)",
-      "category": "MV",
-      "rawCategory": "MV",
-      "order": 1,
-      "featured": false,
-      "role": "VFX",
-      "roles": [
-        "VFX"
-      ],
-      "thumbnail": "thumbnails/mv/gill_ngua_phi.jpg",
+      "video": "videos/freelance/clear-men-fake-situation.mp4",
       "date": ""
     },
     {
@@ -140,6 +145,7 @@
         "VFX"
       ],
       "thumbnail": "thumbnails/7544395711182392593.jpg",
+      "video": "videos/freelance/tu-hao-2-tieng-viet-nam.mp4",
       "date": ""
     },
     {
@@ -157,6 +163,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7276797810253614337.jpg",
+      "video": "videos/thunglong/khi-ban-biet-cach-flexing.mp4",
       "date": ""
     },
     {
@@ -174,6 +181,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7281247914771483905.jpg",
+      "video": "videos/thunglong/chi-em-chi-can-moi-vay-thoi.mp4",
       "date": ""
     },
     {
@@ -191,6 +199,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7521720993946160385.jpg",
+      "video": "videos/freelance/salitos-x-mosvici-tinh-than.mp4",
       "date": ""
     },
     {
@@ -208,6 +217,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7325298596356689153.jpg",
+      "video": "videos/thunglong/du-trend-hoi-muon-ti.mp4",
       "date": ""
     },
     {
@@ -225,6 +235,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7305745167993031937.jpg",
+      "video": "videos/thunglong/roi-ai-la-sep-ai-la-nhan-vien.mp4",
       "date": ""
     },
     {
@@ -242,6 +253,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7303888492621237506.jpg",
+      "video": "videos/thunglong/sau-khi-xem-massage-an-do.mp4",
       "date": ""
     },
     {
@@ -259,6 +271,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7315758991269694721.jpg",
+      "video": "videos/thunglong/khi-ban-xem-massage-an-do.mp4",
       "date": ""
     },
     {
@@ -276,6 +289,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7332087700129877249.jpg",
+      "video": "videos/thunglong/co-oi-co-dung-ve.mp4",
       "date": ""
     },
     {
@@ -293,6 +307,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7369216070894374162.jpg",
+      "video": "videos/thunglong/may-ma-than-thu-phi-pham.mp4",
       "date": ""
     },
     {
@@ -310,6 +325,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7284955655289588994.jpg",
+      "video": "videos/thunglong/em-chi-an-moi-the-thoi.mp4",
       "date": ""
     },
     {
@@ -327,6 +343,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7297587094958902529.jpg",
+      "video": "videos/thunglong/du-trend-trong-1-ngay-mua-gio.mp4",
       "date": ""
     },
     {
@@ -344,6 +361,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7212612550922407194.jpg",
+      "video": "videos/thunglong/1-ngay-hoa-mat-con-gai.mp4",
       "date": ""
     },
     {
@@ -361,6 +379,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7245623121108159749.jpg",
+      "video": "videos/thunglong/bo-cau-hoi-ca-khia-phan-1.mp4",
       "date": ""
     },
     {
@@ -378,6 +397,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7279397866169289986.jpg",
+      "video": "videos/thunglong/bo-cau-hoi-ca-khia-phan-2.mp4",
       "date": ""
     },
     {
@@ -395,6 +415,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7290173297638018311.jpg",
+      "video": "videos/thunglong/dap-hop-thu-lai-dong-qua.mp4",
       "date": ""
     },
     {
@@ -412,6 +433,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7307238023320603911.jpg",
+      "video": "videos/thunglong/chay-theo-xa-hoa-phu-du.mp4",
       "date": ""
     },
     {
@@ -429,6 +451,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7317614770717297921.jpg",
+      "video": "videos/thunglong/cham-nguoi-lon-phuc-tap.mp4",
       "date": ""
     },
     {
@@ -446,6 +469,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7342870241090768130.jpg",
+      "video": "videos/thunglong/chuan-bi-len-thot.mp4",
       "date": ""
     },
     {
@@ -463,6 +487,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7291276702813064449.jpg",
+      "video": "videos/thunglong/cuoc-thi-hoa-hau-nguoi-me.mp4",
       "date": ""
     },
     {
@@ -480,6 +505,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7287550952079396098.jpg",
+      "video": "videos/thunglong/ai-chang-muon-minh-xenh.mp4",
       "date": ""
     },
     {
@@ -497,6 +523,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7236720841944206598.jpg",
+      "video": "videos/thunglong/cu-thich-the-hien-cho-lam-nen.mp4",
       "date": ""
     },
     {
@@ -514,6 +541,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7208891929671650587.jpg",
+      "video": "videos/thunglong/cung-tuong-the-la-ha-duoc-chi.mp4",
       "date": ""
     },
     {
@@ -531,6 +559,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7263072598836202760.jpg",
+      "video": "videos/thunglong/food-tour-tai-le-giang.mp4",
       "date": ""
     },
     {
@@ -548,6 +577,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7302069166826179842.jpg",
+      "video": "videos/thunglong/hiep-hoi-phao-cuu-sinh-phan-1.mp4",
       "date": ""
     },
     {
@@ -565,6 +595,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7330969014832860418.jpg",
+      "video": "videos/thunglong/hiep-hoi-phao-cuu-sinh-phan-2.mp4",
       "date": ""
     },
     {
@@ -581,6 +612,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7315392879562591490.jpg",
+      "video": "videos/thunglong/1-ngay-foodtour.mp4",
       "date": ""
     },
     {
@@ -598,6 +630,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7259733140934102280.jpg",
+      "video": "videos/thunglong/lam-gi-co-chuyen-noi-den-sang-mai.mp4",
       "date": ""
     },
     {
@@ -615,6 +648,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7339135630951304449.jpg",
+      "video": "videos/thunglong/may-cho-anh-day-nhe.mp4",
       "date": ""
     },
     {
@@ -632,6 +666,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7291641220160326913.jpg",
+      "video": "videos/thunglong/quan-trong-la-cai-tam-long.mp4",
       "date": ""
     },
     {
@@ -649,6 +684,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7223728609372998918.jpg",
+      "video": "videos/thunglong/thich-ngam-gai-khong-ha.mp4",
       "date": ""
     },
     {
@@ -666,6 +702,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7539895638197112080.jpg",
+      "video": "videos/thunglong/thom-den-muc-chi-em-muon-dong-khau.mp4",
       "date": ""
     },
     {
@@ -683,6 +720,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7226334534378310918.jpg",
+      "video": "videos/thunglong/voi-moi-mon-skincare.mp4",
       "date": ""
     },
     {
@@ -700,6 +738,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7469760253500853509.jpg",
+      "video": "videos/freelance/haidilao-hotpot-for-happiness.mp4",
       "date": ""
     },
     {
@@ -717,6 +756,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7444768523089399096.jpg",
+      "video": "videos/thunglong/hanfu-chinese-traditional-clothes.mp4",
       "date": ""
     },
     {
@@ -734,6 +774,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7428822702070304005.jpg",
+      "video": "videos/thunglong/me-on-work-vs-halloween.mp4",
       "date": ""
     },
     {
@@ -751,6 +792,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7448873288429767941.jpg",
+      "video": "videos/thunglong/haidilao-late-night-snacks.mp4",
       "date": ""
     },
     {
@@ -768,6 +810,7 @@
         "Sound Design"
       ],
       "thumbnail": "thumbnails/7428082811434716421.jpg",
+      "video": "videos/thunglong/giveaway-for-my-fans.mp4",
       "date": ""
     },
     {
@@ -785,6 +828,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7435672378299944247.jpg",
+      "video": "videos/freelance/haidilao-apt-dance-challenge.mp4",
       "date": ""
     },
     {
@@ -802,6 +846,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7425802752959253765.jpg",
+      "video": "videos/freelance/haidilao-friendship-magic.mp4",
       "date": ""
     },
     {
@@ -819,6 +864,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7447014404505259270.jpg",
+      "video": "videos/freelance/haidilao-great-food-great-mood.mp4",
       "date": ""
     },
     {
@@ -836,6 +882,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7439180307032476984.jpg",
+      "video": "videos/freelance/haidilao-table-magic-tricks.mp4",
       "date": ""
     },
     {
@@ -853,6 +900,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7466795322665094406.jpg",
+      "video": "videos/freelance/haidilao-tomato-or-potato.mp4",
       "date": ""
     },
     {
@@ -870,6 +918,7 @@
         "Motion Graphics"
       ],
       "thumbnail": "thumbnails/7441776844061281591.jpg",
+      "video": "videos/freelance/haidilao-wednesday-drink.mp4",
       "date": ""
     }
   ]
