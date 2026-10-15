@@ -1023,9 +1023,27 @@
       showToast("Đang tải danh sách video...", "info");
 
       try {
-        const res = await fetch("../content/projects/index.json");
-        if (!res.ok) throw new Error("Could not fetch index.json");
-        const data = await res.json();
+        const possiblePaths = [
+          "../content/projects/index.json",
+          "content/projects/index.json",
+          "/content/projects/index.json",
+          "../index.json",
+          "index.json"
+        ];
+        let data = null;
+        for (const p of possiblePaths) {
+          try {
+            const res = await fetch(p);
+            if (res.ok) {
+              data = await res.json();
+              if (data && Array.isArray(data.projects) && data.projects.length > 0) break;
+            }
+          } catch (_) {}
+        }
+
+        if (!data || !Array.isArray(data.projects)) {
+          throw new Error("Could not fetch index.json from any known path");
+        }
 
         let list = [];
         if (Array.isArray(data.projects) && data.projects.length > 0) {
@@ -1047,6 +1065,13 @@
               parsedRoles = p.roles.map(r => String(r).trim()).filter(Boolean);
             } else if (typeof p.role === 'string' && p.role.trim()) {
               parsedRoles = p.role.split('•').map(r => r.trim()).filter(Boolean);
+            }
+
+            let orderNum = 100;
+            if (p.order !== undefined && p.order !== null && p.order !== '' && !isNaN(Number(p.order))) {
+              orderNum = Number(p.order);
+            } else if (p.featured) {
+              orderNum = 1;
             }
 
             return {
@@ -1076,7 +1101,70 @@
         showToast(`✓ Đã nạp ${ALL_PROJECTS.length} dự án thành công!`);
       } catch (err) {
         console.error("Error loading projects:", err);
-        showToast("⚠️ Không thể đọc index.json, đang dùng dữ liệu dự phòng...", "error");
+        // Robust Fallback: try loading projects_data.json
+        try {
+          const fbRes = await fetch("../projects_data.json").catch(() => fetch("projects_data.json"));
+          if (fbRes && fbRes.ok) {
+            const fbData = await fbRes.json();
+            let fallbackList = [];
+            (fbData.cinematic || []).forEach((p, idx) => {
+              fallbackList.push({
+                id: p.id || `cin_${idx}`,
+                filename: (p.id || '').replace('.mp4', '.md'),
+                title: p.title || 'Video',
+                category: 'mv',
+                rawCategory: 'MV',
+                order: p.order !== undefined ? Number(p.order) : (idx + 1),
+                featured: Boolean(p.featured),
+                role: p.role || 'VFX Artist',
+                roles: (p.role || '').split('•').map(s => s.trim()).filter(Boolean),
+                thumbnail: p.thumbnail || p.thumb || '',
+                date: p.date || ''
+              });
+            });
+            (fbData.thunglong || []).forEach((p, idx) => {
+              fallbackList.push({
+                id: p.id || `tl_${idx}`,
+                filename: (p.filename || `${p.id}.md`).replace('.mp4', '.md'),
+                title: p.title || 'Video',
+                category: 'thunglong',
+                rawCategory: 'Thủng Long',
+                order: p.order !== undefined ? Number(p.order) : (idx + 1),
+                featured: Boolean(p.featured),
+                role: p.role || 'Editor • VFX',
+                roles: (p.role || '').split('•').map(s => s.trim()).filter(Boolean),
+                thumbnail: p.thumbnail || p.thumb || '',
+                date: p.date || ''
+              });
+            });
+            (fbData.freelance || []).forEach((p, idx) => {
+              fallbackList.push({
+                id: p.id || `cm_${idx}`,
+                filename: (p.filename || `${p.id}.md`).replace('.mp4', '.md'),
+                title: p.title || 'Video',
+                category: 'commercial',
+                rawCategory: 'Commercial',
+                order: p.order !== undefined ? Number(p.order) : (idx + 1),
+                featured: Boolean(p.featured),
+                role: p.role || 'Editor • VFX',
+                roles: (p.role || '').split('•').map(s => s.trim()).filter(Boolean),
+                thumbnail: p.thumbnail || p.thumb || '',
+                date: p.date || ''
+              });
+            });
+
+            fallbackList.sort(compareProjects);
+            ALL_PROJECTS = fallbackList;
+            INITIAL_SNAPSHOT = JSON.parse(JSON.stringify(fallbackList));
+            renderBoard();
+            initSortables();
+            showToast(`⚠️ Đang dùng dữ liệu dự phòng (${ALL_PROJECTS.length} dự án)`, "warning");
+            return;
+          }
+        } catch (fbErr) {
+          console.error("Fallback load failed:", fbErr);
+        }
+        showToast("⚠️ Không thể đọc index.json hoặc dữ liệu dự phòng!", "error");
       }
     }
 
