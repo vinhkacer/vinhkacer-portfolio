@@ -1,5 +1,5 @@
 ---
-order: 50
+order: 9
 title: "Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp"
 category: "Thủng Long"
 roles:
