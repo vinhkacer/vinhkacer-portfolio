@@ -72,6 +72,10 @@ def parse_markdown_file(file_path):
     m = re.search(r'^(?:youtube_url|url):\s*["\']?(.*?)["\']?\s*$', fm, re.MULTILINE)
     youtube_url = m.group(1).strip() if m else ""
 
+    # TikTok URL
+    m = re.search(r'^tiktok_url:\s*["\']?(.*?)["\']?\s*$', fm, re.MULTILINE)
+    tiktok_url = m.group(1).strip() if m else ""
+
     # Description
     m = re.search(r'^description:\s*(?:\||>)?\s*\n?([^\n\r]+)', fm, re.MULTILINE)
     description = m.group(1).strip() if m else ""
@@ -87,7 +91,8 @@ def parse_markdown_file(file_path):
         "date": date,
         "roles": roles,
         "description": description,
-        "youtube_url": youtube_url
+        "youtube_url": youtube_url,
+        "tiktok_url": tiktok_url
     }
 
 
@@ -138,6 +143,9 @@ def build_index_data():
         # YouTube URL fallback
         yt_url = parsed.get("youtube_url") or existing_p.get("youtube_url") or existing_p.get("url", "")
 
+        # TikTok URL fallback
+        tt_url = parsed.get("tiktok_url") or existing_p.get("tiktok_url", "")
+
         item = {
             "id": p_id,
             "filename": fn,
@@ -155,6 +163,10 @@ def build_index_data():
         if yt_url:
             item["youtube_url"] = yt_url
             item["url"] = yt_url
+        if tt_url:
+            item["tiktok_url"] = tt_url
+            if not item.get("url"):
+                item["url"] = tt_url
         projects.append(item)
 
     # Sort projects: Order ascending, then title A-Z
@@ -254,22 +266,29 @@ def sync_projects_data(index_data):
 
     # Check and append Thủng Long: Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp
     thunglong = p_data.get("thunglong", [])
-    has_phong_dep = any("phong-dep" in (p.get("id", "") + p.get("filename", "")).lower() for p in thunglong)
+    has_phong_dep = any("phong-dep" in (p.get("id", "") + p.get("filename", "")).lower() or "7529132272008695057" in str(p.get("id", "")) for p in thunglong)
+    tiktok_url_phong_dep = "https://www.tiktok.com/@thunglongfamily/video/7529132272008695057"
     if not has_phong_dep:
         thunglong.append({
-            "id": "phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep",
+            "id": "7529132272008695057",
             "title": "Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp",
             "category": "thunglong",
             "aspect": "9:16",
-            "order": 50,
+            "order": 9,
             "role": "Tiền kì • Dựng chính • VFX",
             "badge": "🔥 Viral Content / Triệu Views",
             "thumbnail": "thumbnails/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.jpg",
             "video_src": "videos/thunglong/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4",
-            "url": "",
+            "url": tiktok_url_phong_dep,
+            "tiktok_url": tiktok_url_phong_dep,
             "platform": "TikTok",
             "filename": "phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4"
         })
+    else:
+        for p in thunglong:
+            if "phong-dep" in (p.get("id", "") + p.get("filename", "")).lower() or "7529132272008695057" in str(p.get("id", "")):
+                p["url"] = tiktok_url_phong_dep
+                p["tiktok_url"] = tiktok_url_phong_dep
     p_data["thunglong"] = thunglong
 
     with open(PROJECTS_DATA_JSON, "w", encoding="utf-8") as f:
@@ -321,14 +340,19 @@ def sync_portfolio_data():
 
     # Check and append Thủng Long: Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp
     tl = data.get("portfolio_projects", {}).get("thung_long_family", [])
-    has_phong_dep_tl = any("phong-dep" in p.get("id", "").lower() for p in tl)
+    has_phong_dep_tl = any("phong-dep" in p.get("id", "").lower() or "7529132272008695057" in str(p.get("id", "")) for p in tl)
+    tiktok_url_phong_dep = "https://www.tiktok.com/@thunglongfamily/video/7529132272008695057"
     if not has_phong_dep_tl:
         tl.append({
-            "id": "phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep",
+            "id": "7529132272008695057",
             "title": "Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp",
             "platform": "TikTok",
-            "url": "videos/thunglong/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4"
+            "url": tiktok_url_phong_dep
         })
+    else:
+        for p in tl:
+            if "phong-dep" in p.get("id", "").lower() or "7529132272008695057" in str(p.get("id", "")):
+                p["url"] = tiktok_url_phong_dep
     data["portfolio_projects"]["thung_long_family"] = tl
 
     with open(PORTFOLIO_DATA_JSON, "w", encoding="utf-8") as f:

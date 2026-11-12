@@ -8,6 +8,7 @@ roles:
   - Sound Design
 video: "videos/thunglong/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4"
 thumbnail: "thumbnails/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.jpg"
-tiktok_url: ""
+tiktok_url: "https://www.tiktok.com/@thunglongfamily/video/7529132272008695057"
+url: "https://www.tiktok.com/@thunglongfamily/video/7529132272008695057"
 description: ""
 ---
