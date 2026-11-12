@@ -182,16 +182,13 @@ function playMP4Facade(element, src, poster) {
 
   const container = element.closest('.video-16-9-container') || element.parentElement || element;
   container.innerHTML = `
-    <video controls autoplay playsinline preload="none" class="w-full h-full object-contain relative z-20 pointer-events-auto" style="pointer-events: auto; object-fit: contain;">
+    <video controls autoplay playsinline preload="metadata" class="w-full h-full object-contain relative z-30 pointer-events-auto" style="pointer-events: auto; object-fit: contain; z-index: 30;">
       <source src="${src}" type="video/mp4">
       Trình duyệt của bạn không hỗ trợ thẻ video HTML5.
     </video>
   `;
   const vid = container.querySelector('video');
   if (vid) {
-    ['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(evt => {
-      vid.addEventListener(evt, (e) => e.stopPropagation());
-    });
     observeVideoVisibility(vid);
     vid.play().catch(() => {});
   }
@@ -474,12 +471,10 @@ function loadBreakdownPart(index) {
     if (videoPlayer && videoSource) {
       videoPlayer.classList.remove('hidden');
       videoPlayer.setAttribute('controls', '');
-      videoPlayer.setAttribute('preload', 'none');
+      videoPlayer.setAttribute('preload', 'metadata');
       videoPlayer.setAttribute('playsinline', '');
       videoPlayer.style.pointerEvents = 'auto';
-      ['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(evt => {
-        videoPlayer.addEventListener(evt, (e) => e.stopPropagation());
-      });
+      videoPlayer.style.zIndex = '30';
       videoPlayer.pause();
       if (part.thumb) {
         videoPlayer.poster = part.thumb;
@@ -665,7 +660,7 @@ function openCinemaModal(item) {
     }
     modalVideo.classList.remove('hidden');
     modalVideo.setAttribute('controls', '');
-    modalVideo.setAttribute('preload', 'none');
+    modalVideo.setAttribute('preload', 'metadata');
     modalVideo.setAttribute('playsinline', '');
     modalVideo.style.pointerEvents = 'auto';
     modalVideo.style.objectFit = 'contain';
@@ -681,9 +676,7 @@ function openCinemaModal(item) {
       modalVideo.style.maxHeight = '75vh';
     }
 
-    ['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(evt => {
-      modalVideo.addEventListener(evt, (e) => e.stopPropagation());
-    });
+    modalVideo.style.zIndex = '30';
 
     if (item.video_src) {
       modalSource.src = item.video_src;
@@ -1062,6 +1055,7 @@ function create16x9Card(item) {
 
 // Play 9:16 Video inline directly on the card with controls & non-blocking overlays
 function playVerticalCard(card, item) {
+  if (card.querySelector('video')) return;
   playBeep(800, 0.05);
   pauseAllVideos();
 
@@ -1079,41 +1073,25 @@ function playVerticalCard(card, item) {
   }
 
   // 1. Hide thumbnail, center play button, gradient, top badge, breakdown button, and footer overlay to avoid blocking video timeline
-  const thumb = container.querySelector('.vertical-thumb');
-  if (thumb) thumb.style.display = 'none';
-
-  const playBtn = container.querySelector('.vertical-play-btn');
-  if (playBtn) playBtn.style.display = 'none';
-
-  const gradient = container.querySelector('.vertical-gradient');
-  if (gradient) gradient.style.display = 'none';
-
-  const footer = container.querySelector('.vertical-card-footer');
-  if (footer) footer.style.display = 'none';
-
-  const topBadge = container.querySelector('.vertical-top-badge');
-  if (topBadge) topBadge.style.display = 'none';
-
-  const bdBtn = container.querySelector('.vertical-breakdown-btn');
-  if (bdBtn) bdBtn.style.display = 'none';
+  container.classList.add('is-playing');
+  container.querySelectorAll('.vertical-thumb, .vertical-play-btn, .vertical-gradient, .vertical-card-footer, .vertical-top-badge, .vertical-breakdown-btn').forEach(el => {
+    el.style.display = 'none';
+    el.style.pointerEvents = 'none';
+  });
 
   // 2. Check if video element already exists in container or create it
   let vid = container.querySelector('video');
   if (!vid) {
     vid = document.createElement('video');
-    vid.className = 'w-full h-full object-contain absolute inset-0 z-20 pointer-events-auto';
+    vid.className = 'w-full h-full object-contain absolute inset-0 z-40 pointer-events-auto';
     vid.style.pointerEvents = 'auto';
+    vid.style.zIndex = '40';
     vid.style.objectFit = 'contain';
     vid.setAttribute('controls', '');
     vid.setAttribute('autoplay', '');
     vid.setAttribute('playsinline', '');
-    vid.setAttribute('preload', 'none');
+    vid.setAttribute('preload', 'metadata');
     vid.src = item.video_src;
-
-    // Prevent any click/touch on the video or controls from bubbling to card or parents
-    ['click', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'pointerdown', 'pointerup'].forEach(evt => {
-      vid.addEventListener(evt, (e) => e.stopPropagation());
-    });
 
     container.appendChild(vid);
     observeVideoVisibility(vid);
@@ -1182,7 +1160,8 @@ function createVerticalCard(item) {
   const card = document.createElement('div');
   card.className = 'glass-card rounded-2xl overflow-hidden group flex flex-col cursor-pointer relative';
   card.onclick = (e) => {
-    if (e.target.closest('a') || e.target.closest('button')) return;
+    if (e.target.closest('a') || e.target.closest('button') || e.target.closest('video') || e.target.tagName === 'VIDEO') return;
+    if (card.querySelector('video')) return;
     playVerticalCard(card, item);
   };
 
@@ -1312,16 +1291,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // Automatically pause other videos when one starts playing
-  document.addEventListener('play', (e) => {
-    if (e.target && e.target.tagName === 'VIDEO') {
-      document.querySelectorAll('video').forEach(v => {
-        if (v !== e.target && !v.paused) {
-          try { v.pause(); } catch (err) {}
-        }
-      });
-    }
-  }, true);
 
   // Initial render with 'all' tab selected
   updateTabUI('all');
