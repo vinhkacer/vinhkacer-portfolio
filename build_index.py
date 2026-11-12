@@ -252,6 +252,26 @@ def sync_projects_data(index_data):
 
     p_data["cinematic"] = cinematic
 
+    # Check and append Thủng Long: Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp
+    thunglong = p_data.get("thunglong", [])
+    has_phong_dep = any("phong-dep" in (p.get("id", "") + p.get("filename", "")).lower() for p in thunglong)
+    if not has_phong_dep:
+        thunglong.append({
+            "id": "phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep",
+            "title": "Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp",
+            "category": "thunglong",
+            "aspect": "9:16",
+            "order": 50,
+            "role": "Tiền kì • Dựng chính • VFX",
+            "badge": "🔥 Viral Content / Triệu Views",
+            "thumbnail": "thumbnails/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.jpg",
+            "video_src": "videos/thunglong/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4",
+            "url": "",
+            "platform": "TikTok",
+            "filename": "phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4"
+        })
+    p_data["thunglong"] = thunglong
+
     with open(PROJECTS_DATA_JSON, "w", encoding="utf-8") as f:
         json.dump(p_data, f, indent=2, ensure_ascii=False)
         f.write("\n")
@@ -298,6 +318,18 @@ def sync_portfolio_data():
         })
 
     data["portfolio_projects"]["music_videos"] = mvs
+
+    # Check and append Thủng Long: Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp
+    tl = data.get("portfolio_projects", {}).get("thung_long_family", [])
+    has_phong_dep_tl = any("phong-dep" in p.get("id", "").lower() for p in tl)
+    if not has_phong_dep_tl:
+        tl.append({
+            "id": "phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep",
+            "title": "Phòng Đẹp Thì Đương Nhiên Phải Thuộc Về Người Đẹp",
+            "platform": "TikTok",
+            "url": "videos/thunglong/phong-dep-thi-duong-nhien-phai-thuoc-ve-nguoi-dep.mp4"
+        })
+    data["portfolio_projects"]["thung_long_family"] = tl
 
     with open(PORTFOLIO_DATA_JSON, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
