@@ -2,7 +2,7 @@
 order: 1
 featured: false
 title: GILL – NGỰA PHI (Official MV)
-category: MV
+category: "MV"
 roles:
   - VFX
 video: videos/mv/gill-ngua-phi.mp4

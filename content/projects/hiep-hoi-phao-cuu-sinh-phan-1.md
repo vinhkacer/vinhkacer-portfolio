@@ -1,5 +1,5 @@
 ---
-order: 30
+order: 32
 title: "Hiệp Hội Phao Cứu Sinh Sẵn Sàng Phục Vụ (Bosch Home VN)"
 category: "Thủng Long"
 roles:
