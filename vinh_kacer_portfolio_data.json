@@ -89,6 +89,20 @@
         "title": "GILL – NGỰA PHI (Official MV)",
         "role": "VFX Artist",
         "url": "videos/mv/gill-ngua-phi.mp4"
+      },
+      {
+        "id": "lezii-tron-tim",
+        "title": "LEZII - Trốn Tìm (Official MV)",
+        "role": "VFX",
+        "url": "videos/mv/lezii-tron-tim.mp4",
+        "youtube_url": "https://www.youtube.com/watch?v=Lct0U67OOk4"
+      },
+      {
+        "id": "lezii-silent-treatment",
+        "title": "LEZII - Silent Treatment (Official MV)",
+        "role": "VFX",
+        "url": "videos/mv/lezii-silent-treatment.mp4",
+        "youtube_url": "https://www.youtube.com/watch?v=bB6hdeM6n7A"
       }
     ],
     "freelance_and_commercial": [

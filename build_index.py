@@ -68,6 +68,10 @@ def parse_markdown_file(file_path):
     if roles_block:
         roles = [re.sub(r'^\s*-\s*', '', line).strip() for line in roles_block.group(1).splitlines() if line.strip()]
 
+    # YouTube URL
+    m = re.search(r'^(?:youtube_url|url):\s*["\']?(.*?)["\']?\s*$', fm, re.MULTILINE)
+    youtube_url = m.group(1).strip() if m else ""
+
     # Description
     m = re.search(r'^description:\s*(?:\||>)?\s*\n?([^\n\r]+)', fm, re.MULTILINE)
     description = m.group(1).strip() if m else ""
@@ -82,7 +86,8 @@ def parse_markdown_file(file_path):
         "thumbnail": thumbnail,
         "date": date,
         "roles": roles,
-        "description": description
+        "description": description,
+        "youtube_url": youtube_url
     }
 
 
@@ -130,6 +135,9 @@ def build_index_data():
         # Video fallback
         vid = parsed["video"] or existing_p.get("video", "")
 
+        # YouTube URL fallback
+        yt_url = parsed.get("youtube_url") or existing_p.get("youtube_url") or existing_p.get("url", "")
+
         item = {
             "id": p_id,
             "filename": fn,
@@ -144,6 +152,9 @@ def build_index_data():
             "video": vid,
             "date": parsed["date"] or existing_p.get("date", "")
         }
+        if yt_url:
+            item["youtube_url"] = yt_url
+            item["url"] = yt_url
         projects.append(item)
 
     # Sort projects: Order ascending, then title A-Z
@@ -156,7 +167,7 @@ def build_index_data():
 
 
 def sync_projects_data(index_data):
-    """Đảm bảo projects_data.json chứa đầy đủ 4 MV (kèm Gill - Ngựa Phi) và các video Thủng Long, Freelance."""
+    """Đảm bảo projects_data.json chứa đầy đủ 4 MV cũ + 2 MV mới của LEZII và các video Thủng Long, Freelance."""
     if not os.path.exists(PROJECTS_DATA_JSON):
         return
 
@@ -188,7 +199,58 @@ def sync_projects_data(index_data):
             "breakdowns": []
         }
         cinematic.append(gill_item)
-        p_data["cinematic"] = cinematic
+
+    # Check and append LEZII - Trốn Tìm
+    has_tron_tim = any("tron-tim" in (p.get("id", "") + p.get("filename", "")).lower() for p in cinematic)
+    if not has_tron_tim:
+        cinematic.append({
+            "id": "lezii-tron-tim.mp4",
+            "title": "LEZII - Trốn Tìm (Official MV)",
+            "category": "cinematic",
+            "aspect": "16:9",
+            "order": 5,
+            "featured": False,
+            "role": "VFX",
+            "badge": "OFFICIAL MV",
+            "thumbnail": "thumbnails/mv/lezii_tron_tim.jpg",
+            "video_src": "videos/mv/lezii-tron-tim.mp4",
+            "has_breakdown": False,
+            "breakdown_src": "",
+            "breakdown_thumb": "",
+            "youtube_url": "https://www.youtube.com/watch?v=Lct0U67OOk4",
+            "url": "https://www.youtube.com/watch?v=Lct0U67OOk4",
+            "platform": "Music Video",
+            "description": "Official Music Video của nghệ sĩ LEZII. Đảm nhiệm vai trò VFX.",
+            "filename": "lezii-tron-tim.mp4",
+            "breakdowns": []
+        })
+
+    # Check and append LEZII - Silent Treatment
+    has_silent = any("silent" in (p.get("id", "") + p.get("filename", "")).lower() for p in cinematic)
+    if not has_silent:
+        cinematic.append({
+            "id": "lezii-silent-treatment.mp4",
+            "title": "LEZII - Silent Treatment (Official MV)",
+            "category": "cinematic",
+            "aspect": "16:9",
+            "order": 6,
+            "featured": False,
+            "role": "VFX",
+            "badge": "OFFICIAL MV",
+            "thumbnail": "thumbnails/mv/lezii_silent_treatment.jpg",
+            "video_src": "videos/mv/lezii-silent-treatment.mp4",
+            "has_breakdown": False,
+            "breakdown_src": "",
+            "breakdown_thumb": "",
+            "youtube_url": "https://www.youtube.com/watch?v=bB6hdeM6n7A",
+            "url": "https://www.youtube.com/watch?v=bB6hdeM6n7A",
+            "platform": "Music Video",
+            "description": "Official Music Video của nghệ sĩ LEZII. Đảm nhiệm vai trò VFX.",
+            "filename": "lezii-silent-treatment.mp4",
+            "breakdowns": []
+        })
+
+    p_data["cinematic"] = cinematic
 
     with open(PROJECTS_DATA_JSON, "w", encoding="utf-8") as f:
         json.dump(p_data, f, indent=2, ensure_ascii=False)
@@ -197,7 +259,7 @@ def sync_projects_data(index_data):
 
 
 def sync_portfolio_data():
-    """Đảm bảo vinh_kacer_portfolio_data.json chứa Gill - Ngựa Phi trong danh mục music_videos."""
+    """Đảm bảo vinh_kacer_portfolio_data.json chứa Gill - Ngựa Phi và 2 MV LEZII trong danh mục music_videos."""
     if not os.path.exists(PORTFOLIO_DATA_JSON):
         return
 
@@ -214,7 +276,28 @@ def sync_portfolio_data():
             "role": "VFX Artist",
             "url": "videos/mv/gill-ngua-phi.mp4"
         })
-        data["portfolio_projects"]["music_videos"] = mvs
+
+    has_tron_tim = any("tron-tim" in p.get("id", "").lower() for p in mvs)
+    if not has_tron_tim:
+        mvs.append({
+            "id": "lezii-tron-tim",
+            "title": "LEZII - Trốn Tìm (Official MV)",
+            "role": "VFX",
+            "url": "videos/mv/lezii-tron-tim.mp4",
+            "youtube_url": "https://www.youtube.com/watch?v=Lct0U67OOk4"
+        })
+
+    has_silent = any("silent" in p.get("id", "").lower() for p in mvs)
+    if not has_silent:
+        mvs.append({
+            "id": "lezii-silent-treatment",
+            "title": "LEZII - Silent Treatment (Official MV)",
+            "role": "VFX",
+            "url": "videos/mv/lezii-silent-treatment.mp4",
+            "youtube_url": "https://www.youtube.com/watch?v=bB6hdeM6n7A"
+        })
+
+    data["portfolio_projects"]["music_videos"] = mvs
 
     with open(PORTFOLIO_DATA_JSON, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)

@@ -37,6 +37,8 @@
     "khi-ban-biet-cach-flexing.md",
     "khi-ban-xem-massage-an-do.md",
     "lam-gi-co-chuyen-noi-den-sang-mai.md",
+    "lezii-silent-treatment.md",
+    "lezii-tron-tim.md",
     "may-cho-anh-day-nhe.md",
     "may-ma-than-thu-phi-pham.md",
     "me-on-work-vs-halloween.md",
@@ -81,7 +83,9 @@
       ],
       "thumbnail": "thumbnails/mv/cam_bat_den.jpg",
       "video": "videos/mv/cam-bat-den-nen.mp4",
-      "date": ""
+      "date": "",
+      "youtube_url": "https://www.youtube.com/watch?v=L-zp0dPv7IU",
+      "url": "https://www.youtube.com/watch?v=L-zp0dPv7IU"
     },
     {
       "id": "wheelie-mon-qua-que.mp4",
@@ -98,7 +102,9 @@
       ],
       "thumbnail": "thumbnails/mv/mon_qua_que.jpg",
       "video": "videos/mv/wheelie-mon-qua-que-nen.mp4",
-      "date": ""
+      "date": "",
+      "youtube_url": "https://www.youtube.com/watch?v=zFlmnkeFCGU&list=RDzFlmnkeFCGU&start_radio=1",
+      "url": "https://www.youtube.com/watch?v=zFlmnkeFCGU&list=RDzFlmnkeFCGU&start_radio=1"
     },
     {
       "id": "danmy-vi-da-la-con-gai.mp4",
@@ -114,7 +120,9 @@
       ],
       "thumbnail": "thumbnails/mv/vi_da_la_con_gai.jpg",
       "video": "videos/mv/danmy-vi-da-la-con-gai-nen.mp4",
-      "date": ""
+      "date": "",
+      "youtube_url": "https://www.youtube.com/watch?v=msf4UwVORPA",
+      "url": "https://www.youtube.com/watch?v=msf4UwVORPA"
     },
     {
       "id": "7520226940834352385",
@@ -131,6 +139,42 @@
       "thumbnail": "thumbnails/7520226940834352385.jpg",
       "video": "videos/freelance/clear-men-fake-situation.mp4",
       "date": ""
+    },
+    {
+      "id": "lezii-tron-tim.mp4",
+      "filename": "lezii-tron-tim.md",
+      "title": "LEZII - Trốn Tìm (Official MV)",
+      "category": "MV",
+      "rawCategory": "MV",
+      "order": 5,
+      "featured": false,
+      "role": "VFX",
+      "roles": [
+        "VFX"
+      ],
+      "thumbnail": "thumbnails/mv/lezii_tron_tim.jpg",
+      "video": "videos/mv/lezii-tron-tim.mp4",
+      "date": "",
+      "youtube_url": "https://www.youtube.com/watch?v=Lct0U67OOk4",
+      "url": "https://www.youtube.com/watch?v=Lct0U67OOk4"
+    },
+    {
+      "id": "lezii-silent-treatment.mp4",
+      "filename": "lezii-silent-treatment.md",
+      "title": "LEZII - Silent Treatment (Official MV)",
+      "category": "MV",
+      "rawCategory": "MV",
+      "order": 6,
+      "featured": false,
+      "role": "VFX",
+      "roles": [
+        "VFX"
+      ],
+      "thumbnail": "thumbnails/mv/lezii_silent_treatment.jpg",
+      "video": "videos/mv/lezii-silent-treatment.mp4",
+      "date": "",
+      "youtube_url": "https://www.youtube.com/watch?v=bB6hdeM6n7A",
+      "url": "https://www.youtube.com/watch?v=bB6hdeM6n7A"
     },
     {
       "id": "7544395711182392593",
