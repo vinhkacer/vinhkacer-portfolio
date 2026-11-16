@@ -189,6 +189,10 @@ function playMP4Facade(element, src, poster) {
   `;
   const vid = container.querySelector('video');
   if (vid) {
+    // Isolate video control interactions from parent handlers so seeking works smoothly
+    vid.addEventListener('click', (e) => e.stopPropagation());
+    vid.addEventListener('mousedown', (e) => e.stopPropagation());
+    vid.addEventListener('pointerdown', (e) => e.stopPropagation());
     observeVideoVisibility(vid);
     vid.play().catch(() => {});
   }
@@ -310,9 +314,9 @@ function updateTabUI(tabKey) {
   tabs.forEach(t => {
     if (!t.btn) return;
     if (t.key === tabKey) {
-      t.btn.className = 'tab-btn px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider font-bold transition-all duration-300 flex items-center gap-2.5 bg-neon-cyan text-obsidian-950 shadow-neon-glow';
+      t.btn.className = 'tab-btn px-5 py-2.5 rounded-lg text-xs font-mono font-semibold transition-all duration-200 flex items-center gap-2 bg-[#F4F4F5] text-zinc-950';
     } else {
-      t.btn.className = 'tab-btn px-6 py-3 rounded-full text-xs font-mono uppercase tracking-wider font-bold transition-all duration-300 flex items-center gap-2.5 bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/10 border border-white/10';
+      t.btn.className = 'tab-btn px-5 py-2.5 rounded-lg text-xs font-mono font-medium transition-all duration-200 flex items-center gap-2 bg-white/[0.02] text-zinc-400 hover:text-white border border-white/5';
     }
   });
 
@@ -320,13 +324,13 @@ function updateTabUI(tabKey) {
   const bannerText = document.getElementById('tabBannerText');
   if (bannerText) {
     if (tabKey === 'all') {
-      bannerText.textContent = 'HIỂN THỊ TẤT CẢ DỰ ÁN • OFFICIAL MUSIC VIDEOS 16:9, VIRAL SERIES 9:16 & COMMERCIAL';
+      bannerText.textContent = 'Hiển thị tất cả dự án • Music Videos 16:9, Viral Series 9:16 & Commercial';
     } else if (tabKey === 'cinematic') {
-      bannerText.textContent = 'THƯ MỤC: videos/mv/ • TỈ LỆ 16:9 WIDESCREEN • TÍCH HỢP NÚT BÓC TÁCH KỸ XẢO VFX BREAKDOWN (9:16)';
+      bannerText.textContent = 'Music Videos • Tỉ lệ 16:9 widescreen • Tích hợp bóc tách kỹ xảo VFX Breakdown (9:16)';
     } else if (tabKey === 'thunglong') {
-      bannerText.textContent = 'THƯ MỤC: videos/thunglong/ • TỈ LỆ DỌC 9:16 (TIKTOK / REELS) • BỐ CỤC LƯỚI BẮT MẮT';
+      bannerText.textContent = 'Thủng Long Family • Tỉ lệ dọc 9:16 (TikTok / Reels) • Tối ưu vuốt chạm mobile';
     } else {
-      bannerText.textContent = 'THƯ MỤC: videos/freelance/ • ĐỊNH DẠNG LINH HOẠT THEO KÍCH THƯỚC GỐC DỰ ÁN';
+      bannerText.textContent = 'Commercial & Freelance • Chiến dịch thương mại và clip nhãn hàng';
     }
   }
 }
@@ -425,10 +429,10 @@ function loadBreakdownPart(index) {
         tabsContainer.innerHTML = list.map((p, i) => {
           const isActive = (i === index);
           const activeClasses = isActive 
-            ? 'bg-neon-cyan text-obsidian-950 font-bold shadow-neon-subtle' 
-            : 'bg-white/10 text-slate-300 hover:text-white hover:bg-white/15';
+            ? 'bg-[#F4F4F5] text-zinc-950 font-semibold' 
+            : 'bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10';
           return `
-            <button onclick="navigateBreakdownTo(${i})" class="px-3 py-1 rounded-full text-xs font-mono transition-all duration-200 ${activeClasses}">
+            <button onclick="navigateBreakdownTo(${i})" class="px-3 py-1 rounded-md text-xs font-mono transition-all duration-200 ${activeClasses}">
               ${p.title || `Part 0${i + 1}`}
             </button>
           `;
@@ -932,7 +936,7 @@ function triggerBreakdown(itemId, partIndex = 0) {
 // Build 16:9 Cinematic Card (Full-width in All & MV tabs)
 function create16x9Card(item) {
   const card = document.createElement('div');
-  card.className = 'col-span-full card-16-9-wide glass-card rounded-3xl p-5 sm:p-7 flex flex-col gap-5 border border-white/10 hover:border-cyan-400/50 transition-all duration-300';
+  card.className = 'col-span-full card-16-9-wide glass-card rounded-3xl p-5 sm:p-7 flex flex-col gap-5 border border-white/10 hover:border-white/25 transition-all duration-300';
 
   // Breakdown Buttons
   let breakdownBtnsHtml = '';
@@ -940,25 +944,27 @@ function create16x9Card(item) {
     (item.has_breakdown || item.breakdown_src) ? [{ title: "Breakdown 01", label: "VFX Breakdown (9:16)", src: item.breakdown_src, thumb: item.breakdown_thumb || '' }] : []
   );
 
+  const layersSvg = `<svg class="w-3.5 h-3.5 text-zinc-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
+
   if (bdList.length > 1) {
     // 2 or more breakdowns: render separate pill buttons for each part
     breakdownBtnsHtml = bdList.map((bd, idx) => `
       <button onclick="triggerBreakdown('${item.id}', ${idx})" 
               class="vfx-breakdown-btn group flex items-center gap-1.5" 
               title="Xem ${bd.title}">
-        <span class="text-neon-cyan animate-pulse">✨</span>
+        ${layersSvg}
         <span>${bd.label || `Breakdown 0${idx + 1}`}</span>
       </button>
     `).join('');
   } else if (bdList.length === 1) {
-    // 1 breakdown: standard single pill button
+    // 1 breakdown: standard single button
     const bd = bdList[0];
     const label = bd.label || 'VFX Breakdown (9:16)';
     breakdownBtnsHtml = `
       <button onclick="triggerBreakdown('${item.id}', 0)" 
               class="vfx-breakdown-btn group flex items-center gap-1.5" 
               title="Xem bóc tách kỹ xảo VFX tỉ lệ dọc 9:16">
-        <span class="text-neon-cyan animate-pulse">✨</span>
+        ${layersSvg}
         <span>${label}</span>
       </button>
     `;
@@ -970,9 +976,9 @@ function create16x9Card(item) {
     const badgeText = bdList.length > 1 ? `${bdList.length} VFX BREAKDOWNS` : 'VFX BREAKDOWN (9:16)';
     breakdownBadgeHtml = `
       <span onclick="triggerBreakdown('${item.id}', 0)" 
-            class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/40 text-cyan-300 flex items-center gap-1.5 cursor-pointer hover:bg-cyan-400/25 transition-colors shadow-sm" 
+            class="text-[10px] font-mono font-medium uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/15 text-zinc-300 flex items-center gap-1.5 cursor-pointer hover:bg-white/10 hover:border-white/25 transition-colors shadow-sm" 
             title="Bấm để xem ${bdList.length} video bóc tách kỹ xảo VFX">
-        <span class="animate-pulse">✨</span>
+        ${layersSvg}
         <span>${badgeText}</span>
       </span>
     `;
@@ -1026,25 +1032,25 @@ function create16x9Card(item) {
       <div>
         <div class="flex flex-wrap items-center gap-2.5 mb-2">
           ${item.featured ? `
-            <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 flex items-center gap-1 shadow-sm" title="Dự án ghim nổi bật">
-              <span class="animate-pulse">★</span>
+            <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-3 py-1 rounded-md bg-amber-400/20 border border-amber-400/50 text-amber-300 flex items-center gap-1 shadow-sm" title="Dự án ghim nổi bật">
+              <span>★</span>
               <span>FEATURED</span>
             </span>
           ` : ''}
-          <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan">
+          <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-md bg-white/[0.04] border border-white/15 text-zinc-300">
             OFFICIAL MV
           </span>
-          <span class="text-xs font-mono text-slate-400">16:9 WIDESCREEN</span>
+          <span class="text-xs font-mono text-zinc-400">16:9 WIDESCREEN</span>
           ${breakdownBadgeHtml}
         </div>
         <h3 class="text-xl sm:text-2xl font-display font-bold text-white leading-snug">
           ${item.title}
         </h3>
-        ${item.description ? `<p class="text-sm text-slate-400 mt-1.5 leading-relaxed">${item.description}</p>` : ''}
+        ${item.description ? `<p class="text-sm text-zinc-400 mt-1.5 leading-relaxed">${item.description}</p>` : ''}
       </div>
 
       <div class="shrink-0 flex flex-wrap items-center gap-2.5">
-        ${item.role ? `<span class="text-xs font-mono text-neon-cyan font-medium px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 shadow-sm">${item.role}</span>` : ''}
+        ${item.role ? `<span class="text-xs font-mono text-zinc-300 font-medium px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 shadow-sm">${item.role}</span>` : ''}
         ${breakdownBtnsHtml}
         ${socialLinksHtml}
       </div>
@@ -1093,6 +1099,11 @@ function playVerticalCard(card, item) {
     vid.setAttribute('preload', 'metadata');
     vid.src = item.video_src;
 
+    // Isolate video control interactions from parent handlers so seeking works smoothly
+    vid.addEventListener('click', (e) => e.stopPropagation());
+    vid.addEventListener('mousedown', (e) => e.stopPropagation());
+    vid.addEventListener('pointerdown', (e) => e.stopPropagation());
+
     container.appendChild(vid);
     observeVideoVisibility(vid);
   }
@@ -1106,7 +1117,7 @@ function playVerticalCard(card, item) {
 // Build 9:16 Vertical Card (for Shorts, TikTok, Reels, Commercials)
 function createVerticalCard(item) {
   const isViral = item.category === 'thunglong';
-  const badgeColor = isViral ? 'border-rose-500/40 text-rose-300' : 'border-cyan-400/40 text-cyan-300';
+  const badgeColor = 'border-white/15 text-zinc-300';
   const tagText = isViral ? '9:16' : 'HD';
   const cleanBadge = getFormattedBadge(item);
 
@@ -1116,13 +1127,15 @@ function createVerticalCard(item) {
     (item.has_breakdown || item.breakdown_src) ? [{ title: "Breakdown 01", label: "VFX Breakdown (9:16)", src: item.breakdown_src, thumb: item.breakdown_thumb || '' }] : []
   );
 
+  const layersSvgSm = `<svg class="w-3 h-3 text-zinc-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
+
   if (bdList.length > 0) {
     const label = bdList.length > 1 ? `Breakdown (${bdList.length})` : 'Breakdown';
     breakdownFloatingBtn = `
       <button onclick="event.stopPropagation(); triggerBreakdown('${item.id}', 0)" 
-              class="vertical-breakdown-btn absolute top-12 right-3 z-20 text-[9px] font-mono font-bold px-2.5 py-1 rounded-full bg-obsidian-950/90 border border-cyan-400/60 text-cyan-300 hover:bg-cyan-400 hover:text-black transition-all flex items-center gap-1 shadow-neon-glow backdrop-blur-md"
+              class="vertical-breakdown-btn absolute top-12 right-3 z-20 text-[9px] font-mono font-bold px-2.5 py-1 rounded-md bg-obsidian-950/90 border border-white/20 text-zinc-200 hover:bg-white hover:text-black transition-all flex items-center gap-1 shadow-sm backdrop-blur-md" 
               title="Xem ${bdList.length} video VFX Breakdown">
-        <span class="animate-pulse">✨</span>
+        ${layersSvgSm}
         <span>${label}</span>
       </button>
     `;
@@ -1147,7 +1160,7 @@ function createVerticalCard(item) {
     verticalSocialHtml += `
       <a href="${item.tiktok_url}" target="_blank" rel="noopener noreferrer" 
          onclick="event.stopPropagation()"
-         class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg tiktok-pill-badge text-[10px] font-mono font-bold transition-all duration-200 backdrop-blur-md shadow-sm"
+         class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg tiktok-pill-badge text-[10px] font-mono font-medium transition-all duration-200 backdrop-blur-md shadow-sm"
          title="Xem bản full trên TikTok (Mở tab mới)">
         <svg class="w-3 h-3 fill-current shrink-0" viewBox="0 0 24 24">
           <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
@@ -1173,17 +1186,17 @@ function createVerticalCard(item) {
       <div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5 z-10 vertical-top-badge pointer-events-none">
         <div class="flex items-center gap-1 min-w-0 max-w-[85%]">
           ${item.featured ? `
-            <span class="text-[8px] sm:text-[9px] font-mono font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-amber-400 text-obsidian-950 flex items-center gap-0.5 shrink-0 shadow-sm" title="Dự án nổi bật">
+            <span class="text-[8px] sm:text-[9px] font-mono font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-amber-400 text-obsidian-950 flex items-center gap-0.5 shrink-0 shadow-sm" title="Dự án nổi bật">
               ★ HOT
             </span>
           ` : ''}
           ${cleanBadge ? `
-            <span class="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-obsidian-950/90 backdrop-blur-md border ${badgeColor} whitespace-nowrap overflow-hidden text-ellipsis shadow-sm">
+            <span class="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-obsidian-950/90 backdrop-blur-md border ${badgeColor} whitespace-nowrap overflow-hidden text-ellipsis shadow-sm">
               ${cleanBadge}
             </span>
           ` : ''}
         </div>
-        <span class="text-[9px] font-mono text-slate-400 bg-black/60 px-1.5 py-0.5 rounded shrink-0">
+        <span class="text-[9px] font-mono text-zinc-400 bg-black/60 px-1.5 py-0.5 rounded shrink-0">
           ${tagText}
         </span>
       </div>
@@ -1191,7 +1204,7 @@ function createVerticalCard(item) {
       ${breakdownFloatingBtn}
 
       <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none vertical-play-btn">
-        <div class="w-12 h-12 rounded-full bg-white/90 text-obsidian-950 flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 group-hover:bg-neon-cyan transition-all duration-300">
+        <div class="w-12 h-12 rounded-full bg-white/90 text-obsidian-950 flex items-center justify-center shadow-lg group-hover:bg-white transition-all duration-200">
           <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
           </svg>
@@ -1199,7 +1212,7 @@ function createVerticalCard(item) {
       </div>
 
       <div class="vertical-card-footer pointer-events-none">
-        <h3 class="vertical-card-title group-hover:text-neon-cyan transition-colors" title="${item.title}">
+        <h3 class="vertical-card-title group-hover:text-white transition-colors" title="${item.title}">
           ${item.title}
         </h3>
         <div class="flex items-center justify-between gap-1.5 flex-wrap">
@@ -1432,7 +1445,7 @@ function normalizeCMSItem(item, defaultId = null) {
   } else if (rawCat === 'VFX Breakdown' || rawCatLower.includes('breakdown')) {
     category = 'cinematic';
     aspect = '9:16';
-    badge = item.badge || '✨ VFX BREAKDOWN (9:16)';
+    badge = item.badge || 'VFX BREAKDOWN (9:16)';
   } else if (rawCatLower === 'cinematic' || rawCatLower === 'thunglong' || rawCatLower === 'freelance') {
     category = rawCatLower;
     aspect = item.aspect || (category === 'cinematic' ? '16:9' : '9:16');
